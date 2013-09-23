@@ -4,5 +4,20 @@
     <string name="app_name">BAC Safe</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="BloodAlcoholContent">Blood Alcohol Content (BAC):</string>
+    <string name="DrinkCount">Total Drink Count:</string>
+    <string name="BAC_Percent_Result">%</string>
+    <string name="DrinkCount_Number_Result">#</string>
+    <string name="Beer">Beer</string>
+    <string name="Wine">Wine</string>
+    <string name="Shot">Shot</string>
+    <string name="TimeUntilSober">Time Until Sober:</string>
+    <string name="SoberTime_Result">00:00</string>
+    <string name="Edit">Edit</string>
+    <string name="AddFriend">Add Friend</string>
+    <string name="CreateGroup">Create Group as Designated Driver</string>
+    <string name="DrinkCount_Beer_Result">#</string>
+    <string name="DrinkCount_Wine_Result">#</string>
+    <string name="DrinkCount_Shot_Result">#</string>
 
 </resources>

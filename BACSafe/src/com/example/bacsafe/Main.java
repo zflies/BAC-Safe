@@ -30,7 +30,7 @@ public class Main extends TabActivity {
         spec1.setContent(R.id.tabDrinkCounter);
      
         //Tab - Night Group
-        TabSpec spec2=tabHost.newTabSpec("Night Group");
+        TabSpec spec2=tabHost.newTabSpec("Groups");
         spec2.setIndicator("Night Group");
         spec2.setContent(R.id.tabNightGroup);
 
