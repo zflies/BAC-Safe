@@ -31,12 +31,12 @@ public class Main extends TabActivity {
      
         //Tab - Night Group
         TabSpec spec2=tabHost.newTabSpec("Groups");
-        spec2.setIndicator("Night Group");
+        spec2.setIndicator("Groups");
         spec2.setContent(R.id.tabNightGroup);
 
         //Tab - Friends List
-        TabSpec spec3=tabHost.newTabSpec("Friends List");
-        spec3.setIndicator("Friends List");
+        TabSpec spec3=tabHost.newTabSpec("Friends");
+        spec3.setIndicator("Friends");
         spec3.setContent(R.id.tabFriendsList);
 
        
