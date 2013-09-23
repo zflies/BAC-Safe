@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center|fill"
-    android:background="#0099cc"
+    android:background="#505050"
     android:screenOrientation="portrait"
     tools:context=".Main" >
 
@@ -34,11 +34,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="47dp" />
             
-
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:background="#607B8B" >
 
                 <GridLayout
                     android:id="@+id/tabDrinkCounter"
