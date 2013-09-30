@@ -19,5 +19,8 @@
     <string name="DrinkCount_Beer_Result">#</string>
     <string name="DrinkCount_Wine_Result">#</string>
     <string name="DrinkCount_Shot_Result">#</string>
+    <string name="Help">Help</string>
+    <string name="Name">Name: </string>
+ 
 
 </resources>
