@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#607B8B"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="10dp" >
+
+        <EditText
+            android:id="@+id/textBox_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/textView6"
+            android:layout_marginTop="35dp"
+            android:layout_toRightOf="@+id/textView3"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/labelName"
+            android:layout_marginTop="35dp"
+            android:text="Sex:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_centerVertical="true"
+            android:text="Height:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView3"
+            android:layout_below="@+id/textView3"
+            android:layout_marginTop="70dp"
+            android:text="Weight:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/labelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textBox_Name"
+            android:layout_alignLeft="@+id/textView1"
+            android:text="@string/Name"
+            android:textColor="#FFFFFF"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/textBox_Weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView4"
+            android:layout_alignLeft="@+id/textBox_Height_Feet"
+            android:ems="3"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/textBox_Height_Feet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView4"
+            android:layout_marginLeft="24dp"
+            android:layout_toRightOf="@+id/textView4"
+            android:ems="3"
+            android:inputType="number"/>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView4"
+            android:layout_toRightOf="@+id/textBox_Height_Feet"
+            android:text="(ft.)"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
+
+        <EditText
+            android:id="@+id/textBox_Height_Inches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView4"
+            android:layout_toLeftOf="@+id/textView6"
+            android:ems="3"
+            android:inputType="number"
+            android:nextFocusDown="@id/textBox_Weight" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textBox_Weight"
+            android:layout_toRightOf="@+id/textBox_Weight"
+            android:text="(lbs.)"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/button_Edit_Save"
+            android:layout_width="109dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="Save"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/textView7"
+            android:layout_alignTop="@+id/radioGroup_Sex"
+            android:text="Age:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/button_Edit_Back"
+            android:layout_width="109dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/button_Edit_Save"
+            android:layout_alignBottom="@+id/button_Edit_Save"
+            android:layout_alignLeft="@+id/textView4"
+            android:onClick="Main"
+            android:text="Back"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView5"
+            android:layout_alignBottom="@+id/textView5"
+            android:layout_alignRight="@+id/button_Edit_Save"
+            android:text="(in.)"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF"
+            android:textStyle="italic" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup_Sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView1"
+            android:layout_toRightOf="@+id/textView4" >
+
+            <RadioButton
+                android:id="@+id/radioGroup_Sex_Male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="M"
+                android:textColor="#FFFFFF"
+                android:textStyle="italic" />
+
+            <RadioButton
+                android:id="@+id/radioGroup_Sex_Female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="F"
+                android:textColor="#FFFFFF"
+                android:textStyle="italic" />
+
+        </RadioGroup>
+
+        <Spinner
+            android:id="@+id/spinner_Edit_Age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textBox_Height_Inches"
+            android:layout_alignTop="@+id/textView2"
+            android:layout_toLeftOf="@+id/textView6" />
+
+    </RelativeLayout>
