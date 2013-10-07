@@ -9,7 +9,11 @@ import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
-
+/*
+ * Main class
+ * 
+ * @Defn - Main home screen with tabHost for Drink Counter, Friends, and Groups
+ */
 public class Main extends TabActivity {
 	
     @Override
@@ -56,9 +60,10 @@ public class Main extends TabActivity {
 			public void onClick(View v) {
 				Intent intent = new Intent(Main.this, EditButtonActivity.class);
 				startActivity(intent);
-			}
+			}//onClick()
 		}); 
         
 
-    }
-}
+    }//onCreate()
+    
+}//class Main
