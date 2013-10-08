@@ -16,7 +16,7 @@
         
         <!-- Drink Counter - Edit Button Screen -->
         <activity 
-		    android:name="com.example.bacsafe.EditButtonActivity"
+		    android:name="com.example.bacsafe.ProfileActivity"
 		   	android:screenOrientation="portrait" >
 		</activity>
 		

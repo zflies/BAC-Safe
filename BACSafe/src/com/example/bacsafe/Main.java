@@ -2,6 +2,7 @@ package com.example.bacsafe;
 
 import android.app.TabActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -9,12 +10,17 @@ import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
-/*
- * Main class
- * 
- * @Defn - Main home screen with tabHost for Drink Counter, Friends, and Groups
- */
+
 public class Main extends TabActivity {
+	
+	//Profile Data Instance 
+	private ProfileActivity profileData = new ProfileActivity();
+	private SharedPreferences userData = profileData.userData;
+	//User Profile variables
+	private String sUserName, sName;
+	private int nWeight, nHeightFeet, nHeightInches, nAge;
+	private boolean bIsMale;
+	
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,17 +28,39 @@ public class Main extends TabActivity {
         
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        
-        /*	TODO:	if (profile exists)
-         * 				load Home screen (activity_main)
-         * 			else
-         * 				load CreateProfileScreen
-         */
         
         //Load the home screen
         setContentView(R.layout.activity_main);
-
+        setHomeScreen();
+       
+        //Load profile data
+        loadProfileData();
+        
+		final Intent profileActivity = new Intent(Main.this, ProfileActivity.class);
+		 
+    	//If the profile has not been created, open the Create Profile page.
+        if(sUserName.isEmpty()){
+        	startActivity(profileActivity);
+        }
+        
+        //Edit Button (Drink Counter tab) Allows user profile data to be changed
+        Button editButton = (Button)findViewById(R.id.buttonEdit);
+        editButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(profileActivity);
+			}//onClick()
+		}); 
+    }//onCreate()
+    
+    
+    
+    /* 
+     * setHomeScreen
+     * 
+     * @Defn - Load navigation tabs (i.e. Drink Counter, Groups, Friends)
+     */
+    private void setHomeScreen(){
         //Create the Home Screen navigation tabs
         TabHost tabHost=getTabHost();
         tabHost.setup();
@@ -52,18 +80,28 @@ public class Main extends TabActivity {
         tabHost.addTab(spec1);
         tabHost.addTab(spec2);
         tabHost.addTab(spec3);
-       
-        //Edit Button (Drink Counter tab) Allows user profile data to be changed
-        Button editButton = (Button)findViewById(R.id.buttonEdit);
-        editButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(Main.this, EditButtonActivity.class);
-				startActivity(intent);
-			}//onClick()
-		}); 
-        
-
-    }//onCreate()
+    }// setHomeScreen()
+    
+    
+    /*
+     * loadProfileData()
+     * 
+     * @Defn - Loads User Information for BAC calculations
+     */
+    private void loadProfileData(){
+    	
+    	userData = getSharedPreferences(profileData.userDataFile, 0);
+		
+		//Set UI Variables from saved file
+		sUserName = userData.getString("username", "");
+		sName = userData.getString("name", "");
+		nWeight = userData.getInt("weight", 0);
+		nHeightFeet = userData.getInt("height_feet", 0);
+		nHeightInches = userData.getInt("height_inches", 0);
+		nAge = userData.getInt("age", 21);
+		bIsMale = userData.getBoolean("male", true);
+    	
+    }
+    
     
 }//class Main

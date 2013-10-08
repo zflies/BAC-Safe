@@ -6,7 +6,7 @@
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:paddingBottom="10dp"
-        android:paddingTop="15dp" >
+        android:paddingTop="5dp" >
 
         <TextView
             android:id="@+id/label_Weight"
@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/label_Height"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
             android:text="Weight:"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF" />
@@ -28,19 +28,21 @@
             android:layout_alignLeft="@+id/textBox_Height_Feet"
             android:ems="3"
             android:gravity="center_vertical|center_horizontal"
+            android:selectAllOnFocus="true"
             android:inputType="number" />
 
         <EditText
             android:id="@+id/textBox_Height_Feet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/label_Height_feet"
             android:layout_alignBaseline="@+id/label_Height_feet"
+            android:layout_alignBottom="@+id/label_Height_feet"
             android:layout_marginLeft="24dp"
             android:layout_toRightOf="@+id/label_Weight"
             android:ems="3"
             android:gravity="center_vertical|center_horizontal"
-            android:inputType="number" />
+            android:inputType="number"
+            android:selectAllOnFocus="true" />
 
         <TextView
             android:id="@+id/label_Height_feet"
@@ -63,6 +65,7 @@
             android:layout_marginLeft="10dp"
             android:ems="3"
             android:gravity="center_vertical|center_horizontal"
+            android:selectAllOnFocus="true"
             android:inputType="number"
             android:nextFocusDown="@id/textBox_Weight" >
 
@@ -109,29 +112,8 @@
             android:layout_alignParentLeft="true"
             android:onClick="Main"
             android:text="Back"
-            android:textColor="#FFFFFF" />
-
-        <TextView
-            android:id="@+id/label_Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="75dp"
-            android:text="@string/Name"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#FFFFFF" />
-
-        <TextView
-            android:id="@+id/label_UserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/label_Name"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="25dp"
-            android:text="Username:"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:visibility="visible" />
 
         <EditText
             android:id="@+id/textBox_Username"
@@ -201,23 +183,60 @@
             android:textColor="#FFFFFF" />
 
         <TextView
-            android:id="@+id/label_Height"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/label_Weight"
-            android:layout_below="@+id/radioGroup_Sex"
-            android:layout_marginTop="46dp"
-            android:text="Height:"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#FFFFFF" />
-
-        <TextView
             android:id="@+id/label_Age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/textBox_Height_Inches"
             android:layout_alignTop="@+id/radioGroup_Sex"
             android:text="Age:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/label_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="Edit Your Profile"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/label_UserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/label_Title"
+            android:layout_below="@+id/label_Title"
+            android:layout_marginTop="30dp"
+            android:text="Username:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/label_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/label_UserName"
+            android:layout_below="@+id/textBox_Username"
+            android:layout_marginTop="35dp"
+            android:text="@string/Name"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/label_Height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinner_Edit_Age"
+            android:layout_toLeftOf="@+id/textBox_Height_Feet"
+            android:layout_marginTop="60dp"
+            android:text="Height:"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF" />
 
