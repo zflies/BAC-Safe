@@ -23,12 +23,12 @@ public class ProfileActivity extends Activity {
 	//Declared UI Objects
 	TextView titleTextView;
 	Spinner ageSpinner;
-	EditText usernameTextField, nameTextField, weightTextField, height_feet_TextField, height_inches_TextField;
+	EditText usernameTextField, firstNameTextField, lastNameTextField, weightTextField, height_feet_TextField, height_inches_TextField;
 	RadioButton maleRadioButton, femaleRadioButton;
 	Button backButton, saveButton;
 	
 	//Declared UI Variables
-	private String sUserName, sName;
+	private String sUserName, sFirstName, sLastName;
 	private int nWeight, nHeightFeet, nHeightInches, nAge;
 	private boolean bIsMale;
 	
@@ -45,7 +45,8 @@ public class ProfileActivity extends Activity {
 			usernameTextField.setCursorVisible(false);
 			usernameTextField.setFocusable(false);
 			usernameTextField.setClickable(false);
-			nameTextField.requestFocus(); //Set tab focus to the Name Text Box on startup
+			usernameTextField.setGravity(0x01);
+			firstNameTextField.requestFocus(); //Set tab focus to the Name Text Box on startup
 		}
 		else //If the Username needs to be created
 		{
@@ -69,7 +70,8 @@ public class ProfileActivity extends Activity {
 		//Setup Text Field objects
 		titleTextView = (TextView)findViewById(R.id.label_Title);
 		usernameTextField = (EditText)findViewById(R.id.textBox_Username);
-		nameTextField = (EditText)findViewById(R.id.textBox_Name);
+		firstNameTextField = (EditText)findViewById(R.id.textBox_FirstName);
+		lastNameTextField = (EditText)findViewById(R.id.textBox_LastName);
 		weightTextField = (EditText)findViewById(R.id.textBox_Weight);
 		height_feet_TextField = (EditText)findViewById(R.id.textBox_Height_Feet);
 		height_inches_TextField = (EditText)findViewById(R.id.textBox_Height_Inches);
@@ -83,18 +85,12 @@ public class ProfileActivity extends Activity {
 		//Setup Button objects
 		backButton = (Button)findViewById(R.id.button_Edit_Back);
 		saveButton = (Button)findViewById(R.id.button_Edit_Save);
-
-		
-		final Intent mainActivity = new Intent(ProfileActivity.this, Main.class);
 		
 		//Back Button - Returns to Main screen (Drink Counter)
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-				//Return to Main screen
-				startActivity(mainActivity);
-				
+				finish();
 			}//onClick()
 		});//backButton
 
@@ -106,14 +102,16 @@ public class ProfileActivity extends Activity {
 				SharedPreferences.Editor editor = userData.edit(); //Used to edit the user data file
 				
 				sUserName = usernameTextField.getText().toString();
-				sName = nameTextField.getText().toString();
+				sFirstName = firstNameTextField.getText().toString();
+				sLastName = lastNameTextField.getText().toString();
 				nWeight = Integer.parseInt(weightTextField.getText().toString());
 				nHeightFeet = Integer.parseInt(height_feet_TextField.getText().toString());
 				nHeightInches = Integer.parseInt(height_inches_TextField.getText().toString());
 				nAge = Integer.parseInt(ageSpinner.getSelectedItem().toString());
 				
 				editor.putString("username", sUserName);
-				editor.putString("name", sName);
+				editor.putString("firstname", sFirstName);
+				editor.putString("lastname", sLastName);
 				editor.putBoolean("male", maleRadioButton.isChecked());
 				editor.putInt("age", nAge);
 				editor.putInt("weight", nWeight);
@@ -123,7 +121,7 @@ public class ProfileActivity extends Activity {
 				editor.commit(); //Saves changes to file
 				
 				//Return to Main screen
-				startActivity(mainActivity);
+				finish();
 				
 			}//onClick()
 		});//saveButton
@@ -162,7 +160,8 @@ public class ProfileActivity extends Activity {
 		
 		//Set UI Variables from saved file
 		sUserName = userData.getString("username", "");
-		sName = userData.getString("name", "");
+		sFirstName = userData.getString("firstname", "");
+		sLastName = userData.getString("lastname", "");
 		nWeight = userData.getInt("weight", 0);
 		nHeightFeet = userData.getInt("height_feet", 0);
 		nHeightInches = userData.getInt("height_inches", 0);
@@ -171,7 +170,8 @@ public class ProfileActivity extends Activity {
 		
 		//Set UI Objects from UI Variables
 		usernameTextField.setText(sUserName);
-		nameTextField.setText(sName);
+		firstNameTextField.setText(sFirstName);
+		lastNameTextField.setText(sLastName);
 		maleRadioButton.setChecked(bIsMale);
 		femaleRadioButton.setChecked(!bIsMale);
 		weightTextField.setText(Integer.toString(nWeight));

@@ -14,12 +14,26 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         
-        <!-- Drink Counter - Edit Button Screen -->
+        <!-- Profile Edit Screen -->
         <activity 
 		    android:name="com.example.bacsafe.ProfileActivity"
 		   	android:screenOrientation="portrait" >
 		</activity>
 		
+        
+        <!-- Find/Add Buddy Screen -->
+        <activity
+            android:name="com.example.bacsafe.FindBuddyActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <!-- View Group Screen 
+        <activity
+			android:name="com.example.bacsafe.ViewGroupActivity"
+            android:screenOrientation="portrait" >
+        </activity>		
+        -->
+        
         <!-- Main Home Screen with Tabs -->
         <activity
             android:name="com.example.bacsafe.Main"

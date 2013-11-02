@@ -18,14 +18,13 @@ public class Main extends TabActivity {
 	private ProfileActivity profileData = new ProfileActivity();
 	private SharedPreferences userData = profileData.userData;
 	//User Profile variables
-	private String sUserName, sName, sDrinkTotal, sBACpercent, sBACtimerMinute, sBACtimerHour,sBeer, sWine, sShot;
+	private String sUserName, sFirstName, sLastName, sDrinkTotal, sBACpercent, sBACtimerMinute, sBACtimerHour,sBeer, sWine, sShot;
 	private int nWeight, nHeightFeet, nHeightInches, nAge, nShot, nWine, nBeer, nDrinkTotal, nBACtimerMinute, nBACtimerHour;
 	private double dBACpercent;
 	private boolean bIsMale;
 	
 	//Other variables
 	TextView tDrinkTotal, tBACpercent, tBeer, tWine, tShot, tBACtimer;
-	
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +41,7 @@ public class Main extends TabActivity {
         loadProfileData();
         
 		final Intent profileActivity = new Intent(Main.this, ProfileActivity.class);
+		final Intent findBuddyActivity = new Intent(Main.this, FindBuddyActivity.class);
 		 
     	//If the profile has not been created, open the Create Profile page.
         if(sUserName.isEmpty()){
@@ -56,6 +56,7 @@ public class Main extends TabActivity {
 				startActivity(profileActivity);
 			}//onClick()
 		}); 
+        
         
         Button shotButton =  (Button)findViewById(R.id.buttonShot);
         shotButton.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +93,23 @@ public class Main extends TabActivity {
 				generateBACTimer();
 			}
 		});
+        
+        
+        
+        
+        
+        
+        
+        
+        //Add Buddy Button (Buddies tab) Allows user to search for / add buddies
+        Button addBuddyButton = (Button)findViewById(R.id.buttonAddBuddy);
+        addBuddyButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(findBuddyActivity); 
+			}//onClick()
+		});
+        
     }//onCreate()
     
     
@@ -112,11 +130,11 @@ public class Main extends TabActivity {
      
         TabSpec spec2=tabHost.newTabSpec("Groups");         //Tab - Night Group
         spec2.setIndicator("Groups");
-        spec2.setContent(R.id.tabNightGroup);
+        spec2.setContent(R.id.tabGroups);
 
-        TabSpec spec3=tabHost.newTabSpec("Friends");        //Tab - Friends List
-        spec3.setIndicator("Friends");
-        spec3.setContent(R.id.tabFriendsList);
+        TabSpec spec3=tabHost.newTabSpec("Buddies");        //Tab - Friends List
+        spec3.setIndicator("Buddies");
+        spec3.setContent(R.id.tabBuddies);
 
         tabHost.addTab(spec1);
         tabHost.addTab(spec2);
@@ -135,7 +153,8 @@ public class Main extends TabActivity {
 		
 		//Set UI Variables from saved file
 		sUserName = userData.getString("username", "");
-		sName = userData.getString("name", "");
+		sFirstName = userData.getString("firstname", "");
+		sLastName = userData.getString("lastname", "");
 		nWeight = userData.getInt("weight", 0);
 		nHeightFeet = userData.getInt("height_feet", 0);
 		nHeightInches = userData.getInt("height_inches", 0);

@@ -14,13 +14,13 @@
     <string name="TimeUntilSober">Time Until Sober:</string>
     <string name="SoberTime_Result">00:00</string>
     <string name="Edit">Edit</string>
-    <string name="AddFriend">Add Friend</string>
+    <string name="AddBuddy">Add Buddy</string>
     <string name="CreateGroup">Create Group as Designated Driver</string>
     <string name="DrinkCount_Beer_Result">#</string>
     <string name="DrinkCount_Wine_Result">#</string>
     <string name="DrinkCount_Shot_Result">#</string>
     <string name="Help">Help</string>
-    <string name="Name">Name: </string>
+    <string name="FirstName">First name: </string>
  
 
 </resources>

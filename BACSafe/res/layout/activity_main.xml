@@ -219,10 +219,27 @@
                         android:onClick="EditButtonActivity"
                         android:text="@string/Edit" />
 
+                    <Button
+                        android:id="@+id/buttonRefresh"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/buttonWine"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignRight="@+id/buttonWine"
+                        android:text="Refresh" />
+
                 </RelativeLayout>
 
-                <GridLayout
-                    android:id="@+id/tabNightGroup"
+                <RelativeLayout android:id="@+id/tabBuddies" android:layout_width="match_parent" android:layout_height="match_parent" android:columnCount="1" android:orientation="vertical">
+
+                    <Button android:id="@+id/buttonAddBuddy" android:layout_width="305dp" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_alignParentTop="true" android:layout_column="0" android:layout_gravity="center_horizontal|top" android:layout_row="0" android:text="@string/AddBuddy" />
+
+                    <ListView android:id="@+id/listView_BuddyList" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_above="@+id/button_Edit_Buddies" android:layout_alignParentLeft="true" android:layout_below="@+id/buttonAddBuddy">
+                    </ListView>
+
+                    <Button android:id="@+id/button_Edit_Buddies" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:text="Edit" />
+                </RelativeLayout><RelativeLayout
+                    android:id="@+id/tabGroups"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:columnCount="1"
@@ -231,27 +248,32 @@
                     <Button
                         android:id="@+id/buttonCreateGroup"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
                         android:layout_column="0"
                         android:layout_gravity="left|top"
                         android:layout_row="0"
                         android:text="@string/CreateGroup" />
-                </GridLayout>
 
-                <GridLayout
-                    android:id="@+id/tabFriendsList"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:columnCount="1"
-                    android:orientation="vertical" >
+                    <ListView
+                        android:id="@+id/listView_Groups"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/button1"
+                        android:layout_below="@+id/buttonCreateGroup"
+                        android:layout_centerHorizontal="true" >
+                    </ListView>
 
                     <Button
-                        android:id="@+id/buttonAddFriend"
-                        android:layout_width="match_parent"
-                        android:layout_column="0"
-                        android:layout_gravity="left|top"
-                        android:layout_row="0"
-                        android:text="@string/AddFriend" />
-                </GridLayout>
+                        android:id="@+id/button1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:text="Edit" />
+                </RelativeLayout>
+
             </FrameLayout>
         </RelativeLayout>
     </TabHost>
