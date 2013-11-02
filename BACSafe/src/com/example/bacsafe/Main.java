@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.TabHost.TabSpec;
 
 
@@ -17,9 +18,13 @@ public class Main extends TabActivity {
 	private ProfileActivity profileData = new ProfileActivity();
 	private SharedPreferences userData = profileData.userData;
 	//User Profile variables
-	private String sUserName, sName;
-	private int nWeight, nHeightFeet, nHeightInches, nAge;
+	private String sUserName, sName, sDrinkTotal, sBACpercent, sBACtimerMinute, sBACtimerHour,sBeer, sWine, sShot;
+	private int nWeight, nHeightFeet, nHeightInches, nAge, nShot, nWine, nBeer, nDrinkTotal, nBACtimerMinute, nBACtimerHour;
+	private double dBACpercent;
 	private boolean bIsMale;
+	
+	//Other variables
+	TextView tDrinkTotal, tBACpercent, tBeer, tWine, tShot, tBACtimer;
 	
 	
     @Override
@@ -51,6 +56,42 @@ public class Main extends TabActivity {
 				startActivity(profileActivity);
 			}//onClick()
 		}); 
+        
+        Button shotButton =  (Button)findViewById(R.id.buttonShot);
+        shotButton.setOnClickListener(new View.OnClickListener() {
+        	@Override
+			public void onClick(View v) {
+        		nShot++;
+        		generateShotDrinks();
+        		generateNumberDrinks();
+        		generateBAC();
+        		generateBACTimer();
+			}//onClick
+		});
+        
+        Button wineButton = (Button)findViewById(R.id.buttonWine);
+        wineButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				nWine++;
+				generateWineDrinks();
+				generateNumberDrinks();
+				generateBAC();
+				generateBACTimer();
+			}
+		});
+        
+        Button beerButton = (Button)findViewById(R.id.buttonBeer);
+        beerButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				nBeer++;
+				generateBeerDrinks();
+				generateNumberDrinks();
+				generateBAC();
+				generateBACTimer();
+			}
+		});
     }//onCreate()
     
     
@@ -103,5 +144,47 @@ public class Main extends TabActivity {
     	
     }
     
+    private void generateBAC(){
+    	dBACpercent = (nBeer) + (nWine*2) + (nShot*3);
+    	sBACpercent = Double.toString(dBACpercent);
+    	tBACpercent = (TextView)findViewById(R.id.labelBACPercent);
+    	tBACpercent.setText(sBACpercent);
+    }
     
+    private void generateNumberDrinks(){
+    	nDrinkTotal = (nBeer) + (nWine*2) + (nShot*3);
+    	sDrinkTotal = Integer.toString(nDrinkTotal);
+    	tDrinkTotal = (TextView)findViewById(R.id.labelDrinkCountNumber);
+    	tDrinkTotal.setText(sDrinkTotal);
+    }
+    
+    private void generateBeerDrinks(){
+    	sBeer = Integer.toString(nBeer);
+    	tBeer = (TextView)findViewById(R.id.labelBeerCount);
+    	tBeer.setText(sBeer);
+    }
+    
+    private void generateWineDrinks(){
+    	sWine = Integer.toString(nWine);
+    	tWine = (TextView)findViewById(R.id.labelWineCount);
+    	tWine.setText(sWine);
+    }
+    
+    private void generateShotDrinks(){
+    	sShot = Integer.toString(nShot);
+    	tShot = (TextView)findViewById(R.id.labelShotCount);
+    	tShot.setText(sShot);
+    }
+    
+    private void generateBACTimer(){
+    	tBACtimer = (TextView)findViewById(R.id.labelSoberTime);
+    	
+    	nBACtimerMinute = (nBeer) + (nWine*2) + (nShot*3);
+    	sBACtimerMinute = Integer.toString(nBACtimerMinute);
+
+    	nBACtimerHour = (nBeer) + (nWine*2) + (nShot*3);
+    	sBACtimerHour = Integer.toString(nBACtimerHour);
+    	
+    	tBACtimer.setText(sBACtimerMinute + ":" + sBACtimerHour);
+    }
 }//class Main
