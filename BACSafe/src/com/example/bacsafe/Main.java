@@ -110,6 +110,15 @@ public class Main extends TabActivity {
 				}
 			});
         
+	        //Refresh Button
+	        Button refreshButton = (Button)findViewById(R.id.buttonRefresh);
+	        refreshButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					generateBAC();
+					generateBACTimer();
+				}
+			});
         
         /* 
          * -- BUDDIES Tab ------------------------------------------------------------------------
