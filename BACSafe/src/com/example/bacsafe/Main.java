@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -42,12 +43,18 @@ public class Main extends TabActivity {
 	        //Remove title bar
 	        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 	        
+	        
 	        //Load the home screen
 	        setContentView(R.layout.activity_main);
 	        setHomeScreen();
-	       
+
 	        //Load profile data
 	        loadProfileData();
+	        
+	        //Show Liability Agreement if needed
+	        //TODO:  if(!preferenced)
+	        alertLiabilityAgreement();
+	        
 	        
 	        //Profile page activity
 	        final Intent profileActivity = new Intent(Main.this, ProfileActivity.class);
@@ -208,6 +215,35 @@ public class Main extends TabActivity {
 	    }//loadProfileData()
     
 	    
+	    /*
+	     * alertLiabilityAgreement
+	     * 
+	     * @Defn - Load alert dialog Liability/User Agreement (When BAC Safe is opened) 
+	     */
+	    private void alertLiabilityAgreement(){
+	    	
+	        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+	
+	        alert.setTitle(R.string.UserAgreement);
+	        alert.setMessage(R.string.UserAgreementMessage);
+	        	     
+	        alert.setPositiveButton(R.string.Accept, new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int whichButton) {
+	        	//Continue to Drink Calculator
+	          }
+	        });
+	
+	        alert.setNegativeButton(R.string.Decline, new DialogInterface.OnClickListener() {
+	          public void onClick(DialogInterface dialog, int whichButton) {
+	            // Canceled.
+	        	  android.os.Process.killProcess(android.os.Process.myPid());
+                  System.exit(1);
+	          }
+	        });
+	        alert.show();
+	       
+	    }//alertCreateGroupName()
+	    
 	    
 	/*
      * -- DRINK COUNTER Tab ------------------------------------------------------------------
@@ -306,21 +342,21 @@ public class Main extends TabActivity {
 	    	
 	        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 	
-	        alert.setTitle("Title");
-	        alert.setMessage("Message");
+	        alert.setTitle(R.string.CreateGroup);
+	        alert.setMessage(R.string.EnterGroupName);
 	
 	        // Set an EditText view to get user input 
 	        final EditText input = new EditText(this);
 	        alert.setView(input);
 	
-	        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+	        alert.setPositiveButton(R.string.Next, new DialogInterface.OnClickListener() {
 	        public void onClick(DialogInterface dialog, int whichButton) {
 	          Editable value = input.getText();
 	          // Do something with value!
 	          }
 	        });
 	
-	        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	        alert.setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
 	          public void onClick(DialogInterface dialog, int whichButton) {
 	            // Canceled.
 	          }
