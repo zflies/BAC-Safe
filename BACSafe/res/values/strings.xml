@@ -15,12 +15,23 @@
     <string name="SoberTime_Result">00:00</string>
     <string name="Edit">Edit</string>
     <string name="AddBuddy">Add Buddy</string>
-    <string name="CreateGroup">Create Group as Designated Driver</string>
+    <string name="CreateGroupAsDesignatedDriver">Create Group as Designated Driver</string>
     <string name="DrinkCount_Beer_Result">#</string>
     <string name="DrinkCount_Wine_Result">#</string>
     <string name="DrinkCount_Shot_Result">#</string>
     <string name="Help">Help</string>
     <string name="FirstName">First name: </string>
+    <string name="Cancel">Cancel</string>
+    <string name="EnterGroupName">Enter Group Name:</string>
+    <string name="Next">Next</string>
+    <string-array name="Temp_BuddyList">
+        <item >Buddy 1</item>
+        <item >Buddy 2</item>
+        <item >Buddy 3</item>
+        <item >Buddy 4</item>
+        <item >Buddy 5</item>
+    </string-array>
+    <string name="CreateGroup">Create Group</string>
  
 
 </resources>
