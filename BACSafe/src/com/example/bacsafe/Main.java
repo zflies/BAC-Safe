@@ -1,14 +1,12 @@
 package com.example.bacsafe;
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.app.TabActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -18,19 +16,24 @@ import android.widget.TextView;
 import android.widget.TabHost.TabSpec;
 
 
+@SuppressWarnings("deprecation")
 public class Main extends TabActivity {
 	
 	//Profile Data Instance 
 	private ProfileActivity profileData = new ProfileActivity();
 	private SharedPreferences userData = profileData.userData;
+	private SharedPreferences userPreferences = profileData.userPreferences;
+	
 	//User Profile variables
 	private String sUserName, sFirstName, sLastName, sDrinkTotal, sBACpercent, sBACtimerMinute, sBACtimerHour,sBeer, sWine, sShot;
 	private int nWeight, nHeightFeet, nHeightInches, nAge, nShot, nWine, nBeer, nDrinkTotal, nBACtimerMinute, nBACtimerHour;
 	private double dBACpercent;
-	private boolean bIsMale;
+	private boolean bIsMale, bShowUserAgreementAlert;
 	
 	//Other variables
 	TextView tDrinkTotal, tBACpercent, tBeer, tWine, tShot, tBACtimer;
+	
+	
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,25 +46,26 @@ public class Main extends TabActivity {
 	        //Remove title bar
 	        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 	        
-	        
 	        //Load the home screen
 	        setContentView(R.layout.activity_main);
 	        setHomeScreen();
 
 	        //Load profile data
 	        loadProfileData();
-	        
-	        //Show Liability Agreement if needed
-	        //TODO:  if(!preferenced)
-	        alertLiabilityAgreement();
-	        
-	        
+	       
 	        //Profile page activity
-	        final Intent profileActivity = new Intent(Main.this, ProfileActivity.class);
+	        final Intent profileActivityIntent = new Intent(Main.this, ProfileActivity.class);
+	        ProfileActivity profileActivity = new ProfileActivity();
 	        
 	    	//If the profile has not been created, open the Create Profile page.
 	        if(sUserName.isEmpty()){
-	        	startActivity(profileActivity);
+	        	startActivity(profileActivityIntent);
+	        }
+	        
+	        //Show the liability agreement if needed, if a profile already exists.  
+	        if(!sUserName.isEmpty() && bShowUserAgreementAlert)
+	        {
+	        	profileActivity.alertLiabilityAgreement(this, userPreferences);
 	        }
         
         
@@ -74,7 +78,7 @@ public class Main extends TabActivity {
 	        editButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					startActivity(profileActivity);
+					startActivity(profileActivityIntent);
 				}//onClick()
 			}); 
 	        
@@ -117,6 +121,15 @@ public class Main extends TabActivity {
 				}
 			});
         
+	        //Refresh Button
+	        Button refreshButton = (Button)findViewById(R.id.buttonRefresh);
+	        refreshButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					generateBAC();
+					generateBACTimer();
+				}
+			});
         
         /* 
          * -- BUDDIES Tab ------------------------------------------------------------------------
@@ -200,10 +213,9 @@ public class Main extends TabActivity {
 	     * @Defn - Loads User Information for BAC calculations
 	     */
 	    private void loadProfileData(){
-	    	
-	    	userData = getSharedPreferences(profileData.userDataFile, 0);
-			
-			//Set UI Variables from saved file
+
+			//Set UI Variables from saved User Data file
+	    	userData = getSharedPreferences(ProfileActivity.userDataFile, 0);
 			sUserName = userData.getString("username", "");
 			sFirstName = userData.getString("firstname", "");
 			sLastName = userData.getString("lastname", "");
@@ -212,37 +224,15 @@ public class Main extends TabActivity {
 			nHeightInches = userData.getInt("height_inches", 0);
 			nAge = userData.getInt("age", 21);
 			bIsMale = userData.getBoolean("male", true);
+			
+			//Set Preferences from saved User Preferences file
+			userPreferences = getSharedPreferences(ProfileActivity.userPreferencesFile, 0);
+			bShowUserAgreementAlert = userPreferences.getBoolean("useragreement", true);
+			
 	    }//loadProfileData()
     
 	    
-	    /*
-	     * alertLiabilityAgreement
-	     * 
-	     * @Defn - Load alert dialog Liability/User Agreement (When BAC Safe is opened) 
-	     */
-	    private void alertLiabilityAgreement(){
-	    	
-	        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-	
-	        alert.setTitle(R.string.UserAgreement);
-	        alert.setMessage(R.string.UserAgreementMessage);
-	        	     
-	        alert.setPositiveButton(R.string.Accept, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int whichButton) {
-	        	//Continue to Drink Calculator
-	          }
-	        });
-	
-	        alert.setNegativeButton(R.string.Decline, new DialogInterface.OnClickListener() {
-	          public void onClick(DialogInterface dialog, int whichButton) {
-	            // Canceled.
-	        	  android.os.Process.killProcess(android.os.Process.myPid());
-                  System.exit(1);
-	          }
-	        });
-	        alert.show();
-	       
-	    }//alertCreateGroupName()
+
 	    
 	    
 	/*
@@ -351,7 +341,7 @@ public class Main extends TabActivity {
 	
 	        alert.setPositiveButton(R.string.Next, new DialogInterface.OnClickListener() {
 	        public void onClick(DialogInterface dialog, int whichButton) {
-	          Editable value = input.getText();
+	          //Editable value = input.getText();
 	          // Do something with value!
 	          }
 	        });

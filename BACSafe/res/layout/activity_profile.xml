@@ -212,7 +212,7 @@
             android:textColor="#FFFFFF" />
 
         <Button
-            android:id="@+id/button_Edit_Buddies"
+            android:id="@+id/button_Profile_Delete"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="45sp"
             android:layout_height="30sp"

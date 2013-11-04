@@ -270,10 +270,10 @@
 
                     <Button android:id="@+id/buttonAddBuddy" android:layout_width="305dp" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_alignParentTop="true" android:layout_column="0" android:layout_gravity="center_horizontal|top" android:layout_row="0" android:text="@string/AddBuddy" />
 
-                    <ListView android:id="@+id/listView_BuddyList" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_above="@+id/button_Edit_Buddies" android:layout_alignParentLeft="true" android:layout_below="@+id/buttonAddBuddy">
+                    <ListView android:id="@+id/listView_BuddyList" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_above="@+id/button_Profile_Delete" android:layout_alignParentLeft="true" android:layout_below="@+id/buttonAddBuddy">
                     </ListView>
 
-                    <Button android:id="@+id/button_Edit_Buddies" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:text="Edit" />
+                    <Button android:id="@+id/button_Profile_Delete" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:text="Edit" />
                 </RelativeLayout>
 
             </FrameLayout>

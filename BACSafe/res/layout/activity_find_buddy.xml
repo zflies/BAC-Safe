@@ -17,6 +17,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="33dp"
+        android:background="#FFFFFF"
         android:showAsAction="always"
         android:visibility="visible" >
 
@@ -31,7 +32,8 @@
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:text="Find your Buddy"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000" />
 
     <Button
         android:id="@+id/button_AddBuddy_Done"
@@ -40,7 +42,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:onClick="Main"
-        android:text="Done" />
+        android:text="Done"
+        android:textColor="#FFFFFF" />
 
     <ListView
         android:id="@+id/listView1"
