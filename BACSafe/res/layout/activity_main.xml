@@ -8,18 +8,6 @@
     android:screenOrientation="portrait"
     tools:context=".Main" >
 
-    <!--
-         The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc.
-    -->
-
-
-    <!--
-         This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows.
-    -->
-
     <TabHost
         android:id="@android:id/tabhost"
         android:layout_width="match_parent"
@@ -226,7 +214,7 @@
                         android:layout_alignLeft="@+id/buttonWine"
                         android:layout_alignParentBottom="true"
                         android:layout_alignRight="@+id/buttonWine"
-                        android:text="Refresh" />
+                        android:text="@string/Refresh" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -242,9 +230,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:layout_column="0"
                         android:layout_gravity="left|top"
-                        android:layout_row="0"
                         android:text="@string/CreateGroup" />
 
                     <ListView
@@ -262,17 +248,17 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
-                        android:text="Edit" />
+                        android:text="@string/Edit" />
                 </RelativeLayout>
 
                 <RelativeLayout android:id="@+id/tabBuddies" android:layout_width="match_parent" android:layout_height="match_parent" android:columnCount="1" android:orientation="vertical">
 
-                    <Button android:id="@+id/buttonAddBuddy" android:layout_width="305dp" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_alignParentTop="true" android:layout_column="0" android:layout_gravity="center_horizontal|top" android:layout_row="0" android:text="@string/AddBuddy" />
+                    <Button android:id="@+id/buttonAddBuddy" android:layout_width="305dp" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_alignParentTop="true"  android:layout_gravity="center_horizontal|top"  android:text="@string/AddBuddy" />
 
                     <ListView android:id="@+id/listView_BuddyList" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_above="@+id/button_Profile_Delete" android:layout_alignParentLeft="true" android:layout_below="@+id/buttonAddBuddy">
                     </ListView>
 
-                    <Button android:id="@+id/button_Profile_Delete" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:text="Edit" />
+                    <Button android:id="@+id/button_Profile_Delete" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:text="@string/Edit" />
                 </RelativeLayout>
 
             </FrameLayout>
