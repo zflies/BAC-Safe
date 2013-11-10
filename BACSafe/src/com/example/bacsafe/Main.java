@@ -1,5 +1,7 @@
 package com.example.bacsafe;
 
+import java.util.LinkedList;
+
 import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.DialogInterface;
@@ -35,6 +37,9 @@ public class Main extends TabActivity {
 	private int m_nHeightInches;
 	private int m_nAge;
 	private boolean m_bIsMale;
+	
+    protected String tempBuddyList[] = {"Buddy 1", "Buddy 2", "Buddy 3", "Buddy 4", "Buddy 5"};
+	protected LinkedList buddiesList = new LinkedList();
 		
 	//User Preferences variables
 	private boolean m_bShowUserAgreementAlert;
@@ -502,11 +507,12 @@ public class Main extends TabActivity {
 	        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 	
 	        alert.setTitle(getString(R.string.SelectBuddies) + " " + sNewGroupName);
-	        alert.setMultiChoiceItems(R.array.Temp_BuddyList, null, new DialogInterface.OnMultiChoiceClickListener() {
-				
+	        	        
+	        alert.setMultiChoiceItems(tempBuddyList, null, new DialogInterface.OnMultiChoiceClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 					//TODO: Save Selected Buddies to new Group
+					
 				}
 			});
 	        
@@ -524,5 +530,7 @@ public class Main extends TabActivity {
 	        alert.show();
 	       
 	    }//alertSelectGroupBuddies()
+	    
+	    
     
 }//class Main

@@ -6,22 +6,31 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 public class ProfileActivity extends Activity {
 	
-	//Create file for saving User Information to internal storage 
+	//Create files for saving User App Preferences and User Information to internal storage 
+	private static final String userPrefFile = "BAC Safe User Preferences";
 	private static final String userInfoFile = "BAC Safe User Information";
-	SharedPreferences userInfo;
+	SharedPreferences userPrefs, userInfo;
+	SharedPreferences.Editor editor;
+	
+	//Keyboard Access
+	InputMethodManager keyboard;
 	
 	//Declared UI Objects
 	TextView titleTextView;
@@ -130,8 +139,8 @@ public class ProfileActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				finish();
-			}//onClick()
-		});//backButton
+			}// onClick()
+		});// backButton
 
 		//Save Button - Saves new information and recalculates BAC
 		saveButton.setOnClickListener(new View.OnClickListener() {
@@ -145,12 +154,23 @@ public class ProfileActivity extends Activity {
 					if(requiredFieldValidation())
 					{	
 						saveUserInfo();
-					}
-				}
-				
-			}//onClick()
+					} 
+				} 
+					
+			}// onClick()
 			
-		});//saveButton
+		});// saveButton
+		
+		//Profile Delete Button - Deleted the user profile
+		profileDeleteButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				alertConfirmProfileDelete();
+
+			}
+		});// profileDeleteButton
 		
 	}//setupObjectVariables()
 	
@@ -225,7 +245,7 @@ public class ProfileActivity extends Activity {
 	private void saveUserInfo(){
 		
 		userInfo = getSharedPreferences(userInfoFile, 0);
-		SharedPreferences.Editor editor = userInfo.edit();
+		editor = userInfo.edit();
 			
 		editor.putString("username", usernameTextField.getText().toString());
 		editor.putString("firstname", firstNameTextField.getText().toString());
@@ -278,7 +298,6 @@ public class ProfileActivity extends Activity {
 		{
 			alertRequiredFieldsValidation();
 			usernameTextField.requestFocus();
-			keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 			return false;
 		}
 		
@@ -305,9 +324,6 @@ public class ProfileActivity extends Activity {
 	 */
 	private boolean requiredFieldValidation(){
 		
-		//If any validation fails, open keyboard to allow user to re-enter info quickly 
-		InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		
 		String sHeight_Feet = height_feet_TextField.getText().toString();
 		String sHeight_Inches = height_inches_TextField.getText().toString();
 		String sWeight = weightTextField.getText().toString();
@@ -317,7 +333,6 @@ public class ProfileActivity extends Activity {
 		{	
 			alertRequiredFieldsValidation(); //Missing Fields alert
 			height_feet_TextField.requestFocus();
-			keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 			return false;
 		}
 		else
@@ -338,7 +353,6 @@ public class ProfileActivity extends Activity {
 			{
 				alertHeightValidation(); //Invalid Height alert
 				height_feet_TextField.requestFocus();
-				keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 				return false;
 			}
 			else
@@ -348,7 +362,6 @@ public class ProfileActivity extends Activity {
 				{
 					alertRequiredFieldsValidation(); //Missing Fields alert
 					weightTextField.requestFocus();
-					keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 					return false;
 				}
 				else
@@ -359,7 +372,6 @@ public class ProfileActivity extends Activity {
 					{
 						alertWeightValidation(); //Invalid Weight alert
 						weightTextField.requestFocus();
-						keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 						return false;
 					}
 				}
@@ -386,6 +398,8 @@ public class ProfileActivity extends Activity {
         
         alert.setPositiveButton(R.string.Okay, new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int whichButton) {
+        	keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        	keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0); //Open Keyboard
           }
         });
         alert.show();
@@ -407,6 +421,8 @@ public class ProfileActivity extends Activity {
         
         alert.setPositiveButton(R.string.Okay, new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int whichButton) {
+        	keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        	keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0); //Open Keyboard
           }
         });
         alert.show();
@@ -427,6 +443,8 @@ public class ProfileActivity extends Activity {
         
         alert.setPositiveButton(R.string.Okay, new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int whichButton) {
+        	keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        	keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0); //Open Keyboard
           }
         });
         alert.show();
@@ -447,10 +465,95 @@ public class ProfileActivity extends Activity {
         
         alert.setPositiveButton(R.string.Okay, new DialogInterface.OnClickListener() {
         public void onClick(DialogInterface dialog, int whichButton) {
+        	keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        	keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0); //Open Keyboard
           }
         });
         alert.show();
     } //alertWeightValidation()
+    
+   /*
+    * alertConfirmProfileDelete()
+    * 
+    * @Defn - Confirm that user wishes to delete profile
+    */
+   private void alertConfirmProfileDelete(){
+	   
+       final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+       alert.setTitle("Delete Profile?");
+       //alert.setMessage("Deleting your profile will remove all app data, including your Buddies, Groups, and any saved information.  Do you wish to proceed?");
+       
+       //Text View - User Agreement Message
+       TextView tvDeleteProfileMessage = new TextView(this);
+       TextView tvConfirmDeleteProfile = new TextView(this);
+       
+       tvDeleteProfileMessage.setText("Deleting your profile will remove all app data, including your Buddies, Groups, and any saved information.");
+       tvDeleteProfileMessage.setTextSize(16);
+       tvDeleteProfileMessage.setLineSpacing(5, 1);
+       tvDeleteProfileMessage.setPadding(30, 20, 30, 10);
+       
+       tvConfirmDeleteProfile.setText("Do you wish to proceed?");
+       tvConfirmDeleteProfile.setTextSize(16);
+       tvConfirmDeleteProfile.setPadding(30, 10, 30, 20);
+
+       //Set Alert's View
+       ScrollView scrollView = new ScrollView(this); //Need alert context to be scrollable on small screens
+       LinearLayout alertLayout = new LinearLayout(this); //Need Linear Layout to contain more than one View
+       alertLayout.setOrientation(1); //Set View to vertical
+       alertLayout.addView(tvDeleteProfileMessage);
+       alertLayout.addView(tvConfirmDeleteProfile);
+       scrollView.addView(alertLayout);
+       alert.setView(scrollView);
+       
+       alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+       public void onClick(DialogInterface dialog, int whichButton) {
+    	   
+			userInfo = getSharedPreferences(userInfoFile, 0);
+			userPrefs = getSharedPreferences(userPrefFile, 0);
+			
+			//Delete User Information (i.e. Username, Height, Weight, Gender, etc.)
+			editor = userInfo.edit().clear();
+			editor.apply();
+			
+			/*	Delete user preferences? (i.e. User Liabaility's Do Not Show Again)
+			 * 
+			 *	//editor = userPrefs.edit().clear();
+			 *	//editor.apply();
+			 */
+			
+			//TODO: Delete User from DATABASE			
+			
+			//Restart App
+			restartFirstActivity(); 
+         }
+       });
+       
+       alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+	   public void onClick(DialogInterface dialog, int whichButton) {
+		   //Cancel
+	     }
+	   });
+       alert.show();
+	   
+	   
+   }//alertConfirmProfileDelete()
+   
+   
+   /*
+    * restartFirstActivity()
+    * 
+    * @Defn - Restarts BAC Safe 
+    */
+   private void restartFirstActivity()
+   {
+	   Intent restartIntent = getBaseContext().getPackageManager()
+			   .getLaunchIntentForPackage(getBaseContext().getPackageName() );
+   
+	   restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK );
+	   startActivity(restartIntent);
+	   
+   }//restartFirstActivity()
 
 }//class ProfileActivity
 

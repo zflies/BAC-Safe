@@ -24,13 +24,6 @@
     <string name="Cancel">Cancel</string>
     <string name="EnterGroupName">Enter Group Name:</string>
     <string name="Next">Next</string>
-    <string-array name="Temp_BuddyList">
-        <item >Buddy 1</item>
-        <item >Buddy 2</item>
-        <item >Buddy 3</item>
-        <item >Buddy 4</item>
-        <item >Buddy 5</item>
-    </string-array>
     <string name="CreateGroup">Create Group</string>
     <string name="UserAgreement">BAC Safe User Agreement</string>
     <string name="UserAgreementMessage">BAC Safe is intended for recreational and educational use only to promote safe drinking practices.  The described Blood Alcohol Content and Time Until Sober is estimation only and should never be used as a replacement for a breathalyzer.  Do not use the results as a reason to operate any machinery or drive under the influence.  This app is not a substitute for any legal advice or a medical professional. The creators of BAC Safe are not liable for any legal mishaps or medical emergencies that occur while the app is in use during any situations.</string>
@@ -50,6 +43,22 @@
     <string name="MissingRequiredField">* Missing Required Fields</string>
     <string name="UsernameAlreadyExists">Username Already Exists</string>
     <string name="PleaseTryAgain">Please try again.</string>
+    <string name="Weight">*Weight:</string>
+    <string name="Feet">(ft.)</string>
+    <string name="Pounds">(lbs.)</string>
+    <string name="Inches">(in.)</string>
+    <string name="Male">M</string>
+    <string name="Female">F</string>
+    <string name="EditYourProfile">Edit Your Profile</string>
+    <string name="Username">*Username:</string>
+    <string name="Height">*Height:</string>
+    <string name="X">X</string>
+    <string name="Age">Age:</string>
+    <string name="Sex">Sex:</string>
+    <string name="LastName">Last name:</string>
+    <string name="Save">Save</string>
+    
+    
  	
 
 </resources>

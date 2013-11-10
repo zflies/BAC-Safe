@@ -13,8 +13,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/label_Height"
-            android:layout_marginTop="60dp"
-            android:text="*Weight:"
+            android:layout_marginTop="35dp"
+            android:text="@string/Weight"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF" />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/label_Weight"
             android:layout_toRightOf="@+id/textBox_Height_Feet"
-            android:text="(ft.)"
+            android:text="@string/Feet"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
             android:textStyle="italic" />
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textBox_Weight"
             android:layout_toRightOf="@+id/textBox_Weight"
-            android:text="(lbs.)"
+            android:text="@string/Pounds"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
             android:textStyle="italic" />
@@ -92,7 +92,7 @@
             android:layout_alignBaseline="@+id/label_Height_feet"
             android:layout_alignBottom="@+id/label_Height_feet"
             android:layout_toRightOf="@+id/textBox_Height_Inches"
-            android:text="(in.)"
+            android:text="@string/Inches"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
             android:textStyle="italic" />
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:text="Save"
+            android:text="@string/Save"
             android:textColor="#FFFFFF" />
 
         <Button
@@ -113,7 +113,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:onClick="Main"
-            android:text="Back"
+            android:text="@string/Back"
             android:textColor="#FFFFFF"
             android:visibility="visible" />
 
@@ -162,7 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="M"
+                android:text="@string/Male"
                 android:textColor="#FFFFFF"
                 android:textStyle="italic" />
 
@@ -170,7 +170,7 @@
                 android:id="@+id/radioGroup_Sex_Female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="F"
+                android:text="@string/Female"
                 android:textColor="#FFFFFF"
                 android:textStyle="italic" />
         </RadioGroup>
@@ -183,7 +183,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:gravity="center"
-            android:text="Edit Your Profile"
+            android:text="@string/EditYourProfile"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
             android:textSize="25sp"
@@ -197,7 +197,7 @@
             android:layout_alignLeft="@+id/label_Title"
             android:layout_below="@+id/label_Title"
             android:layout_marginTop="20dp"
-            android:text="*Username:"
+            android:text="@string/Username"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF" />
 
@@ -206,8 +206,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/spinner_Edit_Age"
-            android:layout_marginTop="60dp"
-            android:text="*Height:"
+            android:layout_marginTop="45dp"
+            android:text="@string/Height"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF" />
 
@@ -219,7 +219,7 @@
             android:layout_above="@+id/label_UserName"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="X"
+            android:text="@string/X"
             android:textSize="12sp" />
 
         <TextView
@@ -228,7 +228,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/radioGroup_Sex"
             android:layout_toRightOf="@+id/label_Height_feet"
-            android:text="*Age:"
+            android:text="@string/Age"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF" />
 
@@ -248,9 +248,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textBox_LastName"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="45dp"
             android:layout_toLeftOf="@+id/radioGroup_Sex"
-            android:text="*Sex:"
+            android:text="@string/Sex"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF" />
 
@@ -273,7 +273,7 @@
             android:layout_below="@+id/textBox_FirstName"
             android:layout_marginTop="25dp"
             android:layout_toLeftOf="@+id/textBox_FirstName"
-            android:text="Last name:"
+            android:text="@string/LastName"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF" />
 

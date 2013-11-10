@@ -34,6 +34,8 @@ public class FindBuddyActivity extends Activity{
 	    searchView.setIconified(false);
 	    searchView.requestFocusFromTouch();
 	    
+	    
+	    
 	    //Done Button - Returns to Main screen (Buddies tab)
 	    doneButton.setOnClickListener(new View.OnClickListener() {
 	  	@Override
