@@ -1,6 +1,7 @@
 package com.example.bacsafe;
 
 import java.util.LinkedList;
+import java.text.DecimalFormat;
 
 import android.app.AlertDialog;
 import android.app.TabActivity;
@@ -55,6 +56,7 @@ public class Main extends TabActivity {
 	private int nShot;
 	private int nWine;
 	private int nBeer;
+	private int nCurrentDrink;
 	private int nDrinkTotal;
 	private int nBACtimerMinute;
 	private int nBACtimerHour;
@@ -289,6 +291,7 @@ public class Main extends TabActivity {
 	        		nShot++;
 	        		generateShotDrinks();
 	        		generateNumberDrinks();
+	        		nCurrentDrink = 3;
 	        		generateBAC();
 	        		generateBACTimer();
 				}//onClick
@@ -302,6 +305,7 @@ public class Main extends TabActivity {
 					nWine++;
 					generateWineDrinks();
 					generateNumberDrinks();
+					nCurrentDrink = 2;
 					generateBAC();
 					generateBACTimer();
 				}
@@ -315,6 +319,7 @@ public class Main extends TabActivity {
 					nBeer++;
 					generateBeerDrinks();
 					generateNumberDrinks();
+					nCurrentDrink = 1;
 					generateBAC();
 					generateBACTimer();
 				}
@@ -338,8 +343,30 @@ public class Main extends TabActivity {
 	     * @Defn - 
 	     */
 	    private void generateBAC(){
-	    	dBACpercent = (nBeer) + (nWine*2) + (nShot*3);
-	    	sBACpercent = Double.toString(dBACpercent);
+	    	//Initialize Variables
+	    	double nLitersWater;
+	    	double nAlcoholInBodyWater;
+	    	double nGramsPercent;
+	    	
+	    	// Convert weight into approximate amount of mililiters of water in users body (1 & 2)	
+	    	if( m_bIsMale ) {
+	    		nLitersWater = ( 1000 * ( .58 * ( m_nWeight / 2.2046 ) ) );
+	    	}
+	    	else {
+	    		nLitersWater = ( 1000 * ( .49 * ( m_nWeight / 2.2046 ) ) );
+	    	}
+	    	
+	    	// Calculate the grams of pure alcohol per mililiter of water in the body (3)
+	    	nAlcoholInBodyWater = ( 23.3603 / nLitersWater );
+	    	
+	    	// Calculate grams per 100 mililiters aka Grams Percent (4)
+	    	nGramsPercent = ( ( .806 * nAlcoholInBodyWater ) * 100 );
+	    	
+	    	//Take the grams percent multplied by the amount of pure alcohol recently consumed
+	    	dBACpercent += ( nCurrentDrink * .6 ) * nGramsPercent;
+	    	
+	    	DecimalFormat df = new DecimalFormat(".##");
+	    	sBACpercent = df.format(dBACpercent);
 	    	tBACpercent = (TextView)findViewById(R.id.labelBACPercent);
 	    	tBACpercent.setText(sBACpercent);
 	    }//generateBAC()
