@@ -2,7 +2,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#607B8B"
+		android:background="#91C3DC"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:paddingBottom="10dp"
@@ -27,7 +27,6 @@
             android:layout_alignLeft="@+id/textBox_Height_Feet"
             android:ems="3"
             android:gravity="center_vertical|center_horizontal"
-            android:textColor="#FFFFFF"
             android:selectAllOnFocus="true"
             android:inputType="number" />
 
@@ -41,7 +40,6 @@
             android:layout_toRightOf="@+id/label_Weight"
             android:ems="3"
             android:gravity="center_vertical|center_horizontal"
-            android:textColor="#FFFFFF"
             android:inputType="number"
             android:selectAllOnFocus="true" />
 
@@ -66,7 +64,6 @@
             android:layout_marginLeft="10dp"
             android:ems="3"
             android:gravity="center_vertical|center_horizontal"
-            android:textColor="#FFFFFF"
             android:selectAllOnFocus="true"
             android:inputType="number"
             android:nextFocusDown="@id/textBox_Weight" >
@@ -103,8 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:text="@string/Save"
-            android:textColor="#FFFFFF" />
+            android:text="@string/Save"/>
 
         <Button
             android:id="@+id/button_Edit_Back"
@@ -114,7 +110,6 @@
             android:layout_alignParentLeft="true"
             android:onClick="Main"
             android:text="@string/Back"
-            android:textColor="#FFFFFF"
             android:visibility="visible" />
 
         <EditText
@@ -125,7 +120,6 @@
             android:layout_alignBottom="@+id/label_UserName"
             android:layout_alignRight="@+id/textBox_FirstName"
             android:layout_toRightOf="@+id/label_UserName"
-            android:textColor="#FFFFFF"
             android:ems="10"
             android:inputType="textPersonName" />
 
@@ -138,8 +132,7 @@
             android:layout_alignParentRight="true"
             android:layout_toRightOf="@+id/label_FirstName"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:textColor="#FFFFFF" />
+            android:inputType="textPersonName"/>
 
         <Spinner
             android:id="@+id/spinner_Edit_Age"
@@ -163,7 +156,6 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/Male"
-                android:textColor="#FFFFFF"
                 android:textStyle="italic" />
 
             <RadioButton
@@ -171,7 +163,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Female"
-                android:textColor="#FFFFFF"
                 android:textStyle="italic" />
         </RadioGroup>
 
@@ -185,7 +176,6 @@
             android:gravity="center"
             android:text="@string/EditYourProfile"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#FFFFFF"
             android:textSize="25sp"
             android:textStyle="bold"
             android:typeface="normal" />
@@ -263,8 +253,7 @@
             android:layout_alignLeft="@+id/textBox_Username"
             android:layout_alignRight="@+id/textBox_FirstName"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:textColor="#FFFFFF" />
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/label_LastName"

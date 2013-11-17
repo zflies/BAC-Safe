@@ -17,37 +17,6 @@
         android:text="Group Name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:text="#"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="17dp"
-        android:text="BAC %"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/label_groupName"
-        android:layout_marginTop="15dp"
-        android:text="Buddy"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <Button
         android:id="@+id/button_AddBuddy_Done"
         android:layout_width="wrap_content"
@@ -63,5 +32,25 @@
         android:layout_above="@+id/button_AddBuddy_Done"
         android:layout_below="@+id/textView1" >
     </ListView>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_AddBuddy_Done"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/label_groupName"
+        android:text="BAC "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/listView1"
+        android:layout_marginRight="32dp"
+        android:layout_toLeftOf="@+id/textView1"
+        android:text="Drinks"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

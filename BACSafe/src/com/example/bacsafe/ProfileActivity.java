@@ -7,13 +7,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -21,18 +19,20 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+/**
+ * Profile activity for accessing user profile information in BAC Safe.
+ * 
+ * @author Team BAC Safe
+ */
 public class ProfileActivity extends Activity {
-	
-	//Create files for saving User App Preferences and User Information to internal storage 
-	private static final String userPrefFile = "BAC Safe User Preferences";
-	private static final String userInfoFile = "BAC Safe User Information";
-	SharedPreferences userPrefs, userInfo;
-	SharedPreferences.Editor editor;
-	
-	//Keyboard Access
+
+	// Keyboard Access
 	InputMethodManager keyboard;
-	
-	//Declared UI Objects
+
+	// User Information Instance
+	private User m_userProfile;
+
+	// Declared UI Objects
 	TextView titleTextView;
 	Spinner ageSpinner;
 	EditText usernameTextField;
@@ -46,75 +46,65 @@ public class ProfileActivity extends Activity {
 	Button backButton;
 	Button saveButton;
 	Button profileDeleteButton;
-	
-	//User Information variables
-	private String m_sUserName;
-	private String m_sFirstName;
-	private String m_sLastName;
-	private int m_nWeight;
-	private int m_nHeightFeet;
-	private int m_nHeightInches;
-	private int m_nAge;
-	private boolean m_bIsMale;
-	
+
 	//-------------------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------------------
 
-	/*
-	 * @Override onCreate()
+	/**
+	 * Set up Profile Activity when called
 	 * 
-	 * @Defn - Set up Activity when called
+	 * @Override onCreate()
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		
-		setContentView(R.layout.activity_profile); //Show the Edit Button Screen Activity
-		
-		setupObjectVariables();//Setup UI Objects
-		loadUserData();//Load User Data
-		setUserInfo();//Put User Info into UI Objects
-		
-		if(!m_sUserName.isEmpty()){ //If a Username has already been created, do not allow the user to change it
+
+		setContentView(R.layout.activity_profile); // Show the Edit Button Screen Activity
+
+		m_userProfile = new User();// Retrieve User Info and Prefs through m_userProfile initialization
+
+		setupObjectVariables();// Setup UI Objects
+		setUserInfo();// Put User Info into UI Objects
+
+		if(!m_userProfile.getUserName().isEmpty()){ // If a Username has already been created, do not allow the user to change it
 			usernameTextField.setCursorVisible(false);
 			usernameTextField.setFocusable(false);
 			usernameTextField.setClickable(false);
 			usernameTextField.setGravity(0x01);
-			firstNameTextField.requestFocus(); //Set tab focus to the Name Text Box on startup
+			firstNameTextField.requestFocus(); // Set tab focus to the Name Text Box on startup
 		}
-		else //If the Username needs to be created
+		else // If the Username needs to be created
 		{
-			titleTextView.setText("Create Your Profile");
-			backButton.setVisibility(8); //Hide the Back button
-			profileDeleteButton.setVisibility(8);
-			usernameTextField.requestFocus(); //Set the focus to the Username text box on startup
+			titleTextView.setText(R.string.CreateYourProfile); // Change the title of the page
+			backButton.setVisibility(8); // Hide the Back button
+			profileDeleteButton.setVisibility(8); // Hide the Delete Profile button
+			usernameTextField.requestFocus(); // Set the focus to the Username text box on startup
 		}
-		
-	}//onCreate()
-	
-	
-	/* @Override onBackPressed()
+
+	} // onCreate()
+
+
+	/**
+	 *  Disable the back button if a user profile DNE.
 	 * 
-	 * Disable the back button if a user profile DNE.
+	 *  @Override onBackPressed()
 	 */
-    @Override
-    public void onBackPressed() {
-       	if(!m_sUserName.isEmpty())
-       	{
-    		finish();
-    	}
-    }//onBackPressed()
-	
-	
-	/*
-	 * setupObjectVariables()
-	 * 
-	 * @Defn - Sets up the UI and contains the actions for each (i.e. Save Button)
+	@Override
+	public void onBackPressed() {
+		if(!m_userProfile.getUserName().isEmpty())
+		{    
+			finish();	
+		}
+	} // onBackPressed()
+
+
+	/**
+	 * Sets up the UI and contains the actions for each (i.e. Save Button)
 	 */
 	private void setupObjectVariables(){
-		
-		//Setup Text Field objects
+
+		// Setup Text Field objects
 		titleTextView = (TextView)findViewById(R.id.label_Title);
 		usernameTextField = (EditText)findViewById(R.id.textBox_Username);
 		firstNameTextField = (EditText)findViewById(R.id.textBox_FirstName);
@@ -124,176 +114,142 @@ public class ProfileActivity extends Activity {
 		height_inches_TextField = (EditText)findViewById(R.id.textBox_Height_Inches);
 		maleRadioButton = (RadioButton)findViewById(R.id.radioGroup_Sex_Male);
 		femaleRadioButton = (RadioButton)findViewById(R.id.radioGroup_Sex_Female);
-		
-		//Setup Spinner object
+
+		// Setup Spinner object
 		ageSpinner = (Spinner) findViewById(R.id.spinner_Edit_Age);
 		addItemsOm_nAgeSpinner();
-		
-		//Setup Button objects
+
+		// Setup Button objects
 		backButton = (Button)findViewById(R.id.button_Edit_Back);
 		saveButton = (Button)findViewById(R.id.button_Edit_Save);
 		profileDeleteButton = (Button)findViewById(R.id.button_Profile_Delete);
-		
-		//Back Button - Returns to Main screen (Drink Counter)
+
+		// Back Button - Returns to Main screen (Drink Counter)
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Intent returnIntent = new Intent();
+				setResult(RESULT_CANCELED, returnIntent); // Send activity result of Canceled so Main does not reload User Info/Prefs
 				finish();
-			}// onClick()
-		});// backButton
+			} 
+		}); // backButton
 
-		//Save Button - Saves new information and recalculates BAC
+		// Save Button - Saves new information and recalculates BAC
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-				//Form Validation - Check for unique Username
+
+				// Form Validation - Check for unique Username
 				if(uniqueUsernameValidation())
 				{
-					//Form Validation - Required fields (Height and Weight)
+					// Form Validation - Required fields (Height and Weight)
 					if(requiredFieldValidation())
 					{	
 						saveUserInfo();
 					} 
 				} 
-					
-			}// onClick()
-			
-		});// saveButton
-		
-		//Profile Delete Button - Deleted the user profile
+			}
+		}); // saveButton
+
+		// Profile Delete Button - Deleted the user profile
 		profileDeleteButton.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
-				
-				alertConfirmProfileDelete();
-
+				alertConfirmProfileDelete(); //Confirm user's desire to delete profile
 			}
-		});// profileDeleteButton
-		
-	}//setupObjectVariables()
-	
-	
-	
-	
-	/*	
-	 * addItemsOm_nAgeSpinner
-	 * 
-	 * @Defn - Add ages 21-100 to Spinner menu for age selection
+		}); // profileDeleteButton
+
+	} // setupObjectVariables()
+
+
+
+
+	/**
+	 *	Add ages 21-100 to Spinner menu for age selection
 	 */
 	private void addItemsOm_nAgeSpinner() {
 		List<Integer> list = new ArrayList<Integer>();
-	    for(int x=21; x<=100; x++){
-	    	list.add(x);
-	    }
-	    
-	    ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, list);
-	    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-	    ageSpinner.setAdapter(dataAdapter);
-	    
-	}//addItemsOm_nAgeSpinner()
-	
-	
-	
-	/*	
-	 * loadUserData
-	 * 
-	 * @Defn - Loads User Profile information (i.e. weight, height, age, gender, etc.)
-	 */
-	private void loadUserData(){
-		
-		//Set Access to internal storage files
-		userInfo = getSharedPreferences(userInfoFile, 0);
-		
-		m_sUserName = userInfo.getString("username", "");
-		m_sFirstName = userInfo.getString("firstname", "");
-		m_sLastName = userInfo.getString("lastname", "");
-		m_nWeight = userInfo.getInt("weight", 0);
-		m_nHeightFeet = userInfo.getInt("height_feet", 0);
-		m_nHeightInches = userInfo.getInt("height_inches", 0);
-		m_nAge = userInfo.getInt("age", 21);
-		m_bIsMale = userInfo.getBoolean("male", true);
-		
-	} //loadUserData()
-	
-	/*
-	 * setUserInfo()
-	 * 
-	 * @Defn - Sets up the UI for the Profile Activity
+		for(int x=21; x<=100; x++){
+			list.add(x);
+		}
+
+		ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, list);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		ageSpinner.setAdapter(dataAdapter);
+
+	} // addItemsOm_nAgeSpinner()
+
+
+	/**
+	 * Sets up the UI for the Profile Activity
 	 */
 	private void setUserInfo(){
-		
-		//Set UI Objects from UI Variables
-		usernameTextField.setText(m_sUserName);
-		firstNameTextField.setText(m_sFirstName);
-		lastNameTextField.setText(m_sLastName);
-		maleRadioButton.setChecked(m_bIsMale);
-		femaleRadioButton.setChecked(!m_bIsMale);
-		ageSpinner.setSelection(m_nAge-21);
-		weightTextField.setText(Integer.toString(m_nWeight));
-		height_feet_TextField.setText(Integer.toString(m_nHeightFeet));
-		height_inches_TextField.setText(Integer.toString(m_nHeightInches));
-		
-	}//setUserInfo()
-	
-	/*
-	 * saveUserInfo()
-	 * 
-	 * @Defn - Saves user information to internal storage
+
+		// Set UI Objects from UI Variables
+		usernameTextField.setText(m_userProfile.getUserName());
+		firstNameTextField.setText(m_userProfile.getFirstName());
+		lastNameTextField.setText(m_userProfile.getLastName());
+		maleRadioButton.setChecked(m_userProfile.isMale());
+		femaleRadioButton.setChecked(!m_userProfile.isMale());
+		ageSpinner.setSelection(m_userProfile.getAge()-21);
+		weightTextField.setText(Integer.toString(m_userProfile.getWeight()));
+		height_feet_TextField.setText(Integer.toString(m_userProfile.getHeightFeet()));
+		height_inches_TextField.setText(Integer.toString(m_userProfile.getHeightInches()));
+
+	} // setUserInfo()
+
+	/**
+	 *  Sets the user's information so that it can be saved
 	 */
 	private void saveUserInfo(){
-		
-		userInfo = getSharedPreferences(userInfoFile, 0);
-		editor = userInfo.edit();
-			
-		editor.putString("username", usernameTextField.getText().toString());
-		editor.putString("firstname", firstNameTextField.getText().toString());
-		editor.putString("lastname", lastNameTextField.getText().toString());
-		editor.putBoolean("male", maleRadioButton.isChecked());
-		editor.putInt("age", Integer.parseInt(ageSpinner.getSelectedItem().toString()));
-		editor.putInt("weight", Integer.parseInt(weightTextField.getText().toString()));
-		
-		if(!height_feet_TextField.getText().toString().isEmpty())
+
+		// Form Validation will validate these fields are not NULL.
+		m_userProfile.setUserName(usernameTextField.getText().toString());
+		m_userProfile.setFirstName(firstNameTextField.getText().toString());
+		m_userProfile.setLastName(lastNameTextField.getText().toString());
+		m_userProfile.setMale(maleRadioButton.isChecked());
+		m_userProfile.setAge(Integer.parseInt(ageSpinner.getSelectedItem().toString()));
+		m_userProfile.setWeight(Integer.parseInt(weightTextField.getText().toString()));
+
+		// If the Height Feet text field is empty, set a value of 0 instead of NULL
+		if(height_feet_TextField.getText().toString().isEmpty())
 		{
-			editor.putInt("height_feet", Integer.parseInt(height_feet_TextField.getText().toString()));
+			m_userProfile.setHeightFeet(0);
 		}
 		else 
 		{
-			editor.putInt("height_feet", 0);
+			m_userProfile.setHeightFeet(Integer.parseInt(height_feet_TextField.getText().toString()));
 		}
-		
-		
-		if(!height_inches_TextField.getText().toString().isEmpty())
+
+		// If the Height Inches text field is empty, set a value of 0 instead of NULL
+		if(height_inches_TextField.getText().toString().isEmpty())
 		{
-			editor.putInt("height_inches", Integer.parseInt(height_inches_TextField.getText().toString()));
+			m_userProfile.setHeightInches(0);
 		}
 		else 
 		{
-			editor.putInt("height_inches", 0);
+			m_userProfile.setHeightInches(Integer.parseInt(height_inches_TextField.getText().toString()));
 		}
-		
-		editor.apply(); //Saves changes to file
-		  
-		finish(); //Return to Main screen		
-	}
-	
-	
+
+		// Set Activity Result to OK so that Main will load the new information from User
+		Intent returnIntent = new Intent();
+		setResult(RESULT_OK, returnIntent); 
+		finish();	
+
+	} // saveUserInfo()
+
+
 	//----------------------------------------------------------------------------------------
- 	//-- PROFILE DATA VALIDATION -------------------------------------------------------------
+	//-- PROFILE DATA VALIDATION -------------------------------------------------------------
 	//----------------------------------------------------------------------------------------
-	
-	/*
-	 * uniqueUsernameValidation()
+
+	/**
+	 * Check database for unique Username selected by user
 	 * 
-	 * @Defn - Check database for unique Username selected by user
-	 * @Return - True if Username is unique
+	 * @return - True if Username is unique
 	 */
 	private boolean uniqueUsernameValidation(){
-		
-		//If any validation fails, open keyboard to allow user to re-enter info quickly 
-		InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		
+
 		if(usernameTextField.getText().toString().isEmpty())
 		{
 			alertRequiredFieldsValidation();
@@ -301,6 +257,12 @@ public class ProfileActivity extends Activity {
 			return false;
 		}
 		
+		/*
+		 * TODO:  Need Username validation so that length of username is > 4 characters long.
+		 * 		  We also should investigate changing the keyboard type for the username Text Field in activity_profile
+		 * 		  so that usernames cannot contain spaces or symbols.  Perhaps only allow alpha characters and numbers?
+		 */
+
 		//TODO:  Search DATABASE for unique username
 		/*
 		 * if( < Username Already Exists > )
@@ -309,29 +271,28 @@ public class ProfileActivity extends Activity {
 		 * 		return false;
 		 * }
 		 */
-	
-		return true; //Username is unique 
-		
-	}//uniqueUsernameValidation()
-	
-	
-	
-	/*
-	 * requiredFieldValidation()
+
+		return true; // Username is unique 
+
+	} // uniqueUsernameValidation()
+
+
+
+	/**
+	 * Verify all required user information is entered, with a minimum total height of 3ft (36in) and minimum weight of 50lbs.
 	 * 
-	 * @Defn - Verify all required user information is entered, with a minimum total height of 3ft (36in.). and minimum weight of 50lbs.
 	 * @Return - True if all required fields have been entered and valid height and weight
 	 */
 	private boolean requiredFieldValidation(){
-		
+
 		String sHeight_Feet = height_feet_TextField.getText().toString();
 		String sHeight_Inches = height_inches_TextField.getText().toString();
 		String sWeight = weightTextField.getText().toString();
-		
-		//Form Validation - Required fields (Height)
+
+		// Form Validation - Required fields (Height)
 		if(sHeight_Feet.isEmpty() && sHeight_Inches.isEmpty())
 		{	
-			alertRequiredFieldsValidation(); //Missing Fields alert
+			alertRequiredFieldsValidation(); // Missing Fields alert
 			height_feet_TextField.requestFocus();
 			return false;
 		}
@@ -339,28 +300,28 @@ public class ProfileActivity extends Activity {
 		{
 			int heightFeet = 0;
 			int heightInches = 0;
-			
+
 			if(!sHeight_Feet.isEmpty()){
 				heightFeet = Integer.parseInt(sHeight_Feet);
 			}
 			if(!sHeight_Inches.isEmpty()){
 				heightInches = Integer.parseInt(sHeight_Inches);
 			}
-			
+
 			int totalHeightInches = heightInches + (heightFeet * 12);
-			
+
 			if(totalHeightInches < 36)
 			{
-				alertHeightValidation(); //Invalid Height alert
+				alertHeightValidation(); // Invalid Height alert
 				height_feet_TextField.requestFocus();
 				return false;
 			}
 			else
 			{	
-				//Form Validation - Required fields (Weight)
+				// Form Validation - Required fields (Weight)
 				if(sWeight.isEmpty())
 				{
-					alertRequiredFieldsValidation(); //Missing Fields alert
+					alertRequiredFieldsValidation(); // Missing Fields alert
 					weightTextField.requestFocus();
 					return false;
 				}
@@ -370,7 +331,7 @@ public class ProfileActivity extends Activity {
 
 					if(weight < 50)
 					{
-						alertWeightValidation(); //Invalid Weight alert
+						alertWeightValidation(); // Invalid Weight alert
 						weightTextField.requestFocus();
 						return false;
 					}
@@ -378,182 +339,157 @@ public class ProfileActivity extends Activity {
 			}
 		}
 
-		return true; //All checks pass
-		
-	}//requiredFieldValidation
-	
-	
-	
-    /*
-     * alertUsernameAlreadyExists()
-     * 
-     * @Defn - Load alert dialog for missing required fields
-     */
-    private void alertUsernameAlreadyExists(){
-    	
-        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		return true; // All checks pass
 
-        alert.setTitle(R.string.UsernameAlreadyExists);
-        alert.setMessage(R.string.PleaseTryAgain);
-        
-        alert.setPositiveButton(R.string.Okay, new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int whichButton) {
-        	keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        	keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0); //Open Keyboard
-          }
-        });
-        alert.show();
-       
-    }//alertUsernameAlreadyExists()
-	
-	
-    /*
-     * alertRequiredFieldsValidation()
-     * 
-     * @Defn - Load alert dialog for missing required fields
-     */
-    private void alertRequiredFieldsValidation(){
-    	
-        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+	} // requiredFieldValidation()
 
-        alert.setTitle(R.string.InvalidEntry);
-        alert.setMessage(R.string.MissingRequiredField);
-        
-        alert.setPositiveButton(R.string.Okay, new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int whichButton) {
-        	keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        	keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0); //Open Keyboard
-          }
-        });
-        alert.show();
-       
-    }//alertRequiredFieldsValidation()
-    
-    /*
-     * alertHeightValidation()
-     * 
-     * @Defn - Requests total height greater than 3 feet
-     */
-    private void alertHeightValidation(){
-    	
-        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-        alert.setTitle(R.string.InvalidHeight);
-        alert.setMessage(R.string.MinimumHeight);
-        
-        alert.setPositiveButton(R.string.Okay, new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int whichButton) {
-        	keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        	keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0); //Open Keyboard
-          }
-        });
-        alert.show();
-    } //alertHeightValidation()
-    
-    
-    /*
-     * alertWeightValidation()
-     * 
-     * @Defn - Requests total Weight greater than 50 lbs.
-     */
-    private void alertWeightValidation(){
-    	
-        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-        alert.setTitle(R.string.InvalidWeight);
-        alert.setMessage(R.string.MinimumWeight);
-        
-        alert.setPositiveButton(R.string.Okay, new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int whichButton) {
-        	keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        	keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0); //Open Keyboard
-          }
-        });
-        alert.show();
-    } //alertWeightValidation()
-    
-   /*
-    * alertConfirmProfileDelete()
-    * 
-    * @Defn - Confirm that user wishes to delete profile
-    */
-   private void alertConfirmProfileDelete(){
-	   
-       final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+	/**
+	 *  Load alert dialog for missing required fields
+	 */
+	private void alertUsernameAlreadyExists(){
 
-       alert.setTitle("Delete Profile?");
-       //alert.setMessage("Deleting your profile will remove all app data, including your Buddies, Groups, and any saved information.  Do you wish to proceed?");
-       
-       //Text View - User Agreement Message
-       TextView tvDeleteProfileMessage = new TextView(this);
-       TextView tvConfirmDeleteProfile = new TextView(this);
-       
-       tvDeleteProfileMessage.setText("Deleting your profile will remove all app data, including your Buddies, Groups, and any saved information.");
-       tvDeleteProfileMessage.setTextSize(16);
-       tvDeleteProfileMessage.setLineSpacing(5, 1);
-       tvDeleteProfileMessage.setPadding(30, 20, 30, 10);
-       
-       tvConfirmDeleteProfile.setText("Do you wish to proceed?");
-       tvConfirmDeleteProfile.setTextSize(16);
-       tvConfirmDeleteProfile.setPadding(30, 10, 30, 20);
+		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-       //Set Alert's View
-       ScrollView scrollView = new ScrollView(this); //Need alert context to be scrollable on small screens
-       LinearLayout alertLayout = new LinearLayout(this); //Need Linear Layout to contain more than one View
-       alertLayout.setOrientation(1); //Set View to vertical
-       alertLayout.addView(tvDeleteProfileMessage);
-       alertLayout.addView(tvConfirmDeleteProfile);
-       scrollView.addView(alertLayout);
-       alert.setView(scrollView);
-       
-       alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-       public void onClick(DialogInterface dialog, int whichButton) {
-    	   
-			userInfo = getSharedPreferences(userInfoFile, 0);
-			userPrefs = getSharedPreferences(userPrefFile, 0);
-			
-			//Delete User Information (i.e. Username, Height, Weight, Gender, etc.)
-			editor = userInfo.edit().clear();
-			editor.apply();
-			
-			/*	Delete user preferences? (i.e. User Liabaility's Do Not Show Again)
-			 * 
-			 *	//editor = userPrefs.edit().clear();
-			 *	//editor.apply();
-			 */
-			
-			//TODO: Delete User from DATABASE			
-			
-			//Restart App
-			restartFirstActivity(); 
-         }
-       });
-       
-       alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-	   public void onClick(DialogInterface dialog, int whichButton) {
-		   //Cancel
-	     }
-	   });
-       alert.show();
-	   
-	   
-   }//alertConfirmProfileDelete()
-   
-   
-   /*
-    * restartFirstActivity()
-    * 
-    * @Defn - Restarts BAC Safe 
-    */
-   private void restartFirstActivity()
-   {
-	   Intent restartIntent = getBaseContext().getPackageManager()
-			   .getLaunchIntentForPackage(getBaseContext().getPackageName() );
-   
-	   restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK );
-	   startActivity(restartIntent);
-	   
-   }//restartFirstActivity()
+		alert.setTitle(R.string.UsernameAlreadyExists);
+		alert.setMessage(R.string.PleaseTryAgain);
 
-}//class ProfileActivity
+		alert.setPositiveButton(R.string.Okay, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0); //Open Keyboard
+			}
+		});
+		alert.show();
+
+	} // alertUsernameAlreadyExists()
+
+
+	/**
+	 *  Load alert dialog for missing required fields
+	 */
+	private void alertRequiredFieldsValidation(){
+
+		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+		alert.setTitle(R.string.InvalidEntry);
+		alert.setMessage(R.string.MissingRequiredField);
+
+		alert.setPositiveButton(R.string.Okay, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0); //Open Keyboard
+			}
+		});
+		alert.show();
+
+	} // alertRequiredFieldsValidation()
+
+	/**
+	 *  Requests total height greater than 3 feet
+	 */
+	private void alertHeightValidation(){
+
+		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+		alert.setTitle(R.string.InvalidHeight);
+		alert.setMessage(R.string.MinimumHeight);
+
+		alert.setPositiveButton(R.string.Okay, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0); //Open Keyboard
+			}
+		});
+		alert.show();
+	} // alertHeightValidation()
+
+
+	/**
+	 *  Requests total Weight greater than 50 lbs.
+	 */
+	private void alertWeightValidation(){
+
+		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+		alert.setTitle(R.string.InvalidWeight);
+		alert.setMessage(R.string.MinimumWeight);
+
+		alert.setPositiveButton(R.string.Okay, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				keyboard.toggleSoftInput(InputMethodManager.SHOW_FORCED,0); //Open Keyboard
+			}
+		});
+		alert.show();
+	} // alertWeightValidation()
+
+	/**
+	 *  Confirm that user wishes to delete profile
+	 */
+	private void alertConfirmProfileDelete(){
+
+		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+		alert.setTitle(R.string.DeleteProfile);
+
+		// Text View - User Agreement Message
+		TextView tvDeleteProfileMessage = new TextView(this);
+		TextView tvConfirmDeleteProfile = new TextView(this);
+
+		tvDeleteProfileMessage.setText(R.string.DeleteProfileMessage);
+		tvDeleteProfileMessage.setTextSize(16);
+		tvDeleteProfileMessage.setLineSpacing(5, 1);
+		tvDeleteProfileMessage.setPadding(30, 20, 30, 10);
+
+		tvConfirmDeleteProfile.setText(R.string.DoYouWishToProceed);
+		tvConfirmDeleteProfile.setTextSize(16);
+		tvConfirmDeleteProfile.setPadding(30, 10, 30, 20);
+
+		// Set Alert's View
+		ScrollView scrollView = new ScrollView(this); // Need alert context to be scrollable on small screens
+		LinearLayout alertLayout = new LinearLayout(this); // Need Linear Layout to contain more than one View
+		alertLayout.setOrientation(1); // Set View to vertical
+		alertLayout.addView(tvDeleteProfileMessage);
+		alertLayout.addView(tvConfirmDeleteProfile);
+		scrollView.addView(alertLayout);
+		alert.setView(scrollView);
+
+		// YES button
+		alert.setPositiveButton(R.string.YES, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+
+				m_userProfile.deleteUserProfile();		
+
+				// Restart App
+				restartFirstActivity(); 
+			}
+		});
+
+		// NO button
+		alert.setNegativeButton(R.string.NO, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				// Cancel
+			}
+		});
+		alert.show();
+
+	} // alertConfirmProfileDelete()
+
+
+	/**
+	 *  Restarts BAC Safe 
+	 */
+	private void restartFirstActivity()
+	{
+		Intent restartIntent = getBaseContext().getPackageManager()
+				.getLaunchIntentForPackage(getBaseContext().getPackageName() );
+
+		restartIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK );
+		startActivity(restartIntent);
+
+	} // restartFirstActivity()
+
+} // class ProfileActivity
 

@@ -57,6 +57,19 @@
     <string name="Sex">Sex:</string>
     <string name="LastName">Last name:</string>
     <string name="Save">Save</string>
+    <string name="SearchUsername">Search Username</string>
+    <string name="DoYouWishToAdd">Do you wish to add </string>
+    <string name="ToYourBuddies"> to your Buddies?</string>
+    <string name="NO">NO</string>
+    <string name="YES">YES</string>
+    <string name="Add">Add</string>
+    <string name="DeleteProfile">Delete Profile?</string>
+    <string name="DeleteProfileMessage">Deleting your profile will remove all app data, including your Buddies, Groups, and any saved information.</string>
+    <string name="DoYouWishToProceed">Do you wish to proceed?</string>
+    <string name="CreateYourProfile">Create Your Profile</string>
+    <string name="DrinkCounter">Drink Counter</string>
+    <string name="Groups">Groups</string>
+    <string name="Buddies">Buddies</string>
     
     
  	

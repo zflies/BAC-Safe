@@ -19,7 +19,7 @@
 		    android:name="com.example.bacsafe.ProfileActivity"
 		   	android:screenOrientation="portrait" >
 		</activity>
-		
+		    
         
         <!-- Find/Add Buddy Screen -->
         <activity
@@ -27,12 +27,12 @@
             android:screenOrientation="portrait" >
         </activity>
         
-        <!-- View Group Screen 
+        <!-- View Group Screen -->
         <activity
 			android:name="com.example.bacsafe.ViewGroupActivity"
             android:screenOrientation="portrait" >
         </activity>		
-        -->
+        
         
         <!-- Main Home Screen with Tabs -->
         <activity
