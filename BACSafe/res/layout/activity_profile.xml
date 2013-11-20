@@ -201,16 +201,6 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF" />
 
-        <Button
-            android:id="@+id/button_Profile_Delete"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="45sp"
-            android:layout_height="30sp"
-            android:layout_above="@+id/label_UserName"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/X"
-            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/label_Age"

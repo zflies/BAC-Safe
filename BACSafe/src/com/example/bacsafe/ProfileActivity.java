@@ -8,6 +8,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -45,7 +48,6 @@ public class ProfileActivity extends Activity {
 	RadioButton femaleRadioButton;
 	Button backButton;
 	Button saveButton;
-	Button profileDeleteButton;
 
 	//-------------------------------------------------------------------------------------------------------
 	//-------------------------------------------------------------------------------------------------------
@@ -78,7 +80,6 @@ public class ProfileActivity extends Activity {
 		{
 			titleTextView.setText(R.string.CreateYourProfile); // Change the title of the page
 			backButton.setVisibility(8); // Hide the Back button
-			profileDeleteButton.setVisibility(8); // Hide the Delete Profile button
 			usernameTextField.requestFocus(); // Set the focus to the Username text box on startup
 		}
 
@@ -122,7 +123,6 @@ public class ProfileActivity extends Activity {
 		// Setup Button objects
 		backButton = (Button)findViewById(R.id.button_Edit_Back);
 		saveButton = (Button)findViewById(R.id.button_Edit_Save);
-		profileDeleteButton = (Button)findViewById(R.id.button_Profile_Delete);
 
 		// Back Button - Returns to Main screen (Drink Counter)
 		backButton.setOnClickListener(new View.OnClickListener() {
@@ -150,14 +150,6 @@ public class ProfileActivity extends Activity {
 				} 
 			}
 		}); // saveButton
-
-		// Profile Delete Button - Deleted the user profile
-		profileDeleteButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				alertConfirmProfileDelete(); //Confirm user's desire to delete profile
-			}
-		}); // profileDeleteButton
 
 	} // setupObjectVariables()
 
@@ -490,6 +482,44 @@ public class ProfileActivity extends Activity {
 		startActivity(restartIntent);
 
 	} // restartFirstActivity()
+	
+	/**
+	 * Sets up the Options Menu for the Profile Page
+	 * @param menu - The Options Menu to be setup
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		
+		MenuInflater inflater = getMenuInflater();
+		
+		if(!m_userProfile.getUserName().isEmpty()){
+			inflater.inflate(R.menu.menu_profile, menu); 
+			return true;
+		}
+
+		return false;
+		
+	} // onPrepareOptionsMenu()
+
+
+	/**
+	 * Determines which Options Menu was clicked and what action should be taken
+	 * @param item - The Options Menu item selected
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch(item.getItemId())
+		{  
+		case R.id.menu_item_DeleteProfile:
+			// TODO:
+			alertConfirmProfileDelete();
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	} // onOptionsItemSelected()
 
 } // class ProfileActivity
 

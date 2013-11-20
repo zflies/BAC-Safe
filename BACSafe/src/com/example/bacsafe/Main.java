@@ -9,6 +9,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -171,8 +174,8 @@ public class Main extends TabActivity {
 		spec1.setIndicator(getString(R.string.DrinkCounter));
 		spec1.setContent(R.id.tabDrinkCounter);
 
-		final TabSpec spec2=tabHost.newTabSpec("Buddy System");       	// Tab - Groups List
-		spec2.setIndicator("Buddy System");
+		final TabSpec spec2=tabHost.newTabSpec("Buddy Systems");       	// Tab - Groups List
+		spec2.setIndicator("Buddy Systems");
 		spec2.setContent(R.id.tabGroups);
 
 		final TabSpec spec3=tabHost.newTabSpec(getString(R.string.Buddies));     	// Tab - Buddies List
@@ -338,16 +341,6 @@ public class Main extends TabActivity {
 	 * Set up the UI for the Drink Counter Tab
 	 */
 	private void drinkCounterTabSetup(){
-
-		// Edit Button - Allows user profile data to be changed
-		Button editButton = (Button)findViewById(R.id.buttonEdit);
-		editButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent profileActivityIntent = new Intent(Main.this, ProfileActivity.class);
-				startActivityForResult(profileActivityIntent, 1);
-			} 
-		}); 
 
 		// Shot Button
 		Button shotButton =  (Button)findViewById(R.id.buttonShot);
@@ -575,6 +568,20 @@ public class Main extends TabActivity {
 			}
 		});
 		
+		m_listViewGroups.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				// TODO: Popup dialog menu? 
+						//Remove self from group?
+						//Rename Group - if creator?
+				alertRemoveSelfFromGroup(m_listViewGroups.getItemAtPosition(position).toString());
+						
+				return false;
+			}
+		});
+		
 	} // setGroupsListView()
 
 	/**
@@ -689,5 +696,91 @@ public class Main extends TabActivity {
 		alert.show();
 
 	} // alertSelectGroupBuddies()
+	
+	/**
+	 * Load alert dialog to verify User wants to be removed from a group  
+	 */
+	private void alertRemoveSelfFromGroup(String sGroupName){
+
+		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+		// Set dialog title and message
+		alert.setTitle("Leave Buddy System?");
+		alert.setMessage("Are you sure you want to remove yourself from " + sGroupName + "?");	
+
+		// YES Button
+		alert.setPositiveButton(R.string.YES, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				// TODO: Remove user from group
+			}
+		});
+
+		// Cancel Button
+		alert.setNegativeButton(R.string.NO, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				// Canceled.
+			}
+		});
+		alert.show();
+
+	} // alertCreateGroupName()
+
+	
+	/**
+	 * Sets up the Options Menu for the different tabs
+	 * @param menu - The Options Menu to be setup
+	 */
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.clear();
+		//super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		int tab = getTabHost().getCurrentTab();
+		switch(tab){
+		case 0:
+			inflater.inflate(R.menu.menu_drink_counter, menu); 
+			return true;
+		case 1:
+			//inflater.inflate(R.menu.menu_view_group, menu);
+			return false; // Returning false prevents blank menu from being shown.
+		case 2:
+			inflater.inflate(R.menu.menu_buddies, menu); 
+			return true;
+		default:
+			return true;
+		}
+
+	} // onPrepareOptionsMenu()
+
+
+	/**
+	 * Determines which Options Menu was clicked and what action should be taken
+	 * @param item - The Options Menu item selected
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch(item.getItemId())
+		{  
+		
+		// Drink Counter tab
+		case R.id.menu_item_EditProfile:
+			Intent profileActivityIntent = new Intent(Main.this, ProfileActivity.class);
+			startActivityForResult(profileActivityIntent, 1);
+			return true;
+
+		case R.id.menu_item_About:
+			// TODO: 
+			return true;
+			
+		// Buddies Tab
+		case R.id.menu_item_DeleteBuddies:
+			// TODO:
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	} // onOptionsItemSelected()
 
 } // class Main
