@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingTop="5dp"
-    android:paddingRight="10dp" >
+    android:paddingRight="14dp" >
 
     <TextView
         android:id="@+id/textView_Username"
@@ -19,9 +19,9 @@
     <TextView
         android:id="@+id/textView_firstAndLastName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_alignLeft="@+id/textView_Username"
-        android:layout_alignRight="@+id/textView_Username"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/textView_Username"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />

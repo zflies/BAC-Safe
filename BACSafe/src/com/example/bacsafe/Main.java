@@ -8,7 +8,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -54,9 +56,6 @@ public class Main extends TabActivity {
 	private int m_nBACtimerHour;
 	private double m_dBACpercent;
 
-	/*
-	 * TODO: change name to represent member variables
-	 */
 	//UI variables - Drink Counter tab
 	private TextView m_tDrinkTotal;
 	private TextView m_tBACpercent;
@@ -172,8 +171,8 @@ public class Main extends TabActivity {
 		spec1.setIndicator(getString(R.string.DrinkCounter));
 		spec1.setContent(R.id.tabDrinkCounter);
 
-		final TabSpec spec2=tabHost.newTabSpec(getString(R.string.Groups));       	// Tab - Groups List
-		spec2.setIndicator(getString(R.string.Groups));
+		final TabSpec spec2=tabHost.newTabSpec("Buddy System");       	// Tab - Groups List
+		spec2.setIndicator("Buddy System");
 		spec2.setContent(R.id.tabGroups);
 
 		final TabSpec spec3=tabHost.newTabSpec(getString(R.string.Buddies));     	// Tab - Buddies List
@@ -192,22 +191,47 @@ public class Main extends TabActivity {
 				// Drink Counter
 				if(tabId.equals(spec1.getTag()))
 				{
-					// Refresh Drink Counter?
+					// TODO: Change Menu Button Items
 				}
 
 				// Groups
 				if(tabId.equals(spec2.getTag()))
 				{
-					// Load Groups?
+					// TODO: Change Menu Button Items
 				}
 
 				// Buddies
 				if(tabId.equals(spec3.getTag()))
 				{
-					setBuddiesListView();
+					// TODO: Change Menu Button Items
 				}
 			}
 		});
+		
+		int tabCount = tabHost.getTabWidget().getTabCount();
+		for (int i = 0; i < tabCount; i++) {
+		    final View view = tabHost.getTabWidget().getChildTabViewAt(i);
+		    if ( view != null ) {
+		        
+		    	// Can be used to reduce height of the tab
+		        //view.getLayoutParams().height *= 0.66; 
+
+		        //  get title text view
+		        final View textView = view.findViewById(android.R.id.title);
+		        if ( textView instanceof TextView ) {
+		            // just in case check the type
+
+		            // center text
+		            ((TextView) textView).setGravity(Gravity.CENTER);
+		            // wrap text
+		            ((TextView) textView).setSingleLine(false);
+
+		            // explicitly set layout parameters
+		            textView.getLayoutParams().height = ViewGroup.LayoutParams.FILL_PARENT;
+		            textView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
+		        }
+		    }
+		}
 
 	} // setHomeScreen()
 	
@@ -476,6 +500,8 @@ public class Main extends TabActivity {
 	 * Set up the UI for the Buddies Tab
 	 */
 	private void buddiesTabSetup(){
+		
+		setBuddiesListView();
 
 		// Add Buddy Button (Buddies tab) Allows user to search for / add buddies
 		Button addBuddyButton = (Button)findViewById(R.id.buttonAddBuddy);
@@ -543,6 +569,9 @@ public class Main extends TabActivity {
 				/*
 				 * TODO: Open ViewGroupActivity 
 				 */
+				Intent viewGroupIntent = new Intent(getApplicationContext(), ViewGroup_Activity.class);
+				viewGroupIntent.putExtra("groupname",m_listViewGroups.getItemAtPosition(position).toString());
+				startActivity(viewGroupIntent);
 			}
 		});
 		

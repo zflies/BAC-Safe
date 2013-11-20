@@ -24,12 +24,13 @@
         <!-- Find/Add Buddy Screen -->
         <activity
             android:name="com.example.bacsafe.FindBuddyActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
         
         <!-- View Group Screen -->
         <activity
-			android:name="com.example.bacsafe.ViewGroupActivity"
+			android:name="com.example.bacsafe.ViewGroup_Activity"
             android:screenOrientation="portrait" >
         </activity>		
         

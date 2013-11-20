@@ -4,32 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#607B8B"
-    tools:context=".ViewGroupActivity" >
+    tools:context=".ViewGroup_Activity"
+    android:paddingRight="5dp"
+    android:paddingLeft="5dp" >
 
     <TextView
         android:id="@+id/label_groupName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:text="Group Name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF" />
 
     <Button
-        android:id="@+id/button_AddBuddy_Done"
+        android:id="@+id/button_ViewGroup_Done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Done" />
+        android:text="@string/Done"
+        android:textColor="#FFFFFF" />
 
     <ListView
-        android:id="@+id/listView1"
+        android:id="@+id/listView_ViewGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button_AddBuddy_Done"
+        android:layout_above="@+id/button_ViewGroup_Done"
         android:layout_below="@+id/textView1" >
     </ListView>
 
@@ -37,20 +41,23 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button_AddBuddy_Done"
+        android:layout_alignLeft="@+id/button_ViewGroup_Done"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/label_groupName"
-        android:text="BAC "
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:gravity="center"
+        android:text="BAC %"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/listView1"
-        android:layout_marginRight="32dp"
+        android:layout_above="@+id/listView_ViewGroup"
+        android:layout_marginRight="29dp"
         android:layout_toLeftOf="@+id/textView1"
         android:text="Drinks"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>

@@ -12,7 +12,7 @@ import android.content.SharedPreferences;
 public class User{
 
 	// Create file for saving User App Preferences
-	private final String userPrefFile = "BAC Safe User Preferences";
+	private final String userPrefFile = "BAC Safe User Preferences";		
 	private SharedPreferences pref_userPrefs;
 	// Create file for saving User Information
 	private final String userInfoFile = "BAC Safe User Information";
@@ -64,11 +64,13 @@ public class User{
 	} // Constructor
 
 
-
 	/**
 	 * Loads the User's Information and Stored Preferences
 	 */
 	protected void loadUserInfoPrefs(){
+		
+		//TODO: Load User Info and Prefs from database
+		//		Delete code beneath
 
 		// Set Access to internal storage files
 		pref_userPrefs = context.getSharedPreferences(userPrefFile, 0);
@@ -94,6 +96,8 @@ public class User{
 	 * Loads the Buddies list for the user
 	 */
 	protected void loadBuddies(){
+		
+		//TODO: Load Buddies for user from database
 		
 		// Set Access to internal storage file with Buddies List		
 		pref_buddiesList = context.getSharedPreferences(userBuddiesList, 0);
@@ -127,6 +131,8 @@ public class User{
 	 */
 	protected void loadGroups(){
 		
+		//TODO: Load User's Groups from database
+		
 		// Set Access to internal storage file with Groups List
 		pref_groupsList = context.getSharedPreferences(userGroupsList, 0);
 
@@ -154,6 +160,8 @@ public class User{
 	 * Deletes the user's profile from the database and phone
 	 */
 	protected void deleteUserProfile(){
+		
+		// TODO: Delete User from Database
 
 		pref_userInfo = context.getSharedPreferences(userInfoFile, 0);
 		pref_userPrefs = context.getSharedPreferences(userPrefFile, 0);
@@ -166,7 +174,6 @@ public class User{
 		prefEditor = pref_userPrefs.edit().clear();
 		prefEditor.apply();
 
-		// TODO: Delete User from Database
 	} // deleteUserProfile()
 
 
@@ -184,6 +191,8 @@ public class User{
 	 * @param m_sUserName
 	 */
 	protected void setUserName(String sUserName) {
+		
+		//TODO: Save user's username to database
 
 		m_sUserName = sUserName;
 
@@ -209,6 +218,8 @@ public class User{
 	 * @param m_sFirstName
 	 */
 	protected void setFirstName(String sFirstName) {
+		
+		//TODO: Save user's first name to database
 
 		m_sFirstName = sFirstName;
 
@@ -233,6 +244,9 @@ public class User{
 	 * @param m_sLastName
 	 */
 	protected void setLastName(String sLastName) {
+		
+		//TODO: Save user's last name to database
+
 		m_sLastName = sLastName;
 
 		pref_userInfo = context.getSharedPreferences(userInfoFile, 0);
@@ -256,6 +270,9 @@ public class User{
 	 * @param m_nWeight
 	 */
 	protected void setWeight(int nWeight) {
+		
+		//TODO: Save user's weight to database
+
 
 		m_nWeight = nWeight;
 
@@ -281,6 +298,8 @@ public class User{
 	 * @param m_nHeightFeet
 	 */
 	protected void setHeightFeet(int nHeightFeet) {
+		
+		//TODO: Save user's Height to database
 
 		m_nHeightFeet = nHeightFeet;
 
@@ -306,6 +325,9 @@ public class User{
 	 * @param m_nHeightInches 
 	 */
 	protected void setHeightInches(int nHeightInches) {
+		
+		//TODO: Save user's Height to database
+
 		m_nHeightInches = nHeightInches;
 
 		pref_userInfo = context.getSharedPreferences(userInfoFile, 0);
@@ -329,6 +351,9 @@ public class User{
 	 * @param m_nAge
 	 */
 	protected void setAge(int nAge) {
+		
+		//TODO: Save user's age to database
+
 
 		m_nAge = nAge;
 
@@ -354,6 +379,8 @@ public class User{
 	 * @param m_bIsMale
 	 */
 	protected void setMale(boolean bIsMale) {
+		
+		//TODO: Save user's gender to database
 
 		m_bIsMale = bIsMale;
 
@@ -379,6 +406,8 @@ public class User{
 	 * @param m_bShowUserAgreementAlert the m_bShowUserAgreementAlert to set
 	 */
 	protected void setShowUserAgreementAlert(boolean bShowUserAgreementAlert) {
+		
+		//TODO: Save user's preference to database
 
 		m_bShowUserAgreementAlert = bShowUserAgreementAlert;
 
@@ -409,6 +438,8 @@ public class User{
 	 * @param listBuddies
 	 */
 	protected void setBuddies(LinkedList<Buddy> listBuddies) {
+		
+		//TODO: Save user's Buddies to database
 		
 		m_listBuddies = listBuddies;
 		
@@ -457,6 +488,8 @@ public class User{
 	 */
 	protected void setGroups(LinkedList<Group> listGroups) {
 		
+		//TODO: Save user's groups to database
+		
 		m_listGroups = listGroups;
 		
 		// Set Access to internal storage file with Buddies List		
@@ -475,6 +508,5 @@ public class User{
 		prefEditor.commit();
 		
 	} // getGroups()
-
 
 } //class User

@@ -11,10 +11,8 @@ public class Buddy {
 	String m_sBuddyFirstName;
 	String m_sBuddyLastName;
 
-	double m_dBuddyBAC;
-	double m_dBuddyTimeUntilSober;
-	int m_nBuddyTotalDrinkCount;
-
+	private double m_dBuddyBAC;
+	private int m_nBuddyTotalDrinkCount;
 
 
 	/**
@@ -26,10 +24,6 @@ public class Buddy {
 	public Buddy(String username)
 	{
 		m_sBuddyUsername = username;
-		
-		/*
-		 * Get rest of information from server
-		 */
 		
 	} // Constructor
 
@@ -55,8 +49,8 @@ public class Buddy {
 
 
 	/**
-	 * 	TODO:
-	 * @return
+	 * 	Retrieves the BAC for a Buddy
+	 * @return m_dBuddyBAC - Estimated BAC value for the Buddy
 	 */
 	public double getBuddyBAC(){
 
@@ -67,22 +61,10 @@ public class Buddy {
 
 
 	/**
-	 * TODO:
-	 * @return
+	 * 	Retrieves the Total Drink Count for a Buddy
+	 * @return m_nBuddyTotalDrinkCount - Number of total drinks consumed by the Buddy
 	 */
-	public double getBuddyTimeUntilSober(){
-
-		//TODO: Send request to receive Buddy's Time Until Sober
-
-		return m_dBuddyTimeUntilSober;
-	} // getBuddyTimeUntilSober()
-
-
-	/**
-	 * TODO: 
-	 * @return
-	 */
-	public double getBuddyTotalDrinkCount(){
+	public int getBuddyTotalDrinkCount(){
 
 		//TODO: Send request to receive Buddy's Total Drink Count
 

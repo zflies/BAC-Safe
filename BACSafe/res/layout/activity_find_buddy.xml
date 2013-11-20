@@ -18,7 +18,6 @@
         android:layout_below="@+id/label_FindYourBuddy"
         android:showAsAction="always"
         android:visibility="visible" >
-
     </SearchView>
 
     <TextView
@@ -33,19 +32,19 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/button_AddBuddy_Done"
+        android:id="@+id/button_AddBuddy_Back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:onClick="Main"
-        android:text="@string/Back"/>
+        android:text="@string/Back" />
     
     <ListView
         android:id="@+id/listView_BuddySearchList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button_AddBuddy_Done"
+        android:layout_above="@+id/button_AddBuddy_Back"
         android:layout_below="@+id/searchView_Find_Buddy"
         android:visibility="invisible" >
 

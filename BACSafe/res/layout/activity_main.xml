@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center|fill"
     android:background="#4086AA"
+    android:gravity="center_horizontal"
     android:screenOrientation="portrait"
     tools:context=".Main" >
 
@@ -13,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true"
+        android:textAlignment="center" >
 
         <RelativeLayout
             android:id="@+id/RelativeLayout2"
@@ -28,7 +30,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:gravity="center"
+                android:gravity="center|center_horizontal"
                 android:textAlignment="center" />
 
             <FrameLayout
@@ -88,7 +90,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_gravity="left|top"
-                        android:text="@string/CreateGroup" />
+                        android:text="Create new Buddy System" />
 
                     <ListView
                         android:id="@+id/listView_Groups"
@@ -99,13 +101,6 @@
                         android:layout_centerHorizontal="true" >
                     </ListView>
 
-                    <Button
-                        android:id="@+id/buttonEditGroups"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:text="@string/Edit" />
                 </RelativeLayout>
 
                 <RelativeLayout

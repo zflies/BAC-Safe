@@ -38,8 +38,8 @@ public class Group {
 	} // Constructor
 
 	/**
-	 * //TODO:
-	 * @param newBuddy
+	 * Adds a new Buddy to the group
+	 * @param newBuddy - Buddy Object to be added to group
 	 */
 	public void addGroupMember(Buddy newBuddy){
 
@@ -53,9 +53,11 @@ public class Group {
 
 	/**
 	 *  Loads the Buddies within the Group
-	 * @return m_listGroupBuddies
+	 * @return m_listGroupBuddies - LinkedList of Buddies in group
 	 */
 	public LinkedList<Buddy> getGroupBuddies(){
+		
+		//TODO: Load Buddies for Group from database
 		
 		// Set Access to internal storage file with Groups List
 		pref_groupsBuddiesList = context.getSharedPreferences(userGroupsBuddiesList, 0);
@@ -90,16 +92,30 @@ public class Group {
 
 	/**
 	 * Saves the Group's Buddies
-	 * @param listGroupBuddies
+	 * @param listGroupBuddies - LinkedList of Buddies in group
 	 */
 	public void setGroupBuddies(LinkedList<Buddy> listGroupBuddies){
+		
+		//TODO: Set Buddies for Group to database
+
 		
 		m_listGroupBuddies = listGroupBuddies;
 		
 		// Set Access to internal storage file with Groups List
 		pref_groupsBuddiesList = context.getSharedPreferences(userGroupsBuddiesList, 0);
 		
-		prefEditor = pref_groupsBuddiesList.edit().clear(); // Open the editor and empty the file
+		prefEditor = pref_groupsBuddiesList.edit(); // Open the editor and empty the file
+		
+		int nNumberOfGroupBuddies = pref_groupsBuddiesList.getInt(m_sGroupName + "_Size", 0); // Number of Buddies in group i
+		
+		// If the Old number of buddies is different than the new size
+		if(nNumberOfGroupBuddies != listGroupBuddies.size()){
+			// Clear the list
+			for(int i=0; i < nNumberOfGroupBuddies; i++)
+			{
+				prefEditor.remove(m_sGroupName + "_" + i);
+			}
+		}
 		
 		prefEditor.putInt(m_sGroupName + "_Size", listGroupBuddies.size()); // Number of Buddies in group
 		
@@ -114,6 +130,7 @@ public class Group {
 	
 	/**
 	 * Returns the name of the group
+	 * @return m_sGroupName - Name of group
 	 */
 	public String getGroupName(){
 		return m_sGroupName;

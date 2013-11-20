@@ -91,7 +91,7 @@ public class FindBuddyActivity extends Activity implements SearchView.OnQueryTex
 
 
 		// Done Button - Returns to Main screen (Buddies tab)
-		Button doneButton = (Button)findViewById(R.id.button_AddBuddy_Done);
+		Button doneButton = (Button)findViewById(R.id.button_AddBuddy_Back);
 		doneButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
