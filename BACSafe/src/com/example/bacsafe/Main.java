@@ -434,7 +434,7 @@ public class Main extends TabActivity {
 	 * TODO:
 	 */
 	private void generateNumberDrinks(){
-    	m_nDrinkTotal = (m_nBeer) + (m_nWine*2) + (m_nShot*3);
+    	m_nDrinkTotal = (m_nBeer) + (m_nWine) + (m_nShot);
     	m_sDrinkTotal = Integer.toString(m_nDrinkTotal);
     	m_tDrinkTotal = (TextView)findViewById(R.id.labelDrinkCountNumber);
     	m_tDrinkTotal.setText(m_sDrinkTotal);
@@ -470,16 +470,31 @@ public class Main extends TabActivity {
     	m_tShot.setText(m_sShot);
 	} // generateShotDrinks()
 
-
+//We may need to place faisafes on the strings so the values don't get to high and mess up the UI
 	/**
 	 * Estimates the User's current BAC Time until Sober
 	 */
 	private void generateBACTimer(){
     	m_tBACtimer = (TextView)findViewById(R.id.labelSoberTime);
-    	
     	m_nBACtimerMinute = (m_nBeer) + (m_nWine*2) + (m_nShot*3);
     	m_sBACtimerMinute = Integer.toString(m_nBACtimerMinute);
+    	m_nBACtimerHour = (0);
+    	m_sBACtimerHour = Integer.toString(m_nBACtimerHour);
+    	m_tBACtimer.setText(m_sBACtimerMinute + ":" + m_sBACtimerHour);
 	} // generageBACTimer()
+	
+	private void resetAllDrinkValues(){
+		m_nBeer = 0;
+		m_nWine = 0;
+		m_nShot = 0;
+		m_nCurrentDrink = 0;
+		m_dBACpercent = 0.0;
+		generateBeerDrinks();
+		generateWineDrinks();
+		generateShotDrinks();
+		generateBAC();
+		generateBACTimer();
+	}
 
 
 
