@@ -492,6 +492,7 @@ public class Main extends TabActivity {
 		generateBeerDrinks();
 		generateWineDrinks();
 		generateShotDrinks();
+		generateNumberDrinks();
 		generateBAC();
 		generateBACTimer();
 	}
@@ -788,6 +789,10 @@ public class Main extends TabActivity {
 			// TODO: 
 			return true;
 			
+		case R.id.menu_item_Reset:
+			ResetNotification();
+			return true;
+			
 		// Buddies Tab
 		case R.id.menu_item_DeleteBuddies:
 			// TODO:
@@ -797,5 +802,50 @@ public class Main extends TabActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	} // onOptionsItemSelected()
+	
+	private void ResetNotification(){
+
+		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		alert.setCancelable(true);
+
+		// Set Title
+		//alert.setTitle(R.string.UserAgreement);
+		alert.setTitle("Reset?");
+
+		// Text View - Reset message
+		//textView_UserAgreement.setText(R.string.UserAgreementMessage);
+		
+		TextView textView_Reset = new TextView(this);
+		textView_Reset.setText("Do you want to reset your Blood Alcohol Content Percentage and the BAC timer?");
+		textView_Reset.setTextSize(16);
+		textView_Reset.setLineSpacing(5, 1);
+		textView_Reset.setPadding(30, 20, 30, 20);
+
+		// Set Alert's View
+		ScrollView scrollView = new ScrollView(this); // Need alert context to be scrollable on small screens
+		LinearLayout alertLayout = new LinearLayout(this); // Need Linear Layout to contain more than one View
+		alertLayout.setOrientation(1); // Set View to vertical
+		alertLayout.addView(textView_Reset);
+		scrollView.addView(alertLayout);
+		alert.setView(scrollView);
+
+		// Accept Button
+		alert.setPositiveButton(R.string.Accept, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				resetAllDrinkValues();//Reset function
+			}
+		});
+
+		// Decline Button
+		alert.setNegativeButton(R.string.Decline, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				//Nothing Happens
+			}
+		});
+
+		alert.show();
+
+	} // alertReset
+
 
 } // class Main

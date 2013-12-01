@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/menu_item_EditProfile" android:title="Edit Profile"></item>
     <item android:id="@+id/menu_item_About" android:title="About"></item>
+    <item android:id="@+id/menu_item_Reset" android:title="Reset"></item>
     
 
 </menu>
