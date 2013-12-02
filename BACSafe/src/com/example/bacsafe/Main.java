@@ -517,8 +517,10 @@ public class Main extends TabActivity {
 		m_nBeer = 0;
 		m_nWine = 0;
 		m_nShot = 0;
-		m_nCurrentDrink = 0;		
-		m_userProfile.setBACpercent(0.0);
+		m_nCurrentDrink = 0;
+		
+		m_dBACpercent = 0.0;
+		m_userProfile.setBACpercent(m_dBACpercent);
 		
 		generateBeerDrinks();
 		generateWineDrinks();
