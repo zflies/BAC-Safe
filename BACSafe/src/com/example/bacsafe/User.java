@@ -41,6 +41,7 @@ public class User{
 	
 	// Drink Counter
 	private long m_lSoberCounter;
+	private double m_dBACpercent;
 	
 	// Buddies
 	private LinkedList<Buddy> m_listBuddies;
@@ -92,7 +93,9 @@ public class User{
 		// Set Preferences from saved User Preferences file
 		m_bShowUserAgreementAlert = pref_userPrefs.getBoolean("useragreement", true);
 		
-		m_lSoberCounter = pref_userPrefs.getLong("sobercounter", 0);
+		m_lSoberCounter = pref_userPrefs.getLong("sobercounter", 0); // Can 0 be used as a default value?
+		
+		m_dBACpercent = Double.longBitsToDouble(pref_userPrefs.getLong("bacpercent", Double.doubleToLongBits(0.0))); 
 
 	} // loadUserInfoPrefs()
 	
@@ -442,6 +445,28 @@ public class User{
 		prefEditor.putLong("sobercounter", lSoberCounter);
 		prefEditor.apply();
 	} // setSoberCounter()
+	
+	/**
+	 * Returns the BAC percent for the Drink Counter
+	 */
+	public double getBACpercent() {
+		return m_dBACpercent;
+	} // getBACpercent
+
+	/**
+	 * Sets the BAC Percent value from the Drink Counter
+	 * @param dBACpercent - BAC percent value
+	 */
+	public void setBACpercent(double dBACpercent) {
+		
+		m_dBACpercent = dBACpercent;
+		
+		pref_userPrefs = context.getSharedPreferences(userPrefFile, 0);
+		prefEditor = pref_userInfo.edit();
+		prefEditor.putLong("bacpercent", Double.doubleToRawLongBits(dBACpercent)); // Allows casting to Long without loss in precision
+		prefEditor.apply();
+		
+	} // setBACpercent()
 
 
 	/**

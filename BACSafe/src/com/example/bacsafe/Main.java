@@ -58,7 +58,7 @@ public class Main extends TabActivity {
 	private int m_nBACtimerMinute;
 	private int m_nBACtimerHour;
 	private double m_dBACpercent;
-	//private long m_soberCounter;	 // See comment in generateBACTimer()
+	//private long m_soberCounter;	 // See comment in generateBACTimer(); Use member variable only if needed several times
 
 	//UI variables - Drink Counter tab
 	private TextView m_tDrinkTotal;
@@ -342,6 +342,8 @@ public class Main extends TabActivity {
 	 * Set up the UI for the Drink Counter Tab
 	 */
 	private void drinkCounterTabSetup(){
+		
+		m_dBACpercent = m_userProfile.getBACpercent(); // This will load the BAC percent from the phone if the application has been shut down
 
 		// Shot Button
 		Button shotButton =  (Button)findViewById(R.id.buttonShot);
@@ -426,6 +428,7 @@ public class Main extends TabActivity {
     	
     	//Take the grams percent multplied by the amount of pure alcohol recently consumed
     	m_dBACpercent += ( m_nCurrentDrink * .6 ) * nGramsPercent;
+    	m_userProfile.setBACpercent( m_dBACpercent ); // Save the BAC percent if the application is shut down
     	
     	DecimalFormat df = new DecimalFormat(".##");
     	m_sBACpercent = df.format(m_dBACpercent);
@@ -480,9 +483,9 @@ public class Main extends TabActivity {
 	 */
 	private void generateBACTimer(){
 		
-		
 		m_nBACtimerMinute = 0;
 		m_nBACtimerHour = 0;
+		
 		double i = m_dBACpercent;
 		while( i > 0){
 			//On average the body can process .012 per hour or .0002 a minute
@@ -514,8 +517,9 @@ public class Main extends TabActivity {
 		m_nBeer = 0;
 		m_nWine = 0;
 		m_nShot = 0;
-		m_nCurrentDrink = 0;
-		m_dBACpercent = 0.0;
+		m_nCurrentDrink = 0;		
+		m_userProfile.setBACpercent(0.0);
+		
 		generateBeerDrinks();
 		generateWineDrinks();
 		generateShotDrinks();
