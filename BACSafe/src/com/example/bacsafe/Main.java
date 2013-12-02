@@ -58,6 +58,7 @@ public class Main extends TabActivity {
 	private int m_nBACtimerMinute;
 	private int m_nBACtimerHour;
 	private double m_dBACpercent;
+	private long m_soberCounter;
 
 	//UI variables - Drink Counter tab
 	private TextView m_tDrinkTotal;
@@ -350,9 +351,10 @@ public class Main extends TabActivity {
 				m_nShot++;
 				generateShotDrinks();
 				generateNumberDrinks();
-				m_nCurrentDrink = 3;
+				m_nCurrentDrink = 1;
 				generateBAC();
 				generateBACTimer();
+				m_nCurrentDrink = 0;
 			}
 		});
 
@@ -364,9 +366,10 @@ public class Main extends TabActivity {
 				m_nWine++;
 				generateWineDrinks();
 				generateNumberDrinks();
-				m_nCurrentDrink = 2;
+				m_nCurrentDrink = 1;
 				generateBAC();
 				generateBACTimer();
+				m_nCurrentDrink = 0;
 			}
 		});
 
@@ -381,6 +384,7 @@ public class Main extends TabActivity {
 				m_nCurrentDrink = 1;
 				generateBAC();
 				generateBACTimer();
+				m_nCurrentDrink = 0;
 			}
 		});
 
@@ -475,12 +479,32 @@ public class Main extends TabActivity {
 	 * Estimates the User's current BAC Time until Sober
 	 */
 	private void generateBACTimer(){
+		
+		
+		m_nBACtimerMinute = 0;
+		m_nBACtimerHour = 0;
+		double i = m_dBACpercent;
+		while( i > 0){
+			//On average the body can process .012 per hour or .0002 a minute
+			i = i - .0002;
+			m_nBACtimerMinute++;
+		}
+		i = m_nBACtimerMinute;
+        while (i > 0){
+        	i = i - 60;
+        	m_nBACtimerHour++;
+        }
+        if(i < 0){
+        	m_nBACtimerHour--;
+        }
+		m_nBACtimerMinute = m_nBACtimerMinute % 60;
     	m_tBACtimer = (TextView)findViewById(R.id.labelSoberTime);
-    	m_nBACtimerMinute = (m_nBeer) + (m_nWine*2) + (m_nShot*3);
-    	m_sBACtimerMinute = Integer.toString(m_nBACtimerMinute);
-    	m_nBACtimerHour = (0);
-    	m_sBACtimerHour = Integer.toString(m_nBACtimerHour);
-    	m_tBACtimer.setText(m_sBACtimerMinute + ":" + m_sBACtimerHour);
+    	DecimalFormat df = new DecimalFormat("00");
+
+    	m_sBACtimerMinute = df.format(m_nBACtimerMinute);
+    	m_sBACtimerHour = df.format(m_nBACtimerHour);
+    	m_tBACtimer.setText(m_sBACtimerHour + ":" + m_sBACtimerMinute);
+    	m_soberCounter = System.currentTimeMillis();
 	} // generageBACTimer()
 	
 	private void resetAllDrinkValues(){
