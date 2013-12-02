@@ -812,9 +812,12 @@ public class Main extends TabActivity {
 		//alert.setTitle(R.string.UserAgreement);
 		alert.setTitle("Reset?");
 
-		// Text View - Reset message
-		//textView_UserAgreement.setText(R.string.UserAgreementMessage);
-		
+		// Text View - R
+		/*TextView textView_UserAgreement = new TextView(this);
+		textView_UserAgreement.setText(R.string.UserAgreementMessage);
+		textView_UserAgreement.setTextSize(16);
+		textView_UserAgreement.setLineSpacing(5, 1);
+		textView_UserAgreement.setPadding(30, 20, 30, 20);*/
 		TextView textView_Reset = new TextView(this);
 		textView_Reset.setText("Do you want to reset your Blood Alcohol Content Percentage and the BAC timer?");
 		textView_Reset.setTextSize(16);
