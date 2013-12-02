@@ -39,6 +39,9 @@ public class User{
 	private int m_nAge;
 	private boolean m_bIsMale;
 	
+	// Drink Counter
+	private long m_lSoberCounter;
+	
 	// Buddies
 	private LinkedList<Buddy> m_listBuddies;
 	
@@ -88,6 +91,8 @@ public class User{
 
 		// Set Preferences from saved User Preferences file
 		m_bShowUserAgreementAlert = pref_userPrefs.getBoolean("useragreement", true);
+		
+		m_lSoberCounter = pref_userPrefs.getLong("sobercounter", 0);
 
 	} // loadUserInfoPrefs()
 	
@@ -416,7 +421,27 @@ public class User{
 		prefEditor.putBoolean("useragreement", bShowUserAgreementAlert);
 		prefEditor.apply();
 	} // setShowUserAgreementAlert()
-
+	
+	/**
+	 * Returns the Sober Counter time stamp for the Drink Counter
+	 */
+	protected long getSoberCounter(){
+		return m_lSoberCounter;
+	} // getSoberCounter()
+	
+	/**
+	 * Sets the Sober Counter time stamp value from the Drink Counter
+	 * @param lSoberCounter - time stamp value
+	 */
+	protected void setSoberCounter(long lSoberCounter){
+		
+		m_lSoberCounter = lSoberCounter;
+		
+		pref_userPrefs = context.getSharedPreferences(userPrefFile, 0);
+		prefEditor = pref_userInfo.edit();
+		prefEditor.putLong("sobercounter", lSoberCounter);
+		prefEditor.apply();
+	} // setSoberCounter()
 
 
 	/**

@@ -58,7 +58,7 @@ public class Main extends TabActivity {
 	private int m_nBACtimerMinute;
 	private int m_nBACtimerHour;
 	private double m_dBACpercent;
-	private long m_soberCounter;
+	//private long m_soberCounter;	 // See comment in generateBACTimer()
 
 	//UI variables - Drink Counter tab
 	private TextView m_tDrinkTotal;
@@ -187,6 +187,9 @@ public class Main extends TabActivity {
 		tabHost.addTab(spec2);
 		tabHost.addTab(spec3);
 
+		/*
+		 * setOnTabChangedListener will allow code execution when tabs are changed
+		 * 
 		// Setup Tasks for when the tabs are changed.
 		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
 			@Override
@@ -195,23 +198,20 @@ public class Main extends TabActivity {
 				// Drink Counter
 				if(tabId.equals(spec1.getTag()))
 				{
-					// TODO: Change Menu Button Items
 				}
 
 				// Groups
 				if(tabId.equals(spec2.getTag()))
 				{
-					// TODO: Change Menu Button Items
 				}
 
 				// Buddies
 				if(tabId.equals(spec3.getTag()))
 				{
-					// TODO: Change Menu Button Items
 				}
 			}
 		});
-		
+		*/
 		int tabCount = tabHost.getTabWidget().getTabCount();
 		for (int i = 0; i < tabCount; i++) {
 		    final View view = tabHost.getTabWidget().getChildTabViewAt(i);
@@ -504,7 +504,10 @@ public class Main extends TabActivity {
     	m_sBACtimerMinute = df.format(m_nBACtimerMinute);
     	m_sBACtimerHour = df.format(m_nBACtimerHour);
     	m_tBACtimer.setText(m_sBACtimerHour + ":" + m_sBACtimerMinute);
-    	m_soberCounter = System.currentTimeMillis();
+    	
+    	m_userProfile.setSoberCounter(System.currentTimeMillis()); // Call m_userProfile.getSoberCounter() to access this value
+    	
+   
 	} // generageBACTimer()
 	
 	private void resetAllDrinkValues(){
@@ -833,15 +836,9 @@ public class Main extends TabActivity {
 		alert.setCancelable(true);
 
 		// Set Title
-		//alert.setTitle(R.string.UserAgreement);
 		alert.setTitle("Reset?");
 
 		// Text View - R
-		/*TextView textView_UserAgreement = new TextView(this);
-		textView_UserAgreement.setText(R.string.UserAgreementMessage);
-		textView_UserAgreement.setTextSize(16);
-		textView_UserAgreement.setLineSpacing(5, 1);
-		textView_UserAgreement.setPadding(30, 20, 30, 20);*/
 		TextView textView_Reset = new TextView(this);
 		textView_Reset.setText("Do you want to reset your Blood Alcohol Content Percentage and the BAC timer?");
 		textView_Reset.setTextSize(16);
