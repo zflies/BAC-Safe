@@ -343,8 +343,8 @@ public class Main extends TabActivity {
 	 */
 	private void drinkCounterTabSetup(){
 		
-		m_dBACpercent = m_userProfile.getBACpercent(); // This will load the BAC percent from the phone if the application has been shut down
-		generateBACTimer();
+		//m_dBACpercent = m_userProfile.getBACpercent(); // This will load the BAC percent from the phone if the application has been shut down
+		//generateBACTimer();
 		
 		// Shot Button
 		Button shotButton =  (Button)findViewById(R.id.buttonShot);
@@ -429,7 +429,7 @@ public class Main extends TabActivity {
     	
     	//Take the grams percent multplied by the amount of pure alcohol recently consumed
     	m_dBACpercent += ( m_nCurrentDrink * .6 ) * nGramsPercent;
-    	m_userProfile.setBACpercent( m_dBACpercent ); // Save the BAC percent if the application is shut down
+    	//m_userProfile.setBACpercent( m_dBACpercent ); // Save the BAC percent if the application is shut down
     	
     	DecimalFormat df = new DecimalFormat(".##");
     	m_sBACpercent = df.format(m_dBACpercent);
@@ -509,7 +509,7 @@ public class Main extends TabActivity {
     	m_sBACtimerHour = df.format(m_nBACtimerHour);
     	m_tBACtimer.setText(m_sBACtimerHour + ":" + m_sBACtimerMinute);
     	
-    	m_userProfile.setSoberCounter(System.currentTimeMillis()); // Call m_userProfile.getSoberCounter() to access this value
+    	//m_userProfile.setSoberCounter(System.currentTimeMillis()); // Call m_userProfile.getSoberCounter() to access this value
     	
    
 	} // generageBACTimer()
@@ -521,7 +521,7 @@ public class Main extends TabActivity {
 		m_nCurrentDrink = 0;
 		
 		m_dBACpercent = 0.0;
-		m_userProfile.setBACpercent(m_dBACpercent);
+		//m_userProfile.setBACpercent(m_dBACpercent);
 		
 		generateBeerDrinks();
 		generateWineDrinks();

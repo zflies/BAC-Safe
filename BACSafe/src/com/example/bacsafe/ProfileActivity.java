@@ -268,10 +268,14 @@ public class ProfileActivity extends Activity {
 		 */
 		
 		//Check if username is unique, if so: add to database
+		/*
 		ServerAPI connection = new ServerAPI();
 		
 		String log = "";
 		try {
+			
+			//CANNOT Pass null?  Crash occurs here
+			
 			log = connection.userAccountSetup(usernameTextField.getText().toString(), firstNameTextField.getText().toString(), lastNameTextField.getText().toString());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -281,6 +285,8 @@ public class ProfileActivity extends Activity {
 		if(log.compareTo("Success") == 0) {
 			return true;
 		}else return false;
+		*/
+		return true; //Temp until server issue is fixed
 
 	} // uniqueUsernameValidation()
 

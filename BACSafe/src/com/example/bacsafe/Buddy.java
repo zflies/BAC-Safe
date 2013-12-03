@@ -45,6 +45,7 @@ public class Buddy {
 	 * @return
 	 */
 	public boolean sendBuddyRequest(String curUserName){
+		/*
 		ServerAPI connection = new ServerAPI();
 		
 		String log = "";
@@ -58,6 +59,9 @@ public class Buddy {
 		if(log.compareTo("Success") == 0) {
 			return true;
 		}else return false;
+		*/
+		
+		return true; //temp until server issue is resolved
 	} // sendBuddyRequest()
 
 
@@ -68,6 +72,7 @@ public class Buddy {
 	public double getBuddyBAC(){
 
 		//TODO: Send request to receive Buddy's BAC
+		/*
 		ServerAPI connection = new ServerAPI();
 		
 		double curBAC = 0.0;
@@ -79,6 +84,7 @@ public class Buddy {
 			e.printStackTrace();
 		}
 		m_dBuddyBAC = curBAC;
+		*/
 		return m_dBuddyBAC;
 	} // getBuddyBAC()
 
@@ -90,6 +96,7 @@ public class Buddy {
 	public int getBuddyTotalDrinkCount(){
 
 		//TODO: Send request to receive Buddy's Total Drink Count
+		/*
 		ServerAPI connection = new ServerAPI();
 		
 		long curDrinkCount = 0;
@@ -101,6 +108,7 @@ public class Buddy {
 			e.printStackTrace();
 		}
 		m_nBuddyTotalDrinkCount = (int) curDrinkCount;
+		*/
 
 		return m_nBuddyTotalDrinkCount;	
 	} // getBuddyTotalDrinkCount()

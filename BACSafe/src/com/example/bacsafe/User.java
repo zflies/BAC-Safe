@@ -63,9 +63,13 @@ public class User{
 	{
 		context = Main.getContextOfApplication();
 
+		
 		loadUserInfoPrefs();
-		loadBuddies();
-		loadGroups();
+		
+		//if(m_sUserName!=""){
+			loadBuddies();
+			loadGroups();
+		//}
 
 	} // Constructor
 
@@ -97,7 +101,8 @@ public class User{
 		
 		m_lSoberCounter = pref_userPrefs.getLong("sobercounter", 0); // Can 0 be used as a default value?
 		
-		m_dBACpercent = Double.longBitsToDouble(pref_userPrefs.getLong("bacpercent", Double.doubleToLongBits(0.0))); 
+		Long tempBACpercent = pref_userPrefs.getLong("bacpercent", 0);
+		m_dBACpercent = tempBACpercent.doubleValue();
 
 	} // loadUserInfoPrefs()
 	
@@ -108,22 +113,33 @@ public class User{
 	protected void loadBuddies(){
 		
 		//TODO: Load Buddies for user from database
+		/*
 		ServerAPI connection = new ServerAPI();
 		
 		LinkedList<String> buddies = new LinkedList<String>();
 		LinkedList<Buddy> buddyList = new LinkedList<Buddy>();
-		try {
-			buddies = connection.getUserBuddiesInfo(m_sUserName);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
+		
+		if(!m_sUserName.equalsIgnoreCase("")){
+			
+			try {
+				buddies = connection.getUserBuddiesInfo(m_sUserName);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			}
+			for(int i = 0; i < buddies.size(); i++) {
+				Buddy budd = new Buddy(buddies.get(i));
+				buddyList.add(budd);
+			}
 		}
-		for(int i = 0; i < buddies.size(); i++) {
-			Buddy budd = new Buddy(buddies.get(i));
-			buddyList.add(budd);
-		}
+
 		m_listBuddies = buddyList;
+		*/
+		
+		/*
+		 * Temp Code below until Server Functions are running
+		 */
 		
 		// Set Access to internal storage file with Buddies List		
 		pref_buddiesList = context.getSharedPreferences(userBuddiesList, 0);
@@ -478,10 +494,11 @@ public class User{
 	public void setBACpercent(double dBACpercent) {
 		
 		m_dBACpercent = dBACpercent;
+		long temp = (long) dBACpercent;
 		
 		pref_userPrefs = context.getSharedPreferences(userPrefFile, 0);
 		prefEditor = pref_userPrefs.edit();
-		prefEditor.putLong("bacpercent", Double.doubleToRawLongBits(dBACpercent)); // Allows casting to Long without loss in precision
+		prefEditor.putLong("bacpercent", temp); // Allows casting to Long without loss in precision
 		prefEditor.apply();
 		
 	} // setBACpercent()
