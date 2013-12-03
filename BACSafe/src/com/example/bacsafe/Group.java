@@ -1,6 +1,7 @@
 package com.example.bacsafe;
 
 import java.util.LinkedList;
+import java.util.concurrent.ExecutionException;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -58,6 +59,22 @@ public class Group {
 	public LinkedList<Buddy> getGroupBuddies(){
 		
 		//TODO: Load Buddies for Group from database
+		ServerAPI connection = new ServerAPI();
+		
+		LinkedList<String> buddies = new LinkedList<String>();
+		LinkedList<Buddy> groupList = new LinkedList<Buddy>();
+		try {
+			buddies = connection.getGroupDrinkers(m_sGroupName);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		for(int i = 0; i < buddies.size(); i++) {
+			Buddy budd = new Buddy(buddies.get(i));
+			groupList.add(budd);
+		}
+		m_listGroupBuddies = groupList;
 		
 		// Set Access to internal storage file with Groups List
 		pref_groupsBuddiesList = context.getSharedPreferences(userGroupsBuddiesList, 0);

@@ -1,6 +1,8 @@
 package com.example.bacsafe;
 
 import java.util.LinkedList;
+import java.util.concurrent.ExecutionException;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -106,6 +108,22 @@ public class User{
 	protected void loadBuddies(){
 		
 		//TODO: Load Buddies for user from database
+		ServerAPI connection = new ServerAPI();
+		
+		LinkedList<String> buddies = new LinkedList<String>();
+		LinkedList<Buddy> buddyList = new LinkedList<Buddy>();
+		try {
+			buddies = connection.getUserBuddiesInfo(m_sUserName);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		for(int i = 0; i < buddies.size(); i++) {
+			Buddy budd = new Buddy(buddies.get(i));
+			buddyList.add(budd);
+		}
+		m_listBuddies = buddyList;
 		
 		// Set Access to internal storage file with Buddies List		
 		pref_buddiesList = context.getSharedPreferences(userBuddiesList, 0);

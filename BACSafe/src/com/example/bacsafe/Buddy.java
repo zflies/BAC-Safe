@@ -1,5 +1,7 @@
 package com.example.bacsafe;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * Buddy Object for getting specific buddy information, such as username, firstname, lastname, etc.
  * 
@@ -42,9 +44,20 @@ public class Buddy {
 	 *  TODO:
 	 * @return
 	 */
-	public boolean sendBuddyRequest(){
-
-		return true;
+	public boolean sendBuddyRequest(String curUserName){
+		ServerAPI connection = new ServerAPI();
+		
+		String log = "";
+		try {
+			log = connection.sendBuddyRequest(curUserName, m_sBuddyUsername);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		if(log.compareTo("Success") == 0) {
+			return true;
+		}else return false;
 	} // sendBuddyRequest()
 
 
@@ -55,7 +68,17 @@ public class Buddy {
 	public double getBuddyBAC(){
 
 		//TODO: Send request to receive Buddy's BAC
-
+		ServerAPI connection = new ServerAPI();
+		
+		double curBAC = 0.0;
+		try {
+			curBAC = connection.getUserBAC(m_sBuddyUsername);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		m_dBuddyBAC = curBAC;
 		return m_dBuddyBAC;
 	} // getBuddyBAC()
 
@@ -67,6 +90,17 @@ public class Buddy {
 	public int getBuddyTotalDrinkCount(){
 
 		//TODO: Send request to receive Buddy's Total Drink Count
+		ServerAPI connection = new ServerAPI();
+		
+		long curDrinkCount = 0;
+		try {
+			curDrinkCount = connection.getUserDrinkCount(m_sBuddyUsername);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		m_nBuddyTotalDrinkCount = (int) curDrinkCount;
 
 		return m_nBuddyTotalDrinkCount;	
 	} // getBuddyTotalDrinkCount()

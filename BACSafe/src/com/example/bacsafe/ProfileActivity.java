@@ -1,7 +1,10 @@
 package com.example.bacsafe;
 
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -263,8 +266,21 @@ public class ProfileActivity extends Activity {
 		 * 		return false;
 		 * }
 		 */
-
-		return true; // Username is unique 
+		
+		//Check if username is unique, if so: add to database
+		ServerAPI connection = new ServerAPI();
+		
+		String log = "";
+		try {
+			log = connection.userAccountSetup(usernameTextField.getText().toString(), firstNameTextField.getText().toString(), lastNameTextField.getText().toString());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		if(log.compareTo("Success") == 0) {
+			return true;
+		}else return false;
 
 	} // uniqueUsernameValidation()
 
