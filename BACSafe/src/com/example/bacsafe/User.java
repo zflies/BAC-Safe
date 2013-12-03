@@ -420,7 +420,7 @@ public class User{
 		m_bShowUserAgreementAlert = bShowUserAgreementAlert;
 
 		pref_userPrefs = context.getSharedPreferences(userPrefFile, 0);
-		prefEditor = pref_userInfo.edit();
+		prefEditor = pref_userPrefs.edit();
 		prefEditor.putBoolean("useragreement", bShowUserAgreementAlert);
 		prefEditor.apply();
 	} // setShowUserAgreementAlert()
@@ -441,7 +441,7 @@ public class User{
 		m_lSoberCounter = lSoberCounter;
 		
 		pref_userPrefs = context.getSharedPreferences(userPrefFile, 0);
-		prefEditor = pref_userInfo.edit();
+		prefEditor = pref_userPrefs.edit();
 		prefEditor.putLong("sobercounter", lSoberCounter);
 		prefEditor.apply();
 	} // setSoberCounter()
@@ -462,7 +462,7 @@ public class User{
 		m_dBACpercent = dBACpercent;
 		
 		pref_userPrefs = context.getSharedPreferences(userPrefFile, 0);
-		prefEditor = pref_userInfo.edit();
+		prefEditor = pref_userPrefs.edit();
 		prefEditor.putLong("bacpercent", Double.doubleToRawLongBits(dBACpercent)); // Allows casting to Long without loss in precision
 		prefEditor.apply();
 		

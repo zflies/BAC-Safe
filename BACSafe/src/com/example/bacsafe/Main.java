@@ -344,7 +344,8 @@ public class Main extends TabActivity {
 	private void drinkCounterTabSetup(){
 		
 		m_dBACpercent = m_userProfile.getBACpercent(); // This will load the BAC percent from the phone if the application has been shut down
-
+		generateBACTimer();
+		
 		// Shot Button
 		Button shotButton =  (Button)findViewById(R.id.buttonShot);
 		shotButton.setOnClickListener(new View.OnClickListener() {
