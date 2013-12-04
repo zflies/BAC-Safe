@@ -149,16 +149,29 @@ public class ProfileActivity extends Activity {
                 saveButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                        	
+                        		if(m_userProfile.getUserName() != ""){
+                        			
+                                    // Form Validation - Required fields (Height and Weight)
+                                    if(requiredFieldValidation())
+                                    {        
+                                            saveUserInfo();
+                                    } 
+                        		}
+                        		else{
+                        			
+                        			// Form Validation - Check for unique Username
+                                    if(uniqueUsernameValidation())
+                                    {
+                                            // Form Validation - Required fields (Height and Weight)
+                                            if(requiredFieldValidation())
+                                            {        
+                                                    saveUserInfo();
+                                            } 
+                                    } 
+                        		}
 
-                                // Form Validation - Check for unique Username
-                                if(uniqueUsernameValidation())
-                                {
-                                        // Form Validation - Required fields (Height and Weight)
-                                        if(requiredFieldValidation())
-                                        {        
-                                                saveUserInfo();
-                                        } 
-                                } 
+                                
                         }
                 }); // saveButton
 
