@@ -122,9 +122,9 @@ public class ServerAPI {
 	}
 	public void createGroup(Group group) throws InterruptedException, ExecutionException {
 		CreateGroup request = new CreateGroup();
-		request.execute(group.getGroupName());
+		request.execute(group.m_sGroupName);
 		for(int i = 0; i < group.m_listGroupBuddies.size(); i++) {
-			addDrinker(group.getGroupName(), group.m_listGroupBuddies.get(i).m_sBuddyUsername);
+			addDrinker(group.m_sGroupName, group.m_listGroupBuddies.get(i).m_sBuddyUsername);
 		}
 		for(int i = 0; i < group.m_listGroupBuddies.size(); i++) {
 			LinkedList<Group> groups = new LinkedList<Group>();
