@@ -245,8 +245,7 @@ public class User{
             }
             m_listGroups
 }  // loadGroups() */
-
-
+	
 
 	/**
 	 * Deletes the user's profile from the database and phone
