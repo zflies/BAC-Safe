@@ -120,9 +120,17 @@ public class ServerAPI {
 		SendBuddyRequest request = new SendBuddyRequest();
 		return request.execute(newBuddyUserName, userName).get();
 	}
-	public String createGroup(String groupName) throws InterruptedException, ExecutionException {
+	public void createGroup(Group group) throws InterruptedException, ExecutionException {
 		CreateGroup request = new CreateGroup();
-		return request.execute(groupName).get();
+		request.execute(group.getGroupName());
+		for(int i = 0; i < group.m_listGroupBuddies.size(); i++) {
+			addDrinker(group.getGroupName(), group.m_listGroupBuddies.get(i).m_sBuddyUsername);
+		}
+		for(int i = 0; i < group.m_listGroupBuddies.size(); i++) {
+			LinkedList<Group> groups = new LinkedList<Group>();
+			groups.add(group);
+			setGroups(group.m_listGroupBuddies.get(i).m_sBuddyUsername, groups);
+		}
 	}
 	public String addDD(String groupName, String drinker) throws InterruptedException, ExecutionException {
 		GroupAddDD request = new GroupAddDD();

@@ -540,6 +540,34 @@ public class User{
     		log = connection.setGroups(m_sUserName, listGroups);
     				
     		m_listGroups = listGroups;
-    } // setGroups()
+
+    }/*
+        protected void setGroups(LinkedList<Group> listGroups) {
+                
+                //TODO: Save user's groups to database
+                
+                m_listGroups = listGroups;
+                
+                // Set Access to internal storage file with Buddies List                
+                pref_groupsList = context.getSharedPreferences(userGroupsList, 0);
+                                
+                prefEditor = pref_groupsList.edit().clear();
+
+                prefEditor.putInt("Groups_Size", listGroups.size()); //Store the number of Buddies the user has.
+
+                // Store the usernames
+                for(int i=0; i < listGroups.size(); i++)  
+                {
+                        prefEditor.putString("Group_" + i, listGroups.get(i).getGroupName());
+                }
+
+                prefEditor.commit();
+                
+        } // getGroups() */
+        protected void createGroup(Group group) throws InterruptedException, ExecutionException {
+        	ServerAPI connection = new ServerAPI();
+
+    		connection.createGroup(group);
+        }
 
 } //class User
