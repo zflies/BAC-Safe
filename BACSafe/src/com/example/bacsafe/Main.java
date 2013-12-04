@@ -338,7 +338,7 @@ public class Main extends TabActivity {
                                 {
                                         Intent profileActivityIntent = new Intent(Main.this, ProfileActivity.class);
                                         profileActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
-                                        startActivity(profileActivityIntent);  
+                                        startActivityForResult(profileActivityIntent, 1);
                                 }
                         }
                 });
