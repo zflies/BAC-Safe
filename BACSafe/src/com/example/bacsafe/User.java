@@ -650,4 +650,46 @@ public class User{
 		connection.createGroup(group);
 	}
 
+	
+	//Test Functions
+	public int TestAge(int age){
+		setAge(age);
+		return getAge();
+	}
+	
+	public String TestFName(String name){
+		setFirstName(name);
+		return getFirstName();
+	}
+	
+	public String TestLName(String name){
+		setLastName(name);
+		return getLastName();
+	}
+	
+	public int TestHeight(int num){
+		setHeightFeet(num);
+		return getHeightFeet();
+	}
+	
+	public int TestInches(int num){
+		setHeightInches(num);
+		return getHeightInches();
+	}
+	
+	public  String Testusername(String name){
+		setUserName(name);
+		return getUserName();
+	}
+	
+	public int TestWeight(int num){
+		setWeight(num);
+		return getWeight();
+	}
+	
+	public boolean TestisMale(boolean num){
+		setMale(num);
+		return isMale();
+	}
+	
 } //class User

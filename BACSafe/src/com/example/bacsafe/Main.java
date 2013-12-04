@@ -965,4 +965,40 @@ public class Main extends TabActivity {
 	} // alertReset
 
 
+	//Testing classes
+	public double TestgenerateBAC(int beer, int wine, int shot, int weight){
+		m_nShot = shot;
+		m_nWine = wine;
+		m_nBeer = beer;
+		generateNumberDrinks();
+		m_userProfile.setMale(true);
+		m_userProfile.setWeight(weight);
+		
+		generateBAC();
+		return m_dBACpercent;
+	}
+	
+	public double TestgenerateBACTimer(double bac){
+		m_dBACpercent = bac;
+		
+		generateBACTimer();
+		return(m_nBACtimerMinute + (m_nBACtimerHour*60));
+	}
+	
+	public int TestgenerateNumberDrinks(int beer, int wine, int shot){
+		m_nBeer = beer;
+		m_nWine = wine;
+		m_nShot = shot;
+		generateNumberDrinks();
+		return m_nDrinkTotal;
+	}
+	
+	/*
+	public double TestresetAllDrinkValues(){
+		resetAllDrinkValues();
+		return(m_nBeer + m_nWine + m_nShot + m_nCurrentDrink + m_dBACpercent + m_userProfile.getBACpercent());
+	}
+    */
+
+	
 } // class Main
