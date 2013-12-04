@@ -80,18 +80,34 @@ public class ViewGroup_ListViewAdapt extends BaseAdapter {
 
 		// Combine the First and Last name of the user if provided
 		String sNameCombined = " ";
-		String sFirstName = buddy.m_sBuddyFirstName;
-		String sLastName = buddy.m_sBuddyLastName;
-		if(sFirstName != null)
+		
+		String sFirstName = "";
+		try {
+			sFirstName = buddy.getBuddyFirstName();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		} catch (ExecutionException e1) {
+			e1.printStackTrace();
+		}
+		
+		String sLastName = "";
+		try {
+			sLastName = buddy.getBuddyLastName();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		} catch (ExecutionException e1) {
+			e1.printStackTrace();
+		}
+		if(sFirstName != "")
 		{
 			sNameCombined = sFirstName;
 
-			if(sLastName != null)
+			if(sLastName != "")
 			{
 				sNameCombined += " " + sLastName;
 			}
 		}
-		else if(sLastName != null)
+		else if(sLastName != "")
 		{
 			sNameCombined = sLastName;
 		}

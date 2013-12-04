@@ -68,6 +68,41 @@ public class Buddy {
     			return true;
     		}else return false;
         } // sendBuddyRequest()
+        
+        /**
+         * Gets the Buddy's First name from database
+         * @return
+         * @throws InterruptedException
+         * @throws ExecutionException
+         */
+        public String getBuddyFirstName() throws InterruptedException, ExecutionException{
+        	        	
+        	ServerAPI connection = new ServerAPI();	
+        	
+        	String sFirstName = "";
+
+    		sFirstName = connection.getUserFirstName(m_sBuddyUsername);
+        	
+        	
+        	return sFirstName;
+        } // getBuddyFirstName()
+        
+        /**
+         * Gets the Buddy's Last name from database
+         * @return
+         * @throws InterruptedException
+         * @throws ExecutionException
+         */
+        public String getBuddyLastName() throws InterruptedException, ExecutionException{
+        	        	
+        	ServerAPI connection = new ServerAPI();	
+        	
+        	String sLastName = "";
+
+        	sLastName = connection.getUserLastName(m_sBuddyUsername);
+        	
+        	return sLastName;
+        } // getBuddyLastName()
 
 
         /**
