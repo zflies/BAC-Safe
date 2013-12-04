@@ -730,14 +730,19 @@ public class Main extends TabActivity {
 
                                 LinkedList<Buddy> listGroupBuddies = new LinkedList<Buddy>();
                                 
+                                // Add's current user to the group
+                                Buddy newBuddy = new Buddy(m_userProfile.getUserName());
+                                listGroupBuddies.add(newBuddy);
+                                
+                                // Add's the the selected Buddies to the group
                                 for (int i = 0; i < nNumBuddies; i++) 
                                 {
                                         if (itemsChecked[i]) 
                                         {
                                                 //Add Selected Buddy to Group's Buddy list
-                                        	Buddy newBuddy = new Buddy(sBuddies[i]);
+                                        	newBuddy = new Buddy(sBuddies[i]);
                                                 listGroupBuddies.add(newBuddy);
-                                                
+                                               /* 
                                                 try {
                                 					newBuddy.sendGroupRequest(sNewGroupName);
                                 				} catch (InterruptedException e1) {
@@ -747,12 +752,15 @@ public class Main extends TabActivity {
                                 					// TODO Auto-generated catch block
                                 					e1.printStackTrace();
                                 				}
+                                				*/
                                         }
                                 }
-                                
+
                                 //Create group based on selected Buddies
                                 Group newGroup = new Group(sNewGroupName);
                                 newGroup.setGroupBuddies(listGroupBuddies);
+                                
+                                m_userProfile.createGroup(newGroup);
                                 
                                 //Add the group to User's list of groups
                                 LinkedList<Group> listGroups = new LinkedList<Group>();
