@@ -45,6 +45,14 @@ public class ServerAPI {
 		GetUserBuddiesInfo request = new GetUserBuddiesInfo();
 		return request.execute(userName).get().getCurBAC();
 	}
+	public String getUserFirstName(String userName) throws InterruptedException, ExecutionException {
+		GetUserBuddiesInfo request = new GetUserBuddiesInfo();
+		return request.execute(userName).get().getFirstName();
+	}
+	public String getUserLastName(String userName) throws InterruptedException, ExecutionException {
+		GetUserBuddiesInfo request = new GetUserBuddiesInfo();
+		return request.execute(userName).get().getLastName();
+	}
 	public String[] getUserBuddies(String userName) throws InterruptedException, ExecutionException {
 		GetUserBuddiesInfo request = new GetUserBuddiesInfo();
 		List<String> buddies = request.execute(userName).get().getBuddies();
