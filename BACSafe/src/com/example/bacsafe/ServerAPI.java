@@ -390,8 +390,8 @@ public class ServerAPI {
 			String log = "";
 			try {
 				BacsafeAPIGroupUser group = new BacsafeAPIGroupUser();
-				group.setUserName(info[0]);
-				group.setGroupName(info[1]);
+				group.setUserName(info[1]);
+				group.setGroupName(info[0]);
 				log = service.groups().addDrinker(group).execute().getMessage();
 			} catch(IOException e) {
 				e.printStackTrace();
