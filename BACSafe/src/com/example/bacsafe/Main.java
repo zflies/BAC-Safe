@@ -103,10 +103,8 @@ public class Main extends TabActivity {
                 try {
 					m_userProfile = new User();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (ExecutionException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} // Initialization loads User Info/Prefs, Buddies and Groups
                 
@@ -148,10 +146,8 @@ public class Main extends TabActivity {
                                 try {
 									m_userProfile.loadBuddies();
 								} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								} catch (ExecutionException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
                                 setBuddiesListView();
@@ -163,10 +159,8 @@ public class Main extends TabActivity {
                                 try {
 									m_userProfile.loadGroups();
 								} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								} catch (ExecutionException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
                         }
@@ -368,9 +362,6 @@ public class Main extends TabActivity {
          */
         private void drinkCounterTabSetup(){
                 
-                //m_dBACpercent = m_userProfile.getBACpercent(); // This will load the BAC percent from the phone if the application has been shut down
-                //generateBACTimer();
-                
                 // Shot Button
                 Button shotButton =  (Button)findViewById(R.id.buttonShot);
                 shotButton.setOnClickListener(new View.OnClickListener() {
@@ -454,28 +445,49 @@ public class Main extends TabActivity {
             
             //Take the grams percent multplied by the amount of pure alcohol recently consumed
             m_dBACpercent += ( m_nCurrentDrink * .6 ) * nGramsPercent;
-            //m_userProfile.setBACpercent( m_dBACpercent ); // Save the BAC percent if the application is shut down
+           
+            try {
+				m_userProfile.setBACpercent( m_dBACpercent );
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			} 
             
             DecimalFormat df = new DecimalFormat(".##");
             m_sBACpercent = df.format(m_dBACpercent);
             m_tBACpercent = (TextView)findViewById(R.id.labelBACPercent);
             m_tBACpercent.setText(m_sBACpercent);
+            
+            
+            
         } // generateBAC()
 
 
         /**
-         * TODO:
+         * Increment total Number of Drinks for user
          */
         private void generateNumberDrinks(){
             m_nDrinkTotal = (m_nBeer) + (m_nWine) + (m_nShot);
             m_sDrinkTotal = Integer.toString(m_nDrinkTotal);
             m_tDrinkTotal = (TextView)findViewById(R.id.labelDrinkCountNumber);
             m_tDrinkTotal.setText(m_sDrinkTotal);
+            
+
+            try {
+				m_userProfile.setTotalDrinkCount(m_nDrinkTotal);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			} 
+            
+
         } // generateNumberDrinks()
 
 
         /**
-         * TODO:
+         * Increment Number of Beer Drinks
          */
         private void generateBeerDrinks(){
                 m_sBeer = Integer.toString(m_nBeer);
@@ -485,7 +497,7 @@ public class Main extends TabActivity {
 
 
         /**
-         * TODO:
+         * Increment Number of Wine Drinks
          */
         private void generateWineDrinks(){
                 m_sWine = Integer.toString(m_nWine);
@@ -495,7 +507,7 @@ public class Main extends TabActivity {
 
 
         /**
-         * TODO:
+         * Increment Number of Shot Drinks
          */
         private void generateShotDrinks(){
             m_sShot = Integer.toString(m_nShot);
@@ -546,7 +558,14 @@ public class Main extends TabActivity {
                 m_nCurrentDrink = 0;
                 
                 m_dBACpercent = 0.0;
-                //m_userProfile.setBACpercent(m_dBACpercent);
+                
+                try {
+					m_userProfile.setBACpercent(m_dBACpercent);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					e.printStackTrace();
+				}
                 
                 generateBeerDrinks();
                 generateWineDrinks();
@@ -633,10 +652,6 @@ public class Main extends TabActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
                         {
-                                //m_listViewGroups.getItemAtPosition(position).toString());
-                                /*
-                                 * TODO: Open ViewGroupActivity 
-                                 */
                                 Intent viewGroupIntent = new Intent(getApplicationContext(), ViewGroup_Activity.class);
                                 viewGroupIntent.putExtra("groupname",m_listViewGroups.getItemAtPosition(position).toString());
                                 startActivity(viewGroupIntent);
@@ -647,10 +662,7 @@ public class Main extends TabActivity {
                         @Override
                         public boolean onItemLongClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                                
-                                // TODO: Popup dialog menu? 
-                                                //Remove self from group?
-                                                //Rename Group - if creator?
+
                                 alertRemoveSelfFromGroup(m_listViewGroups.getItemAtPosition(position).toString());
                                                 
                                 return false;
@@ -746,10 +758,8 @@ public class Main extends TabActivity {
                                                 try {
                                 					newBuddy.sendGroupRequest(sNewGroupName);
                                 				} catch (InterruptedException e1) {
-                                					// TODO Auto-generated catch block
                                 					e1.printStackTrace();
                                 				} catch (ExecutionException e1) {
-                                					// TODO Auto-generated catch block
                                 					e1.printStackTrace();
                                 				}
                                 				*/
@@ -760,7 +770,7 @@ public class Main extends TabActivity {
                                 Group newGroup = new Group(sNewGroupName);
                                 newGroup.setGroupBuddies(listGroupBuddies);
                                 
-                                m_userProfile.createGroup(newGroup);
+                                //m_userProfile.createGroup(newGroup);
                                 
                                 //Add the group to User's list of groups
                                 LinkedList<Group> listGroups = new LinkedList<Group>();
@@ -769,10 +779,8 @@ public class Main extends TabActivity {
                                 try {
 									m_userProfile.setGroups(listGroups);
 								} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								} catch (ExecutionException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
                                 

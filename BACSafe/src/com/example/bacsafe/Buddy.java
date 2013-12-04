@@ -67,30 +67,11 @@ public class Buddy {
     		if(log.compareTo("Success") == 0) {
     			return true;
     		}else return false;
-        } /*
-        public boolean sendBuddyRequest(String curUserName){
-                /*
-                ServerAPI connection = new ServerAPI();
-                
-                String log = "";
-                try {
-                        log = connection.sendBuddyRequest(curUserName, m_sBuddyUsername);
-                } catch (InterruptedException e) {
-                        e.printStackTrace();
-                } catch (ExecutionException e) {
-                        e.printStackTrace();
-                }
-                if(log.compareTo("Success") == 0) {
-                        return true;
-                }else return false;
-                
-                
-                return true; //temp until server issue is resolved
-        } // sendBuddyRequest() */
+        } // sendBuddyRequest()
 
 
         /**
-         *         Retrieves the BAC for a Buddy
+         * Retrieves the BAC for a Buddy
          * @return m_dBuddyBAC - Estimated BAC value for the Buddy
          */
         public double getBuddyBAC() throws InterruptedException, ExecutionException{
@@ -102,25 +83,7 @@ public class Buddy {
     		
     		m_dBuddyBAC = curBAC;
     		return m_dBuddyBAC;
-        } /*
-        public double getBuddyBAC(){
-
-                //TODO: Send request to receive Buddy's BAC
-                /*
-                ServerAPI connection = new ServerAPI();
-                
-                double curBAC = 0.0;
-                try {
-                        curBAC = connection.getUserBAC(m_sBuddyUsername);
-                } catch (InterruptedException e) {
-                        e.printStackTrace();
-                } catch (ExecutionException e) {
-                        e.printStackTrace();
-                }
-                m_dBuddyBAC = curBAC;
-                
-                return m_dBuddyBAC;
-        } // getBuddyBAC() */
+        } // getBuddyBAC()
 
 
         /**
@@ -137,25 +100,6 @@ public class Buddy {
     		m_nBuddyTotalDrinkCount = (int) curDrinkCount;
 
     		return m_nBuddyTotalDrinkCount;
-        } /*
-        public int getBuddyTotalDrinkCount(){
-
-                //TODO: Send request to receive Buddy's Total Drink Count
-                /*
-                ServerAPI connection = new ServerAPI();
-                
-                long curDrinkCount = 0;
-                try {
-                        curDrinkCount = connection.getUserDrinkCount(m_sBuddyUsername);
-                } catch (InterruptedException e) {
-                        e.printStackTrace();
-                } catch (ExecutionException e) {
-                        e.printStackTrace();
-                }
-                m_nBuddyTotalDrinkCount = (int) curDrinkCount;
-                
-
-                return m_nBuddyTotalDrinkCount;        
-        } // getBuddyTotalDrinkCount() */
+        } // getBuddyTotalDrinkCount()
 
 } // class Buddy

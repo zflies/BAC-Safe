@@ -35,7 +35,7 @@ public class FindBuddyActivity extends Activity implements SearchView.OnQueryTex
 	private User userProfile; // Access to User Profile Info
 
 	//Temporary String until Database returns usernames
-	private final String[] m_TempBuddies = Temp_BuddyDatabase.sCheeseStrings;
+	//private final String[] m_TempBuddies = Temp_BuddyDatabase.sCheeseStrings;
 
 
 	/**
@@ -130,11 +130,13 @@ public class FindBuddyActivity extends Activity implements SearchView.OnQueryTex
 			// Show search results after input is 3 characters long
 			if(newText.length() > 2){
 
+				/*
 				m_listView.setAdapter(new ArrayAdapter<String>(FindBuddyActivity.this,
 						android.R.layout.simple_list_item_1,
 						m_TempBuddies));
 				m_listView.setFilterText(newText.toString());
 				m_listView.setVisibility(View.VISIBLE);
+				*/
 			}
 			else
 			{	// hide entire list

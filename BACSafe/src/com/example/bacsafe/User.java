@@ -21,12 +21,14 @@ public class User{
         private SharedPreferences pref_userInfo;
         
         // Create file for saving User Buddies List
+        /*
         private final String userBuddiesList = "BAC Safe User Buddies List";
         private SharedPreferences pref_buddiesList;
         
         //Create file for saving User Groups List
         private final String userGroupsList = "BAC Safe User Groups List";
         private SharedPreferences pref_groupsList;
+        */
         
         // Create Preference Editor
         private SharedPreferences.Editor prefEditor;
@@ -135,62 +137,8 @@ public class User{
     		}
     		
     		m_listBuddies = buddyList;
-    }
-       /* protected void loadBuddies(){
-                
-                //TODO: Load Buddies for user from database
-                /*
-                ServerAPI connection = new ServerAPI();
-                
-                LinkedList<String> buddies = new LinkedList<String>();
-                LinkedList<Buddy> buddyList = new LinkedList<Buddy>();
-                
-                if(!m_sUserName.equalsIgnoreCase("")){
-                        
-                        try {
-                                buddies = connection.getUserBuddiesInfo(m_sUserName);
-                        } catch (InterruptedException e) {
-                                e.printStackTrace();
-                        } catch (ExecutionException e) {
-                                e.printStackTrace();
-                        }
-                        for(int i = 0; i < buddies.size(); i++) {
-                                Buddy budd = new Buddy(buddies.get(i));
-                                buddyList.add(budd);
-                        }
-                }
-
-                m_listBuddies = buddyList;
-                */
-                
-                /*
-                 * Temp Code below until Server Functions are running
-                 
-                
-                // Set Access to internal storage file with Buddies List                
-                pref_buddiesList = context.getSharedPreferences(userBuddiesList, 0);
-                
-                LinkedList<Buddy> listBuddies = new LinkedList<Buddy>();
-
-                int nNumberOfBuddies = pref_buddiesList.getInt("Buddies_Size", 0);  // Number of buddies
-
-                String sUsername;
-
-                for(int i=0; i < nNumberOfBuddies; i++) 
-                {
-                        sUsername = pref_buddiesList.getString("Buddy_" + i, null);
-
-                        /* 
-                         * TODO:
-                         * Verify username still exists in database
-                         
-
-                        listBuddies.add(new Buddy(sUsername)); // Add new Buddies to Buddy List
-                }
-
-                m_listBuddies = listBuddies;
-                
-        } // loadBuddies()*/
+    } // loadBuddies()
+       
         
         
         
@@ -215,31 +163,7 @@ public class User{
 
 
     		m_listGroups = groupList;
-    } /*
-        protected void loadGroups(){
-                
-                //TODO: Load User's Groups from database
-                
-                // Set Access to internal storage file with Groups List
-                pref_groupsList = context.getSharedPreferences(userGroupsList, 0);
-
-                LinkedList<Group> listGroups = new LinkedList<Group>();
-
-                int nNumberOfGroups = pref_groupsList.getInt("Groups_Size", 0);  // Number of groups
-
-                String sGroupName;
-
-                // Load Each Group
-                for(int i=0; i < nNumberOfGroups; i++){
-
-                        sGroupName = pref_groupsList.getString("Group_" + i, null);
-
-                        listGroups.add(new Group(sGroupName));
-                }
-                
-                m_listGroups = listGroups;
-                
-        } // loadGroups() */
+    }  // loadGroups()
 
 
 
@@ -525,29 +449,38 @@ public class User{
                 prefEditor.apply();
         } // setSoberCounter()
         
-        /**
-         * Returns the BAC percent for the Drink Counter
-         */
-        public double getBACpercent() {
-                return m_dBACpercent;
-        } // getBACpercent
 
         /**
-         * Sets the BAC Percent value from the Drink Counter
+         * Saves the BAC Percent value from the Drink Counter to database
          * @param dBACpercent - BAC percent value
          */
-        public void setBACpercent(double dBACpercent) {
+        public void setBACpercent(double dBACpercent) throws InterruptedException, ExecutionException{
+                               
+                /*
+                 * TODO: Save BAC to Server
+                 */
                 
-                m_dBACpercent = dBACpercent;
-                long temp = (long) dBACpercent;
-                
-                pref_userPrefs = context.getSharedPreferences(userPrefFile, 0);
-                prefEditor = pref_userPrefs.edit();
-                prefEditor.putLong("bacpercent", temp); // Allows casting to Long without loss in precision
-                prefEditor.apply();
-                
-        } // setBACpercent()
+        	ServerAPI connection = new ServerAPI();		
+        	String log = "";
 
+        	log = connection.updateUserBAC(m_sUserName, dBACpercent);		
+                   
+        } // setBACpercent()
+        
+        /**
+         * Save the Total Drink Count for the user to the database
+         */
+        public void setTotalDrinkCount(int nDrinkCount)throws InterruptedException, ExecutionException{
+        	
+        	/*
+        	 * TODO: Save total drink count to database
+        	 */
+        	ServerAPI connection = new ServerAPI();		
+        	String log = "";
+
+        	log = connection.updateUserDrinkCount(m_sUserName, nDrinkCount);
+        	
+        } // setTotalDrinkCount()
 
         /**
          * Returns a List of Buddies for the User
@@ -576,35 +509,7 @@ public class User{
         	log = connection.createBuddies(m_sUserName, listBuddies);		
         	
         	m_listBuddies = listBuddies;
-        }
-        /*
-        protected void setBuddies(LinkedList<Buddy> listBuddies) {
-                
-                //TODO: Save user's Buddies to database
-        		
         	
-                m_listBuddies = listBuddies;
-                
-                // Set Access to internal storage file with Buddies List                
-                pref_buddiesList = context.getSharedPreferences(userBuddiesList, 0);
-                
-                prefEditor = pref_buddiesList.edit();
-                prefEditor.clear(); // Clear the file first in case Buddies were deleted during session.
-
-                prefEditor.putInt("Buddies_Size", listBuddies.size()); //Store the number of Buddies the user has.
-
-                String sBuddyUsername;
-
-                // Store the usernames
-                for(int i=0; i < listBuddies.size(); i++)  
-                {
-                        sBuddyUsername = listBuddies.get(i).m_sBuddyUsername;
-
-                        prefEditor.putString("Buddy_" + i, sBuddyUsername);
-                        //TODO: Investigate storing string sets so that we may store more information for user with single key value.
-                }
-
-                prefEditor.commit();
         } // setBuddies()*/
 
 
@@ -623,7 +528,6 @@ public class User{
         } // getGroups()
 
 
-
         /**
          * Sets the list of Groups for the User
          * @param listGroups
@@ -636,28 +540,6 @@ public class User{
     		log = connection.setGroups(m_sUserName, listGroups);
     				
     		m_listGroups = listGroups;
-    }/*
-        protected void setGroups(LinkedList<Group> listGroups) {
-                
-                //TODO: Save user's groups to database
-                
-                m_listGroups = listGroups;
-                
-                // Set Access to internal storage file with Buddies List                
-                pref_groupsList = context.getSharedPreferences(userGroupsList, 0);
-                                
-                prefEditor = pref_groupsList.edit().clear();
-
-                prefEditor.putInt("Groups_Size", listGroups.size()); //Store the number of Buddies the user has.
-
-                // Store the usernames
-                for(int i=0; i < listGroups.size(); i++)  
-                {
-                        prefEditor.putString("Group_" + i, listGroups.get(i).getGroupName());
-                }
-
-                prefEditor.commit();
-                
-        } // getGroups() */
+    } // setGroups()
 
 } //class User

@@ -1,6 +1,9 @@
 package com.example.bacsafe;
 
+import java.text.DecimalFormat;
 import java.util.LinkedList;
+import java.util.concurrent.ExecutionException;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -102,9 +105,29 @@ public class ViewGroup_ListViewAdapt extends BaseAdapter {
 
 		// Set UI Fields
 		tvUsername.setText(buddy.m_sBuddyUsername);
-		tvName.setText("Firstname Lastname"); // sNameCombined);
-		tvBAC.setText("0.00"); // TODO: replace with getBuddyBAC()
-		tvDrinkCount.setText("0");	// TODO: replace with getBuddyDrinkCount()
+		tvName.setText(sNameCombined); // sNameCombined);
+		
+		// Retrieve the BAC
+		DecimalFormat df = new DecimalFormat(".##");
+        try {
+			String sBuddyBAC = df.format(buddy.getBuddyBAC());
+			tvBAC.setText(sBuddyBAC); 
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+        
+        // Retrieve the total drink count
+        try {
+			int nBuddyTotalDrinks = buddy.getBuddyTotalDrinkCount();
+			 String sBuddyTotalDrinks = Integer.toString(nBuddyTotalDrinks);
+			tvDrinkCount.setText(sBuddyTotalDrinks);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
 
 		// Set Text Color of UI
 		tvUsername.setTextColor(Color.WHITE);
