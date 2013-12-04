@@ -754,15 +754,6 @@ public class Main extends TabActivity {
                                                 //Add Selected Buddy to Group's Buddy list
                                         	newBuddy = new Buddy(sBuddies[i]);
                                                 listGroupBuddies.add(newBuddy);
-                                               /* 
-                                                try {
-                                					newBuddy.sendGroupRequest(sNewGroupName);
-                                				} catch (InterruptedException e1) {
-                                					e1.printStackTrace();
-                                				} catch (ExecutionException e1) {
-                                					e1.printStackTrace();
-                                				}
-                                				*/
                                         }
                                 }
 
@@ -773,10 +764,8 @@ public class Main extends TabActivity {
                                 try {
 									m_userProfile.createGroup(newGroup);
 								} catch (InterruptedException e1) {
-									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								} catch (ExecutionException e1) {
-									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
                                 

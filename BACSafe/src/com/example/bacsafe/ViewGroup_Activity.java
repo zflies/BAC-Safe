@@ -2,6 +2,7 @@ package com.example.bacsafe;
 
 import java.util.LinkedList;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,7 +57,8 @@ public class ViewGroup_Activity extends Activity{
 		
 		// Custom List View Setup
 		m_listView = (ListView) findViewById(R.id.listView_ViewGroup); 
-		m_listView.setAdapter(new ViewGroup_ListViewAdapt(m_listGroupBuddies , this)); 	
+		m_listView.setAdapter(new ViewGroup_ListViewAdapt(m_listGroupBuddies , this)); 
+		final Context context = this;
 
 		// Done Button - Returns to Main screen (Buddies tab)
 		Button doneButton = (Button)findViewById(R.id.button_ViewGroup_Done);
@@ -64,6 +66,16 @@ public class ViewGroup_Activity extends Activity{
 			@Override
 			public void onClick(View v) {
 				finish();
+			} 
+		}); // Done Button
+		
+		// Refresh Button - Returns to Main screen (Buddies tab)
+		Button refreshButton = (Button)findViewById(R.id.button_ViewGroup_Refresh);
+		refreshButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				m_listGroupBuddies = m_userGroup.getGroupBuddies();
+				m_listView.setAdapter(new ViewGroup_ListViewAdapt(m_listGroupBuddies , context)); 
 			} 
 		}); // Done Button
 		

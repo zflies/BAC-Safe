@@ -60,4 +60,15 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#FFFFFF" />
 
+    <Button
+        android:id="@+id/button_ViewGroup_Refresh"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/listView_ViewGroup"
+        android:layout_alignParentBottom="true"
+        android:text="Refresh"
+        android:textSize="12sp" 
+        android:textColor="#FFFFFF"/>
+
 </RelativeLayout>

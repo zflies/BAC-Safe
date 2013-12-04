@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.concurrent.ExecutionException;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 /**
  * Group Object for storing Buddies belonging to a specific group.  
@@ -14,13 +13,6 @@ import android.content.SharedPreferences;
 public class Group {
 	
 	private Context context;
-	
-	// Create file for saving Group's Buddies List
-	private final String userGroupsBuddiesList = "BAC Safe User Groups Buddies List";
-	private SharedPreferences pref_groupsBuddiesList;
-	
-	// Create Preference Editor
-	private SharedPreferences.Editor prefEditor;
 
 	String m_sGroupName;
 	LinkedList<Buddy> m_listGroupBuddies;
@@ -76,32 +68,6 @@ public class Group {
 		}
 		m_listGroupBuddies = groupList;
 		
-		// Set Access to internal storage file with Groups List
-		pref_groupsBuddiesList = context.getSharedPreferences(userGroupsBuddiesList, 0);
-		
-		LinkedList<Buddy> listGroupBuddies = new LinkedList<Buddy>();
-
-		String sUsername;
-
-		int nNumberOfGroupBuddies = pref_groupsBuddiesList.getInt(m_sGroupName + "_Size", 0); // Number of Buddies in group i
-
-		// Load the Buddies for Each Group
-		for(int i=0; i < nNumberOfGroupBuddies; i++){
-
-			sUsername = pref_groupsBuddiesList.getString(m_sGroupName + "_" + i, null);
-
-			/* 
-			 * TODO:
-			 * Verify username still exists in database
-			 */
-
-			Buddy newBuddy = new Buddy(sUsername); // Create Buddy object with saved Buddy info
-
-			listGroupBuddies.add(newBuddy); // Add new Buddies to Buddy List
-		}
-		
-		m_listGroupBuddies = listGroupBuddies;
-		
 		return m_listGroupBuddies;	
 		
 	} // getGroupBuddies()
@@ -113,45 +79,7 @@ public class Group {
 	 */
 	public void setGroupBuddies(LinkedList<Buddy> listGroupBuddies){
 		
-		//TODO: Set Buddies for Group to database
-		/*
-		ServerAPI connection = new ServerAPI();		
-		LinkedList<Buddy> buddies = new LinkedList<Buddy>();
-		buddies.add(this);
-		String log = "";
-
-		log = connection.createBuddies(curUserName, buddies);		
-		if(log.compareTo("Success") == 0) {
-			return true;
-		}else return false;
-		*/
-		
 		m_listGroupBuddies = listGroupBuddies;
-		
-		// Set Access to internal storage file with Groups List
-		pref_groupsBuddiesList = context.getSharedPreferences(userGroupsBuddiesList, 0);
-		
-		prefEditor = pref_groupsBuddiesList.edit(); // Open the editor and empty the file
-		
-		int nNumberOfGroupBuddies = pref_groupsBuddiesList.getInt(m_sGroupName + "_Size", 0); // Number of Buddies in group i
-		
-		// If the Old number of buddies is different than the new size
-		if(nNumberOfGroupBuddies != listGroupBuddies.size()){
-			// Clear the list
-			for(int i=0; i < nNumberOfGroupBuddies; i++)
-			{
-				prefEditor.remove(m_sGroupName + "_" + i);
-			}
-		}
-		
-		prefEditor.putInt(m_sGroupName + "_Size", listGroupBuddies.size()); // Number of Buddies in group
-		
-		// Load the Buddies for Each Group
-		for(int i=0; i < listGroupBuddies.size(); i++){
-			prefEditor.putString(m_sGroupName + "_" + i, listGroupBuddies.get(i).m_sBuddyUsername);
-		}
-		
-		prefEditor.apply();
 
 	} // saveGroupBuddies()
 	
