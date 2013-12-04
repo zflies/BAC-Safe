@@ -146,11 +146,44 @@ public class User{
          * Loads the Groups list for the User
          */
         protected void loadGroups() throws InterruptedException, ExecutionException{
-    		
+    		/*
+        	ServerAPI connection = new ServerAPI();
+            
+            String[] groups = null;
+            LinkedList<Group> groupBuddyList = new LinkedList<Group>();
+            
+            groups = connection.getUserGroups(m_sUserName);
+            
+            if(groups != null) {
+            	for(int i = 0; i < groups.length; i++) {
+            		Group g = new Group(groups[i]);
+            		LinkedList<String> buddiesList = connection.getGroupDrinkers(groups[i]);
+            		for(int j = 0; j < buddiesList.size(); j++) {
+            			String[] buddies = new String[1];
+            			LinkedList<Buddy> buddyList = new LinkedList<Buddy>();                        
+            			buddies = connection.getUserBuddies(buddiesList.get(i));
+            			for(int k = 0; k < buddies.length; k++) {
+            				String[] buddyInfo = connection.getUserBuddiesInfo(buddies[i]);
+            				Buddy bud = new Buddy(buddies[i]);
+            				bud.m_sBuddyFirstName = buddyInfo[0];
+            				bud.m_sBuddyLastName = buddyInfo[1];
+            				bud.m_dBuddyBAC = Double.parseDouble(buddyInfo[2]); //set m_dBuddyBAC to not be private
+            				bud.m_nBuddyTotalDrinkCount = Integer.parseInt(buddyInfo[3]); //set m_nBuddyTotalDrinkCount to not be private
+            				buddyList.add(bud);
+            			}
+            			g.setGroupBuddies(buddyList);
+            		} 
+            		groupBuddyList.add(g);
+            	}
+            }
+
+            m_listGroups = groupBuddyList;
+        
+        	
         	ServerAPI connection = new ServerAPI();
         	
         	String[] groups = null;
-        	LinkedList<Group> groupBuddyList = new LinkedList<Group>();
+        	LinkedList<Group> groupList = new LinkedList<Group>();
         	
         	groups = connection.getUserGroups(m_sUserName);
         	
@@ -158,27 +191,57 @@ public class User{
         		for(int i = 0; i < groups.length; i++) {
         			Group g = new Group(groups[i]);
         			LinkedList<String> buddiesList = connection.getGroupDrinkers(groups[i]);
-        			for(int j = 0; j < buddiesList.size(); j++) {
-        				String[] buddies = new String[1];
-        				LinkedList<Buddy> buddyList = new LinkedList<Buddy>();			
-        				buddies = connection.getUserBuddies(buddiesList.get(i));
-        				for(int k = 0; k < buddies.length; k++) {
-        					String[] buddyInfo = connection.getUserBuddiesInfo(buddies[i]);
-        					Buddy bud = new Buddy(buddies[i]);
-        					bud.m_sBuddyFirstName = buddyInfo[0];
-        					bud.m_sBuddyLastName = buddyInfo[1];
-        					bud.m_dBuddyBAC = Double.parseDouble(buddyInfo[2]); //set m_dBuddyBAC to not be private
-        					bud.m_nBuddyTotalDrinkCount = Integer.parseInt(buddyInfo[3]); //set m_nBuddyTotalDrinkCount to not be private
-        					buddyList.add(bud);
-        				}
-        				g.setGroupBuddies(buddyList);
-        			} 
-        			groupBuddyList.add(g);
+        			LinkedList<Buddy> buddyList = new LinkedList<Buddy>();
+        			for(int k = 0; k < buddiesList.size(); k++) {
+        				String[] buddyInfo = connection.getUserBuddiesInfo(buddiesList.get(k));
+        				Buddy bud = new Buddy(buddiesList.get(k));
+        				bud.m_sBuddyFirstName = buddyInfo[0];
+        				bud.m_sBuddyLastName = buddyInfo[1];
+        				bud.m_dBuddyBAC = Double.parseDouble(buddyInfo[2]); //set m_dBuddyBAC to not be private
+        				bud.m_nBuddyTotalDrinkCount = Integer.parseInt(buddyInfo[3]); //set m_nBuddyTotalDrinkCount to not be private
+        				buddyList.add(bud);
+        			}
+        			g.m_listGroupBuddies = buddyList;
+        			groupList.add(g);
+        		} 		
+        	} */
+        	ServerAPI connection = new ServerAPI();
+        	
+        	String[] groups = null;
+        	LinkedList<Group> groupList = new LinkedList<Group>(); 	
+        	groups = connection.getUserGroups(m_sUserName);
+        	if(groups != null) {
+        		for(int i = 0; i < groups.length; i++) {
+        			Group g = new Group(groups[i]);
+        			LinkedList<String> buddiesGroupList = connection.getGroupDrinkers(groups[i]);
+        			LinkedList<Buddy> buddyList = new LinkedList<Buddy>();
+        			for(int j = 0; j < buddiesGroupList.size(); j++) {
+        				String[] buddyInfo = connection.getUserBuddiesInfo(buddiesGroupList.get(j));
+        				Buddy bud = new Buddy(buddiesGroupList.get(j));
+        				bud.m_sBuddyFirstName = buddyInfo[0];
+        				bud.m_sBuddyLastName = buddyInfo[1];
+        				bud.m_dBuddyBAC = Double.parseDouble(buddyInfo[2]); //set m_dBuddyBAC to not be private
+        				bud.m_nBuddyTotalDrinkCount = Integer.parseInt(buddyInfo[3]); //set m_nBuddyTotalDrinkCount to not be private
+        				buddyList.add(bud);
+        			}
+        			g.m_listGroupBuddies = buddyList;
+        			groupList.add(g);
+        		}
+        		m_listGroups = groupList;
+        	}
+        } /*
+        	String[] groups = null;
+        	LinkedList<Group> groupList = new LinkedList<Group>();
+        	LinkedList<Buddy> groupBuddyList = new LinkedList<Buddy>();
+        	groups = connection.getUserGroups(m_sUserName);
+        	if(groups != null) {
+        		for(int i = 0; i < groups.length; i++) {
+        			Group g = new Group(groups[i]);
+        			groupBuddyList. = connection.getGroupDrinkers(groups[i]);
         		}
         	}
-
-        	m_listGroups = groupBuddyList;
-    }  // loadGroups()
+        	m_listGroups
+    }  // loadGroups() */
 
 
 
