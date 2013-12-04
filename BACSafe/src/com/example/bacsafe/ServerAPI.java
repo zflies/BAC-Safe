@@ -102,9 +102,9 @@ public class ServerAPI {
 		UserInfo user = request.execute(userName).get();
 		String[] results = new String[4];
 		results[0] = user.getFirstName();
-		results[0] = user.getLastName();
-		results[0] = user.getCurBAC().toString();
-		results[0] = user.getDrinkCount().toString();
+		results[1] = user.getLastName();
+		results[2] = user.getCurBAC().toString();
+		results[3] = user.getDrinkCount().toString();
 		
 		return results;
 	}
@@ -263,9 +263,6 @@ public class ServerAPI {
 			}
 			
 			return userInfo;
-		}
-		protected void onPostExecute(String result) {
-			logResult = result;
 		}
 	}
 	public class SendBuddyRequest extends AsyncTask<String, Void, String> {

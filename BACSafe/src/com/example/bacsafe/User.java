@@ -124,13 +124,13 @@ public class User{
 
     		if(buddies != null){
     			for(int i = 0; i < buddies.length; i++) {
-    			String[] buddyInfo = connection.getUserBuddiesInfo(buddies[i]);
-    			Buddy bud = new Buddy(buddies[i]);
-    			bud.m_sBuddyFirstName = buddyInfo[0];
-    			bud.m_sBuddyLastName = buddyInfo[1];
-    			bud.m_dBuddyBAC = Double.parseDouble(buddyInfo[2]); //set m_dBuddyBAC to not be private
-    			bud.m_nBuddyTotalDrinkCount = Integer.parseInt(buddyInfo[3]); //set m_nBuddyTotalDrinkCount to not be private
-    			buddyList.add(bud);
+	    			String[] buddyInfo = connection.getUserBuddiesInfo(buddies[i]);
+	    			Buddy bud = new Buddy(buddies[i]);
+	    			bud.m_sBuddyFirstName = buddyInfo[0];
+	    			bud.m_sBuddyLastName = buddyInfo[1];
+	    			bud.m_dBuddyBAC = Double.parseDouble(buddyInfo[2]); //set m_dBuddyBAC to not be private
+	    			bud.m_nBuddyTotalDrinkCount = Integer.parseInt(buddyInfo[3]); //set m_nBuddyTotalDrinkCount to not be private
+	    			buddyList.add(bud);
     			}
     		}
     		
