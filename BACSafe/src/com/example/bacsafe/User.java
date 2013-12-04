@@ -659,5 +659,10 @@ public class User{
                 prefEditor.commit();
                 
         } // getGroups() */
+        protected void createGroup(Group group) throws InterruptedException, ExecutionException {
+        	ServerAPI connection = new ServerAPI();
+
+    		connection.createGroup(group);
+        }
 
 } //class User

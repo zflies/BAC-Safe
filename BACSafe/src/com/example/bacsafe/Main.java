@@ -760,7 +760,15 @@ public class Main extends TabActivity {
                                 Group newGroup = new Group(sNewGroupName);
                                 newGroup.setGroupBuddies(listGroupBuddies);
                                 
-                                m_userProfile.createGroup(newGroup);
+                                try {
+									m_userProfile.createGroup(newGroup);
+								} catch (InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (ExecutionException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
                                 
                                 //Add the group to User's list of groups
                                 LinkedList<Group> listGroups = new LinkedList<Group>();

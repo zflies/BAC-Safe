@@ -22,8 +22,8 @@ public class Group {
 	// Create Preference Editor
 	private SharedPreferences.Editor prefEditor;
 
-	private String m_sGroupName;
-	private LinkedList<Buddy> m_listGroupBuddies;
+	String m_sGroupName;
+	LinkedList<Buddy> m_listGroupBuddies;
 
 
 	/**
