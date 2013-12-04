@@ -225,9 +225,10 @@ public class User{
         					bud.m_nBuddyTotalDrinkCount = Integer.parseInt(buddyInfo[3]); //set m_nBuddyTotalDrinkCount to not be private
         					buddyList.add(bud);
         				}
+
+        				g.m_listGroupBuddies = buddyList;
+        				groupList.add(g);
         			}
-        			g.m_listGroupBuddies = buddyList;
-        			groupList.add(g);
         		}
         		m_listGroups = groupList;
         	}
