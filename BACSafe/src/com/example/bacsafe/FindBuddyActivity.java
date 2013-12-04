@@ -1,6 +1,8 @@
 package com.example.bacsafe;
 
 import java.util.LinkedList;
+import java.util.concurrent.ExecutionException;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -46,7 +48,15 @@ public class FindBuddyActivity extends Activity implements SearchView.OnQueryTex
 
 		setContentView(R.layout.activity_find_buddy); //Show the Find Buddy Screen Activity		
 
-		userProfile = new User();// Retrieve User Info and Prefs through userProfile initialization
+		try {
+			userProfile = new User();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}// Retrieve User Info and Prefs through userProfile initialization
 		
 		// Setup the Page to automatically show the keyboard 
 		setupFindBuddyPage();
@@ -147,6 +157,7 @@ public class FindBuddyActivity extends Activity implements SearchView.OnQueryTex
 		keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		keyboard.toggleSoftInput(InputMethodManager.RESULT_HIDDEN,0); //Hide Keyboard
 
+		alertConfirmAddBuddy(query);
 		// TODO: Search database for exact math?
 		//
 		//		Display alert dialog if no matches are found
@@ -209,7 +220,26 @@ public class FindBuddyActivity extends Activity implements SearchView.OnQueryTex
 
 				// Add new Buddy to the User's Buddies List
 				listBuddies.add(newBuddy);
-				userProfile.setBuddies(listBuddies);
+				
+				try {
+					newBuddy.sendBuddyRequest(userProfile.getUserName());
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ExecutionException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				try {
+					userProfile.setBuddies(listBuddies);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				Intent returnIntent = new Intent();
 				setResult(RESULT_OK, returnIntent); // Send activity result of OK so Main reloads Buddies List

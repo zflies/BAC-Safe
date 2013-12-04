@@ -114,7 +114,17 @@ public class Group {
 	public void setGroupBuddies(LinkedList<Buddy> listGroupBuddies){
 		
 		//TODO: Set Buddies for Group to database
+		/*
+		ServerAPI connection = new ServerAPI();		
+		LinkedList<Buddy> buddies = new LinkedList<Buddy>();
+		buddies.add(this);
+		String log = "";
 
+		log = connection.createBuddies(curUserName, buddies);		
+		if(log.compareTo("Success") == 0) {
+			return true;
+		}else return false;
+		*/
 		
 		m_listGroupBuddies = listGroupBuddies;
 		

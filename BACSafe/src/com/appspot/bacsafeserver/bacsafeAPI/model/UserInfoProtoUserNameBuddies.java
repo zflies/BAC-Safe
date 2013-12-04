@@ -19,7 +19,7 @@
 package com.appspot.bacsafeserver.bacsafeAPI.model;
 
 /**
- * Model definition for BacsafeAPILogResponse.
+ * Model definition for UserInfoProtoUserNameBuddies.
  *
  * <p> This is the Java data model class that specifies how to parse/serialize into the JSON that is
  * transmitted over HTTP when working with the bacsafeAPI. For a detailed explanation see:
@@ -29,37 +29,58 @@ package com.appspot.bacsafeserver.bacsafeAPI.model;
  * @author Google, Inc.
  */
 @SuppressWarnings("javadoc")
-public final class BacsafeAPILogResponse extends com.google.api.client.json.GenericJson {
+public final class UserInfoProtoUserNameBuddies extends com.google.api.client.json.GenericJson {
 
   /**
    * The value may be {@code null}.
    */
   @com.google.api.client.util.Key
-  private java.lang.String message;
+  private java.util.List<java.lang.String> buddies;
+
+  /**
+   * The value may be {@code null}.
+   */
+  @com.google.api.client.util.Key
+  private java.lang.String userName;
 
   /**
    * @return value or {@code null} for none
    */
-  public java.lang.String getMessage() {
-    return message;
+  public java.util.List<java.lang.String> getBuddies() {
+    return buddies;
   }
 
   /**
-   * @param message message or {@code null} for none
+   * @param buddies buddies or {@code null} for none
    */
-  public BacsafeAPILogResponse setMessage(java.lang.String message) {
-    this.message = message;
+  public UserInfoProtoUserNameBuddies setBuddies(java.util.List<java.lang.String> buddies) {
+    this.buddies = buddies;
+    return this;
+  }
+
+  /**
+   * @return value or {@code null} for none
+   */
+  public java.lang.String getUserName() {
+    return userName;
+  }
+
+  /**
+   * @param userName userName or {@code null} for none
+   */
+  public UserInfoProtoUserNameBuddies setUserName(java.lang.String userName) {
+    this.userName = userName;
     return this;
   }
 
   @Override
-  public BacsafeAPILogResponse set(String fieldName, Object value) {
-    return (BacsafeAPILogResponse) super.set(fieldName, value);
+  public UserInfoProtoUserNameBuddies set(String fieldName, Object value) {
+    return (UserInfoProtoUserNameBuddies) super.set(fieldName, value);
   }
 
   @Override
-  public BacsafeAPILogResponse clone() {
-    return (BacsafeAPILogResponse) super.clone();
+  public UserInfoProtoUserNameBuddies clone() {
+    return (UserInfoProtoUserNameBuddies) super.clone();
   }
 
 }

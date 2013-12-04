@@ -16,9 +16,11 @@ import com.appspot.bacsafeserver.bacsafeAPI.model.Groups;
 import com.appspot.bacsafeserver.bacsafeAPI.model.GroupsProtoGroupName;
 import com.appspot.bacsafeserver.bacsafeAPI.model.UserInfo;
 import com.appspot.bacsafeserver.bacsafeAPI.model.UserInfoProtoUserName;
+import com.appspot.bacsafeserver.bacsafeAPI.model.UserInfoProtoUserNameBuddies;
 import com.appspot.bacsafeserver.bacsafeAPI.model.UserInfoProtoUserNameCurBAC;
 import com.appspot.bacsafeserver.bacsafeAPI.model.UserInfoProtoUserNameDrinkCount;
 import com.appspot.bacsafeserver.bacsafeAPI.model.UserInfoProtoUserNameFirstNameLastName;
+import com.appspot.bacsafeserver.bacsafeAPI.model.UserInfoProtoUserNameGroups;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.json.gson.GsonFactory;
 
@@ -43,20 +45,68 @@ public class ServerAPI {
 		GetUserBuddiesInfo request = new GetUserBuddiesInfo();
 		return request.execute(userName).get().getCurBAC();
 	}
+	public String[] getUserBuddies(String userName) throws InterruptedException, ExecutionException {
+		GetUserBuddiesInfo request = new GetUserBuddiesInfo();
+		List<String> buddies = request.execute(userName).get().getBuddies();
+		String[] results = null;
+		if(buddies != null) {
+			results = new String[buddies.size()];
+			
+			for(int i = 0; i < buddies.size(); i++) {
+				results[i] = buddies.get(i);
+			}
+		}
+		return results;
+	}
+	public String[] getUserGroups(String userName) throws InterruptedException, ExecutionException {
+		GetUserBuddiesInfo request = new GetUserBuddiesInfo();
+		List<String> groups = request.execute(userName).get().getGroups();
+		String[] results = null;
+		if(groups != null) {
+			results = new String[groups.size()];
+		
+			for(int i = 0; i < groups.size(); i++) {
+				results[i] = groups.get(i);
+			}
+		}
+		return results;
+	}
 	public long getUserDrinkCount(String userName) throws InterruptedException, ExecutionException {
 		GetUserBuddiesInfo request = new GetUserBuddiesInfo();
 		return request.execute(userName).get().getDrinkCount();
 	}
-	public LinkedList<String> getUserBuddiesInfo(String userName) throws InterruptedException, ExecutionException {
+	public String createBuddies(String userName, LinkedList<Buddy> buddies) throws InterruptedException, ExecutionException {
+		CreateBuddies request = new CreateBuddies();	
+		List<String> buddiesList = new LinkedList<String>();
+		for(int i = 0; i < buddies.size(); i++) {
+			buddiesList.add(buddies.get(i).m_sBuddyUsername);
+		}
+		UserInfoProtoUserNameBuddies buddyInfo = new UserInfoProtoUserNameBuddies();
+		buddyInfo.setUserName(userName);
+		buddyInfo.setBuddies(buddiesList);
+		return request.execute(buddyInfo).get();
+	}
+	public String setGroups(String userName, LinkedList<Group> groups) throws InterruptedException, ExecutionException {
+		SetGroups request = new SetGroups();	
+		List<String> groupsList = new LinkedList<String>();
+		for(int i = 0; i < groups.size(); i++) {
+			groupsList.add(groups.get(i).getGroupName());
+		}
+		UserInfoProtoUserNameGroups groupInfo = new UserInfoProtoUserNameGroups();
+		groupInfo.setUserName(userName);
+		groupInfo.setGroups(groupsList);
+		return request.execute(groupInfo).get();
+	}
+	public String[] getUserBuddiesInfo(String userName) throws InterruptedException, ExecutionException {
 		GetUserBuddiesInfo request = new GetUserBuddiesInfo();
 		UserInfo user = request.execute(userName).get();
-		List<String> buddies = user.getBuddies();
-		String[] results = new String[buddies.size()];
-		for(int i = 0; i < buddies.size(); i++) {
-			results[i] = buddies.get(i);
-		}
-		LinkedList<String> buddyList = new LinkedList<String>(Arrays.asList(results));
-		return buddyList;
+		String[] results = new String[4];
+		results[0] = user.getFirstName();
+		results[0] = user.getLastName();
+		results[0] = user.getCurBAC().toString();
+		results[0] = user.getDrinkCount().toString();
+		
+		return results;
 	}
 	public String sendBuddyRequest(String senderName, String requestedName) throws InterruptedException, ExecutionException {
 		SendBuddyRequest request = new SendBuddyRequest();
@@ -155,6 +205,40 @@ public class ServerAPI {
 				user.setUserName(info[0]);
 				user.setDrinkCount(Long.parseLong(info[1]));
 				log = service.userinfo().updateUserDrinkCount(user).execute().getMessage();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+			
+			return log;
+		}
+		protected void onPostExecute(String result) {
+			logResult = result;
+		}
+	}
+	public class CreateBuddies extends AsyncTask<UserInfoProtoUserNameBuddies, Void, String> {
+		protected String doInBackground(UserInfoProtoUserNameBuddies... info) {
+			BacsafeAPI.Builder builder = new BacsafeAPI.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
+			BacsafeAPI service = builder.build();
+			String log = "";
+			try {
+				log = service.userinfo().createBuddies(info[0]).execute().getMessage();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+			
+			return log;
+		}
+		protected void onPostExecute(String result) {
+			logResult = result;
+		}
+	}
+	public class SetGroups extends AsyncTask<UserInfoProtoUserNameGroups, Void, String> {
+		protected String doInBackground(UserInfoProtoUserNameGroups... info) {
+			BacsafeAPI.Builder builder = new BacsafeAPI.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
+			BacsafeAPI service = builder.build();
+			String log = "";
+			try {
+				log = service.userinfo().setGroups(info[0]).execute().getMessage();
 			} catch(IOException e) {
 				e.printStackTrace();
 			}
