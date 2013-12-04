@@ -849,7 +849,7 @@ public class Main extends TabActivity {
 			return true;
 		case 1:
 			inflater.inflate(R.menu.menu_groups, menu);
-			return false; // Returning false prevents blank menu from being shown.
+			return true; // Returning false prevents blank menu from being shown.
 		case 2:
 			inflater.inflate(R.menu.menu_buddies, menu); 
 			return true;
