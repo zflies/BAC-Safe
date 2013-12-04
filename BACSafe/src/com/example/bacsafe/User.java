@@ -215,14 +215,16 @@ public class User{
         			Group g = new Group(groups[i]);
         			LinkedList<String> buddiesGroupList = connection.getGroupDrinkers(groups[i]);
         			LinkedList<Buddy> buddyList = new LinkedList<Buddy>();
-        			for(int j = 0; j < buddiesGroupList.size(); j++) {
-        				String[] buddyInfo = connection.getUserBuddiesInfo(buddiesGroupList.get(j));
-        				Buddy bud = new Buddy(buddiesGroupList.get(j));
-        				bud.m_sBuddyFirstName = buddyInfo[0];
-        				bud.m_sBuddyLastName = buddyInfo[1];
-        				bud.m_dBuddyBAC = Double.parseDouble(buddyInfo[2]); //set m_dBuddyBAC to not be private
-        				bud.m_nBuddyTotalDrinkCount = Integer.parseInt(buddyInfo[3]); //set m_nBuddyTotalDrinkCount to not be private
-        				buddyList.add(bud);
+        			if(buddiesGroupList != null) {
+        				for(int j = 0; j < buddiesGroupList.size(); j++) {
+        					String[] buddyInfo = connection.getUserBuddiesInfo(buddiesGroupList.get(j));
+        					Buddy bud = new Buddy(buddiesGroupList.get(j));
+        					bud.m_sBuddyFirstName = buddyInfo[0];
+        					bud.m_sBuddyLastName = buddyInfo[1];
+        					bud.m_dBuddyBAC = Double.parseDouble(buddyInfo[2]); //set m_dBuddyBAC to not be private
+        					bud.m_nBuddyTotalDrinkCount = Integer.parseInt(buddyInfo[3]); //set m_nBuddyTotalDrinkCount to not be private
+        					buddyList.add(bud);
+        				}
         			}
         			g.m_listGroupBuddies = buddyList;
         			groupList.add(g);

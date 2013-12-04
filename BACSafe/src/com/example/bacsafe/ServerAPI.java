@@ -152,6 +152,7 @@ public class ServerAPI {
 		GetGroupInfo request = new GetGroupInfo();
 		Groups group = request.execute(groupName).get();
 		List<String> drinkers = group.getDrinkers();
+		if(drinkers == null) return null; 
 		String[] results = new String[drinkers.size()];
 		for(int i = 0; i < drinkers.size(); i++) {
 			results[i] = drinkers.get(i);
