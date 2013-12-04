@@ -985,14 +985,17 @@ public class Main extends TabActivity {
 		return(m_nBACtimerMinute + (m_nBACtimerHour*60));
 	}
 	
+	/*
 	public int TestgenerateNumberDrinks(int beer, int wine, int shot){
 		m_nBeer = beer;
 		m_nWine = wine;
 		m_nShot = shot;
-		generateNumberDrinks();
+		m_nDrinkTotal = (m_nBeer) + (m_nWine) + (m_nShot);
+
+
 		return m_nDrinkTotal;
 	}
-	
+	*/
 	/*
 	public double TestresetAllDrinkValues(){
 		resetAllDrinkValues();
