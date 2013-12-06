@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class Buddy {
 
-        String m_sBuddyUsername;
+        public String m_sBuddyUsername;
         String m_sBuddyFirstName;
         String m_sBuddyLastName;
 

@@ -14,8 +14,8 @@ public class Group {
 	
 	private Context context;
 
-	String m_sGroupName;
-	LinkedList<Buddy> m_listGroupBuddies;
+	public String m_sGroupName;
+	public LinkedList<Buddy> m_listGroupBuddies;
 
 
 	/**
