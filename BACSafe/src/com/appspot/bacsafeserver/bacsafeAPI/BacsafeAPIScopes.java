@@ -16,6 +16,12 @@
  * Modify at your own risk.
  */
 
+
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.appspot.bacsafeserver.bacsafeAPI;
 
 /**
@@ -25,20 +31,20 @@ package com.appspot.bacsafeserver.bacsafeAPI;
  */
 public class BacsafeAPIScopes {
 
-  /** View your email address. */
-  public static final String USERINFO_EMAIL = "https://www.googleapis.com/auth/userinfo.email";
+	/** View your email address. */
+	public static final String USERINFO_EMAIL = "https://www.googleapis.com/auth/userinfo.email";
 
-  /**
-   * Returns an unmodifiable set that contains all scopes declared by this class.
-   *
-   * @since 1.16
-   */
-  public static java.util.Set<String> all() {
-    java.util.Set<String> set = new java.util.HashSet<String>();
-    set.add(USERINFO_EMAIL);
-    return java.util.Collections.unmodifiableSet(set);
-  }
+	/**
+	 * Returns an unmodifiable set that contains all scopes declared by this class.
+	 *
+	 * @since 1.16
+	 */
+	public static java.util.Set<String> all() {
+		java.util.Set<String> set = new java.util.HashSet<String>();
+		set.add(USERINFO_EMAIL);
+		return java.util.Collections.unmodifiableSet(set);
+	}
 
-  private BacsafeAPIScopes() {
-  }
+	private BacsafeAPIScopes() {
+	}
 }

@@ -16,6 +16,11 @@
  * Modify at your own risk.
  */
 
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.appspot.bacsafeserver.bacsafeAPI.model;
 
 /**
@@ -31,35 +36,35 @@ package com.appspot.bacsafeserver.bacsafeAPI.model;
 @SuppressWarnings("javadoc")
 public final class BacsafeAPILogResponse extends com.google.api.client.json.GenericJson {
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String message;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.String message;
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getMessage() {
-    return message;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.String getMessage() {
+		return message;
+	}
 
-  /**
-   * @param message message or {@code null} for none
-   */
-  public BacsafeAPILogResponse setMessage(java.lang.String message) {
-    this.message = message;
-    return this;
-  }
+	/**
+	 * @param message message or {@code null} for none
+	 */
+	public BacsafeAPILogResponse setMessage(java.lang.String message) {
+		this.message = message;
+		return this;
+	}
 
-  @Override
-  public BacsafeAPILogResponse set(String fieldName, Object value) {
-    return (BacsafeAPILogResponse) super.set(fieldName, value);
-  }
+	@Override
+	public BacsafeAPILogResponse set(String fieldName, Object value) {
+		return (BacsafeAPILogResponse) super.set(fieldName, value);
+	}
 
-  @Override
-  public BacsafeAPILogResponse clone() {
-    return (BacsafeAPILogResponse) super.clone();
-  }
+	@Override
+	public BacsafeAPILogResponse clone() {
+		return (BacsafeAPILogResponse) super.clone();
+	}
 
 }

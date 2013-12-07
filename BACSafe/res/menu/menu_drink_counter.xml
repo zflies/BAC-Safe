@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. All Rights Reserved -->
+
+<!-- Menu items for Drink Counter tab -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/menu_item_EditProfile" android:title="Edit Profile"></item>
     <item android:id="@+id/menu_item_About" android:title="About"></item>
     <item android:id="@+id/menu_item_Reset" android:title="Reset"></item>
-    
-
 </menu>

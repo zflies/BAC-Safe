@@ -1,3 +1,8 @@
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.example.bacsafe;
 
 import java.util.LinkedList;
@@ -19,12 +24,12 @@ import android.widget.TextView;
 public class ViewGroup_Activity extends Activity{
 
 	private Group m_userGroup; // Access User's Group
-	
+
 	private LinkedList<Buddy> m_listGroupBuddies = new LinkedList<Buddy>();
 	private String m_sGroupName; 
-	
+
 	private ListView m_listView; // Holds the list of Group Members
-	
+
 	/**
 	 * Create the View Group page for user interaction.  
 	 * Called when a group is selected in the Groups Tab in Main Activity.
@@ -34,7 +39,7 @@ public class ViewGroup_Activity extends Activity{
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_view_group); //Show the Find Buddy Screen Activity		
-		
+
 		Bundle extras = getIntent().getExtras(); // Receive the group name from the calling Activity 
 		m_sGroupName = extras.getString("groupname"); 
 
@@ -44,17 +49,17 @@ public class ViewGroup_Activity extends Activity{
 		setupViewGroupPage(); // Setup the UI for the View Group Page
 
 	} // onCreate()
-	
+
 
 	/**
 	 * Sets up UI for the View Group page 
 	 */
 	private void setupViewGroupPage(){
-		
+
 		// Group Name Text Field
 		TextView tvGroupName = (TextView)findViewById(R.id.label_groupName);
 		tvGroupName.setText(m_sGroupName); 
-		
+
 		// Custom List View Setup
 		m_listView = (ListView) findViewById(R.id.listView_ViewGroup); 
 		m_listView.setAdapter(new ViewGroup_ListViewAdapt(m_listGroupBuddies , this)); 
@@ -68,7 +73,7 @@ public class ViewGroup_Activity extends Activity{
 				finish();
 			} 
 		}); // Done Button
-		
+
 		// Refresh Button - Returns to Main screen (Buddies tab)
 		Button refreshButton = (Button)findViewById(R.id.button_ViewGroup_Refresh);
 		refreshButton.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +83,7 @@ public class ViewGroup_Activity extends Activity{
 				m_listView.setAdapter(new ViewGroup_ListViewAdapt(m_listGroupBuddies , context)); 
 			} 
 		}); // Done Button
-		
+
 	} // setupViewGroupPage()
 
 } // class ViewGroupActivity

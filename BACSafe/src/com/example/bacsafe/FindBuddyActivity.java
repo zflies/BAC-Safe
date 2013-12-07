@@ -1,3 +1,8 @@
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.example.bacsafe;
 
 import java.util.LinkedList;
@@ -34,9 +39,6 @@ public class FindBuddyActivity extends Activity implements SearchView.OnQueryTex
 	private InputMethodManager keyboard; // Keyboard Access
 	private User userProfile; // Access to User Profile Info
 
-	//Temporary String until Database returns usernames
-	//private final String[] m_TempBuddies = Temp_BuddyDatabase.sCheeseStrings;
-
 
 	/**
 	 * Create the Find Buddy page for user interaction.  
@@ -51,13 +53,11 @@ public class FindBuddyActivity extends Activity implements SearchView.OnQueryTex
 		try {
 			userProfile = new User();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}// Retrieve User Info and Prefs through userProfile initialization
-		
+
 		// Setup the Page to automatically show the keyboard 
 		setupFindBuddyPage();
 
@@ -130,13 +130,6 @@ public class FindBuddyActivity extends Activity implements SearchView.OnQueryTex
 			// Show search results after input is 3 characters long
 			if(newText.length() > 2){
 
-				/*
-				m_listView.setAdapter(new ArrayAdapter<String>(FindBuddyActivity.this,
-						android.R.layout.simple_list_item_1,
-						m_TempBuddies));
-				m_listView.setFilterText(newText.toString());
-				m_listView.setVisibility(View.VISIBLE);
-				*/
 			}
 			else
 			{	// hide entire list
@@ -160,9 +153,6 @@ public class FindBuddyActivity extends Activity implements SearchView.OnQueryTex
 		keyboard.toggleSoftInput(InputMethodManager.RESULT_HIDDEN,0); //Hide Keyboard
 
 		alertConfirmAddBuddy(query);
-		// TODO: Search database for exact math?
-		//
-		//		Display alert dialog if no matches are found
 
 		return true;
 	} // onQueryTextSubmit()
@@ -212,8 +202,6 @@ public class FindBuddyActivity extends Activity implements SearchView.OnQueryTex
 		alert.setPositiveButton(R.string.YES, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 
-				// TODO: Request object for selected Buddy from database
-				//			Save Selected Buddy object to Buddies List
 				Buddy newBuddy = new Buddy(sSelectedUsername);
 
 				// Get User's current Buddies List
@@ -222,24 +210,20 @@ public class FindBuddyActivity extends Activity implements SearchView.OnQueryTex
 
 				// Add new Buddy to the User's Buddies List
 				listBuddies.add(newBuddy);
-				
+
 				try {
 					newBuddy.sendBuddyRequest(userProfile.getUserName());
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (ExecutionException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				try {
 					userProfile.setBuddies(listBuddies);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (ExecutionException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 

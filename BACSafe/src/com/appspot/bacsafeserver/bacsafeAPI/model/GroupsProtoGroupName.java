@@ -16,6 +16,11 @@
  * Modify at your own risk.
  */
 
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.appspot.bacsafeserver.bacsafeAPI.model;
 
 /**
@@ -31,35 +36,35 @@ package com.appspot.bacsafeserver.bacsafeAPI.model;
 @SuppressWarnings("javadoc")
 public final class GroupsProtoGroupName extends com.google.api.client.json.GenericJson {
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String groupName;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.String groupName;
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getGroupName() {
-    return groupName;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.String getGroupName() {
+		return groupName;
+	}
 
-  /**
-   * @param groupName groupName or {@code null} for none
-   */
-  public GroupsProtoGroupName setGroupName(java.lang.String groupName) {
-    this.groupName = groupName;
-    return this;
-  }
+	/**
+	 * @param groupName groupName or {@code null} for none
+	 */
+	public GroupsProtoGroupName setGroupName(java.lang.String groupName) {
+		this.groupName = groupName;
+		return this;
+	}
 
-  @Override
-  public GroupsProtoGroupName set(String fieldName, Object value) {
-    return (GroupsProtoGroupName) super.set(fieldName, value);
-  }
+	@Override
+	public GroupsProtoGroupName set(String fieldName, Object value) {
+		return (GroupsProtoGroupName) super.set(fieldName, value);
+	}
 
-  @Override
-  public GroupsProtoGroupName clone() {
-    return (GroupsProtoGroupName) super.clone();
-  }
+	@Override
+	public GroupsProtoGroupName clone() {
+		return (GroupsProtoGroupName) super.clone();
+	}
 
 }

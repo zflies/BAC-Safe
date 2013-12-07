@@ -1,3 +1,8 @@
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.example.bacsafe;
 
 import java.util.LinkedList;
@@ -19,16 +24,6 @@ public class User{
 	// Create file for saving User Information
 	private final String userInfoFile = "BAC Safe User Information";
 	private SharedPreferences pref_userInfo;
-
-	// Create file for saving User Buddies List
-	/*
-        private final String userBuddiesList = "BAC Safe User Buddies List";
-        private SharedPreferences pref_buddiesList;
-
-        //Create file for saving User Groups List
-        private final String userGroupsList = "BAC Safe User Groups List";
-        private SharedPreferences pref_groupsList;
-	 */
 
 	// Create Preference Editor
 	private SharedPreferences.Editor prefEditor;
@@ -56,8 +51,6 @@ public class User{
 	// User Preferences variables
 	private boolean m_bShowUserAgreementAlert;
 	private Context context;
-	// User Information variables
-	//private String m_sUserName;
 
 
 	/**
@@ -68,7 +61,6 @@ public class User{
 	public User() throws InterruptedException, ExecutionException 
 	{
 		context = Main.getContextOfApplication();
-
 
 		loadUserInfoPrefs();
 
@@ -84,9 +76,6 @@ public class User{
 	 * Loads the User's Information and Stored Preferences
 	 */
 	protected void loadUserInfoPrefs(){
-
-		//TODO: Load User Info and Prefs from database
-		//                Delete code beneath
 
 		// Set Access to internal storage files
 		pref_userPrefs = context.getSharedPreferences(userPrefFile, 0);
@@ -146,65 +135,7 @@ public class User{
 	 * Loads the Groups list for the User
 	 */
 	protected void loadGroups() throws InterruptedException, ExecutionException{
-		/*
-            ServerAPI connection = new ServerAPI();
-
-        String[] groups = null;
-        LinkedList<Group> groupBuddyList = new LinkedList<Group>();
-
-        groups = connection.getUserGroups(m_sUserName);
-
-        if(groups != null) {
-                for(int i = 0; i < groups.length; i++) {
-                        Group g = new Group(groups[i]);
-                        LinkedList<String> buddiesList = connection.getGroupDrinkers(groups[i]);
-                        for(int j = 0; j < buddiesList.size(); j++) {
-                                String[] buddies = new String[1];
-                                LinkedList<Buddy> buddyList = new LinkedList<Buddy>();                        
-                                buddies = connection.getUserBuddies(buddiesList.get(i));
-                                for(int k = 0; k < buddies.length; k++) {
-                                        String[] buddyInfo = connection.getUserBuddiesInfo(buddies[i]);
-                                        Buddy bud = new Buddy(buddies[i]);
-                                        bud.m_sBuddyFirstName = buddyInfo[0];
-                                        bud.m_sBuddyLastName = buddyInfo[1];
-                                        bud.m_dBuddyBAC = Double.parseDouble(buddyInfo[2]); //set m_dBuddyBAC to not be private
-                                        bud.m_nBuddyTotalDrinkCount = Integer.parseInt(buddyInfo[3]); //set m_nBuddyTotalDrinkCount to not be private
-                                        buddyList.add(bud);
-                                }
-                                g.setGroupBuddies(buddyList);
-                        } 
-                        groupBuddyList.add(g);
-                }
-        }
-
-        m_listGroups = groupBuddyList;
-
-
-            ServerAPI connection = new ServerAPI();
-
-            String[] groups = null;
-            LinkedList<Group> groupList = new LinkedList<Group>();
-
-            groups = connection.getUserGroups(m_sUserName);
-
-            if(groups != null) {
-                    for(int i = 0; i < groups.length; i++) {
-                            Group g = new Group(groups[i]);
-                            LinkedList<String> buddiesList = connection.getGroupDrinkers(groups[i]);
-                            LinkedList<Buddy> buddyList = new LinkedList<Buddy>();
-                            for(int k = 0; k < buddiesList.size(); k++) {
-                                    String[] buddyInfo = connection.getUserBuddiesInfo(buddiesList.get(k));
-                                    Buddy bud = new Buddy(buddiesList.get(k));
-                                    bud.m_sBuddyFirstName = buddyInfo[0];
-                                    bud.m_sBuddyLastName = buddyInfo[1];
-                                    bud.m_dBuddyBAC = Double.parseDouble(buddyInfo[2]); //set m_dBuddyBAC to not be private
-                                    bud.m_nBuddyTotalDrinkCount = Integer.parseInt(buddyInfo[3]); //set m_nBuddyTotalDrinkCount to not be private
-                                    buddyList.add(bud);
-                            }
-                            g.m_listGroupBuddies = buddyList;
-                            groupList.add(g);
-                    }                 
-            } */
+		
 		ServerAPI connection = new ServerAPI();
 
 		String[] groups = null;
@@ -232,19 +163,7 @@ public class User{
 			}
 			m_listGroups = groupList;
 		}
-	} /*
-            String[] groups = null;
-            LinkedList<Group> groupList = new LinkedList<Group>();
-            LinkedList<Buddy> groupBuddyList = new LinkedList<Buddy>();
-            groups = connection.getUserGroups(m_sUserName);
-            if(groups != null) {
-                    for(int i = 0; i < groups.length; i++) {
-                            Group g = new Group(groups[i]);
-                            groupBuddyList. = connection.getGroupDrinkers(groups[i]);
-                    }
-            }
-            m_listGroups
-}  // loadGroups() */
+	} // loadGroups()
 	
 
 	/**
@@ -283,8 +202,6 @@ public class User{
 	 */
 	protected void setUserName(String sUserName) {
 
-		//TODO: Save user's username to database
-
 		m_sUserName = sUserName;
 
 		pref_userInfo = context.getSharedPreferences(userInfoFile, 0);
@@ -310,8 +227,6 @@ public class User{
 	 */
 	protected void setFirstName(String sFirstName) {
 
-		//TODO: Save user's first name to database
-
 		m_sFirstName = sFirstName;
 
 		pref_userInfo = context.getSharedPreferences(userInfoFile, 0);
@@ -336,8 +251,6 @@ public class User{
 	 */
 	protected void setLastName(String sLastName) {
 
-		//TODO: Save user's last name to database
-
 		m_sLastName = sLastName;
 
 		pref_userInfo = context.getSharedPreferences(userInfoFile, 0);
@@ -361,9 +274,6 @@ public class User{
 	 * @param m_nWeight
 	 */
 	protected void setWeight(int nWeight) {
-
-		//TODO: Save user's weight to database
-
 
 		m_nWeight = nWeight;
 
@@ -390,8 +300,6 @@ public class User{
 	 */
 	protected void setHeightFeet(int nHeightFeet) {
 
-		//TODO: Save user's Height to database
-
 		m_nHeightFeet = nHeightFeet;
 
 		pref_userInfo = context.getSharedPreferences(userInfoFile, 0);
@@ -417,8 +325,6 @@ public class User{
 	 */
 	protected void setHeightInches(int nHeightInches) {
 
-		//TODO: Save user's Height to database
-
 		m_nHeightInches = nHeightInches;
 
 		pref_userInfo = context.getSharedPreferences(userInfoFile, 0);
@@ -442,8 +348,6 @@ public class User{
 	 * @param m_nAge
 	 */
 	protected void setAge(int nAge) {
-
-		//TODO: Save user's age to database
 
 
 		m_nAge = nAge;
@@ -471,8 +375,6 @@ public class User{
 	 */
 	protected void setMale(boolean bIsMale) {
 
-		//TODO: Save user's gender to database
-
 		m_bIsMale = bIsMale;
 
 		pref_userInfo = context.getSharedPreferences(userInfoFile, 0);
@@ -497,8 +399,6 @@ public class User{
 	 * @param m_bShowUserAgreementAlert the m_bShowUserAgreementAlert to set
 	 */
 	protected void setShowUserAgreementAlert(boolean bShowUserAgreementAlert) {
-
-		//TODO: Save user's preference to database
 
 		m_bShowUserAgreementAlert = bShowUserAgreementAlert;
 
@@ -536,10 +436,6 @@ public class User{
 	 */
 	public void setBACpercent(double dBACpercent) throws InterruptedException, ExecutionException{
 
-		/*
-		 * TODO: Save BAC to Server
-		 */
-
 		ServerAPI connection = new ServerAPI();		
 		String log = "";
 
@@ -552,9 +448,6 @@ public class User{
 	 */
 	public void setTotalDrinkCount(int nDrinkCount)throws InterruptedException, ExecutionException{
 
-		/*
-		 * TODO: Save total drink count to database
-		 */
 		ServerAPI connection = new ServerAPI();		
 		String log = "";
 
@@ -621,37 +514,26 @@ public class User{
 
 		m_listGroups = listGroups;
 
-	}/*
-        protected void setGroups(LinkedList<Group> listGroups) {
-
-                //TODO: Save user's groups to database
-
-                m_listGroups = listGroups;
-
-                // Set Access to internal storage file with Buddies List                
-                pref_groupsList = context.getSharedPreferences(userGroupsList, 0);
-
-                prefEditor = pref_groupsList.edit().clear();
-
-                prefEditor.putInt("Groups_Size", listGroups.size()); //Store the number of Buddies the user has.
-
-                // Store the usernames
-                for(int i=0; i < listGroups.size(); i++)  
-                {
-                        prefEditor.putString("Group_" + i, listGroups.get(i).getGroupName());
-                }
-
-                prefEditor.commit();
-
-        } // getGroups() */
+	} // setGroups()
+	
+	/**
+	 * Creates the group in the database
+	 * @param group
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
 	protected void createGroup(Group group) throws InterruptedException, ExecutionException {
 		ServerAPI connection = new ServerAPI();
 
 		connection.createGroup(group);
-	}
+	} // createGroup()
 
 	
-	//Test Functions
+	
+	// --------------------------------------------------------------------------------------------------
+	// TEST FUNCTIONS
+	// --------------------------------------------------------------------------------------------------
+	
 	public int TestAge(int age){
 		setAge(age);
 		return getAge();

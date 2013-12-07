@@ -1,3 +1,8 @@
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.example.bacsafe;
 
 import java.util.LinkedList;
@@ -59,7 +64,6 @@ public class Main extends TabActivity {
 	private int m_nBACtimerMinute;
 	private int m_nBACtimerHour;
 	private double m_dBACpercent;
-	//private long m_soberCounter;         // See comment in generateBACTimer(); Use member variable only if needed several times
 
 	//UI variables - Drink Counter tab
 	private TextView m_tDrinkTotal;
@@ -124,8 +128,8 @@ public class Main extends TabActivity {
 
 		// Setup each tab 
 		drinkCounterTabSetup(); // Drink Counter
-		buddiesTabSetup();                // Buddies
-		groupsTabSetup();                // Groups
+		buddiesTabSetup();      // Buddies
+		groupsTabSetup();       // Groups
 
 	} // onCreate()
 
@@ -190,15 +194,15 @@ public class Main extends TabActivity {
 		TabHost tabHost=getTabHost();
 		tabHost.setup();
 
-		final TabSpec spec1=tabHost.newTabSpec(getString(R.string.DrinkCounter));        // Tab - Drink Counter
+		final TabSpec spec1=tabHost.newTabSpec(getString(R.string.DrinkCounter));	// Tab - Drink Counter
 		spec1.setIndicator(getString(R.string.DrinkCounter));
 		spec1.setContent(R.id.tabDrinkCounter);
 
-		final TabSpec spec2=tabHost.newTabSpec("Buddy Systems");               // Tab - Groups List
+		final TabSpec spec2=tabHost.newTabSpec("Buddy Systems");              		// Tab - Groups List
 		spec2.setIndicator("Buddy Systems");
 		spec2.setContent(R.id.tabGroups);
 
-		final TabSpec spec3=tabHost.newTabSpec(getString(R.string.Buddies));             // Tab - Buddies List
+		final TabSpec spec3=tabHost.newTabSpec(getString(R.string.Buddies));		// Tab - Buddies List
 		spec3.setIndicator(getString(R.string.Buddies));
 		spec3.setContent(R.id.tabBuddies);
 
@@ -206,38 +210,35 @@ public class Main extends TabActivity {
 		tabHost.addTab(spec2);
 		tabHost.addTab(spec3);
 
-		/*
-		 * setOnTabChangedListener will allow code execution when tabs are changed
-		 * 
-                // Setup Tasks for when the tabs are changed.
-                tabHost.setOnTabChangedListener(new OnTabChangeListener() {
-                        @Override
-                        public void onTabChanged(String tabId) {
+		// Setup Tasks for when the tabs are changed.
+		tabHost.setOnTabChangedListener(new OnTabChangeListener() {
+			@Override
+			public void onTabChanged(String tabId) {
 
-                                // Drink Counter
-                                if(tabId.equals(spec1.getTag()))
-                                {
-                                }
+				// Drink Counter
+				if(tabId.equals(spec1.getTag()))
+				{
+				}
 
-                                // Groups
-                                if(tabId.equals(spec2.getTag()))
-                                {
-                                }
+				// Groups
+				if(tabId.equals(spec2.getTag()))
+				{
+				}
 
-                                // Buddies
-                                if(tabId.equals(spec3.getTag()))
-                                {
-                                }
-                        }
-                });
-		 */
+				// Buddies
+				if(tabId.equals(spec3.getTag()))
+				{
+				}
+			}
+		});
+
 		int tabCount = tabHost.getTabWidget().getTabCount();
 		for (int i = 0; i < tabCount; i++) {
 			final View view = tabHost.getTabWidget().getChildTabViewAt(i);
 			if ( view != null ) {
 
-				// Can be used to reduce height of the tab
-				//view.getLayoutParams().height *= 0.66; 
+				/* Can be used to reduce height of the tab */
+				// view.getLayoutParams().height *= 0.66; 
 
 				//  get title text view
 				final View textView = view.findViewById(android.R.id.title);
@@ -473,7 +474,6 @@ public class Main extends TabActivity {
 		m_tDrinkTotal = (TextView)findViewById(R.id.labelDrinkCountNumber);
 		m_tDrinkTotal.setText(m_sDrinkTotal);
 
-
 		try {
 			m_userProfile.setTotalDrinkCount(m_nDrinkTotal);
 		} catch (InterruptedException e) {
@@ -481,7 +481,6 @@ public class Main extends TabActivity {
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		} 
-
 
 	} // generateNumberDrinks()
 
@@ -551,6 +550,9 @@ public class Main extends TabActivity {
 
 	} // generageBACTimer()
 
+	/**
+	 * Resets all BAC algorithm variables
+	 */
 	private void resetAllDrinkValues(){
 		m_nBeer = 0;
 		m_nWine = 0;
@@ -573,7 +575,7 @@ public class Main extends TabActivity {
 		generateNumberDrinks();
 		generateBAC();
 		generateBACTimer();
-	}
+	} // resetAllDrinkValues()
 
 
 
@@ -600,7 +602,6 @@ public class Main extends TabActivity {
 				startActivityForResult(findBuddyActivity, 2);  
 			}
 		});
-
 
 	} // buddiesTabSetup()
 
@@ -918,8 +919,6 @@ public class Main extends TabActivity {
 		default:
 			return super.onOptionsItemSelected(item);
 
-
-
 		}
 	} // onOptionsItemSelected()
 
@@ -965,7 +964,14 @@ public class Main extends TabActivity {
 	} // alertReset
 
 
-	//Testing classes
+	/**
+	 * Method for Testing BAC Algorithm
+	 * @param beer
+	 * @param wine
+	 * @param shot
+	 * @param weight
+	 * @return BAC Percent Value
+	 */
 	public double TestgenerateBAC(int beer, int wine, int shot, int weight){
 		m_nShot = shot;
 		m_nWine = wine;
@@ -973,35 +979,21 @@ public class Main extends TabActivity {
 		generateNumberDrinks();
 		m_userProfile.setMale(true);
 		m_userProfile.setWeight(weight);
-		
+
 		generateBAC();
 		return m_dBACpercent;
-	}
-	
+	} // TestgenerateBAC
+
+	/**
+	 * Method for testing BAC Timer
+	 * @param bac
+	 * @return BAC Timer
+	 */
 	public double TestgenerateBACTimer(double bac){
 		m_dBACpercent = bac;
-		
+
 		generateBACTimer();
 		return(m_nBACtimerMinute + (m_nBACtimerHour*60));
-	}
-	
-	/*
-	public int TestgenerateNumberDrinks(int beer, int wine, int shot){
-		m_nBeer = beer;
-		m_nWine = wine;
-		m_nShot = shot;
-		m_nDrinkTotal = (m_nBeer) + (m_nWine) + (m_nShot);
+	} // TestgenerateBACTimer
 
-
-		return m_nDrinkTotal;
-	}
-	*/
-	/*
-	public double TestresetAllDrinkValues(){
-		resetAllDrinkValues();
-		return(m_nBeer + m_nWine + m_nShot + m_nCurrentDrink + m_dBACpercent + m_userProfile.getBACpercent());
-	}
-    */
-
-	
 } // class Main

@@ -16,6 +16,11 @@
  * Modify at your own risk.
  */
 
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.appspot.bacsafeserver.bacsafeAPI.model;
 
 /**
@@ -31,35 +36,35 @@ package com.appspot.bacsafeserver.bacsafeAPI.model;
 @SuppressWarnings("javadoc")
 public final class BuddyRequestsProtoRequestedUserName extends com.google.api.client.json.GenericJson {
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String requestedUserName;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.String requestedUserName;
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getRequestedUserName() {
-    return requestedUserName;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.String getRequestedUserName() {
+		return requestedUserName;
+	}
 
-  /**
-   * @param requestedUserName requestedUserName or {@code null} for none
-   */
-  public BuddyRequestsProtoRequestedUserName setRequestedUserName(java.lang.String requestedUserName) {
-    this.requestedUserName = requestedUserName;
-    return this;
-  }
+	/**
+	 * @param requestedUserName requestedUserName or {@code null} for none
+	 */
+	public BuddyRequestsProtoRequestedUserName setRequestedUserName(java.lang.String requestedUserName) {
+		this.requestedUserName = requestedUserName;
+		return this;
+	}
 
-  @Override
-  public BuddyRequestsProtoRequestedUserName set(String fieldName, Object value) {
-    return (BuddyRequestsProtoRequestedUserName) super.set(fieldName, value);
-  }
+	@Override
+	public BuddyRequestsProtoRequestedUserName set(String fieldName, Object value) {
+		return (BuddyRequestsProtoRequestedUserName) super.set(fieldName, value);
+	}
 
-  @Override
-  public BuddyRequestsProtoRequestedUserName clone() {
-    return (BuddyRequestsProtoRequestedUserName) super.clone();
-  }
+	@Override
+	public BuddyRequestsProtoRequestedUserName clone() {
+		return (BuddyRequestsProtoRequestedUserName) super.clone();
+	}
 
 }

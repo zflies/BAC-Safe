@@ -1,3 +1,8 @@
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.example.bacsafe;
 
 import java.util.LinkedList;
@@ -11,7 +16,7 @@ import android.content.Context;
  * @author Team BAC Safe
  */
 public class Group {
-	
+
 	private Context context;
 
 	public String m_sGroupName;
@@ -23,11 +28,11 @@ public class Group {
 	 * @param groupname
 	 */
 	public Group(String groupname) {
-		
+
 		context = Main.getContextOfApplication();
-		
+
 		m_sGroupName = groupname;
-		
+
 	} // Constructor
 
 	/**
@@ -39,7 +44,7 @@ public class Group {
 		//newBuddy.sendGroupRequest();
 
 		m_listGroupBuddies.add(newBuddy);
-		
+
 		setGroupBuddies(m_listGroupBuddies);
 
 	} // addGroupMember()
@@ -49,10 +54,10 @@ public class Group {
 	 * @return m_listGroupBuddies - LinkedList of Buddies in group
 	 */
 	public LinkedList<Buddy> getGroupBuddies(){
-		
+
 		//TODO: Load Buddies for Group from database
 		ServerAPI connection = new ServerAPI();
-		
+
 		LinkedList<String> buddies = new LinkedList<String>();
 		LinkedList<Buddy> groupList = new LinkedList<Buddy>();
 		try {
@@ -67,9 +72,9 @@ public class Group {
 			groupList.add(budd);
 		}
 		m_listGroupBuddies = groupList;
-		
+
 		return m_listGroupBuddies;	
-		
+
 	} // getGroupBuddies()
 
 
@@ -78,11 +83,11 @@ public class Group {
 	 * @param listGroupBuddies - LinkedList of Buddies in group
 	 */
 	public void setGroupBuddies(LinkedList<Buddy> listGroupBuddies){
-		
+
 		m_listGroupBuddies = listGroupBuddies;
 
 	} // saveGroupBuddies()
-	
+
 	/**
 	 * Returns the name of the group
 	 * @return m_sGroupName - Name of group

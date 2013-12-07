@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. All Rights Reserved -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bacsafe"
     android:versionCode="1"

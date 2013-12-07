@@ -16,6 +16,11 @@
  * Modify at your own risk.
  */
 
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.appspot.bacsafeserver.bacsafeAPI.model;
 
 /**
@@ -31,56 +36,56 @@ package com.appspot.bacsafeserver.bacsafeAPI.model;
 @SuppressWarnings("javadoc")
 public final class BuddyRequestsProtoSenderUserNameRequestedUserName extends com.google.api.client.json.GenericJson {
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String requestedUserName;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.String requestedUserName;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String senderUserName;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.String senderUserName;
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getRequestedUserName() {
-    return requestedUserName;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.String getRequestedUserName() {
+		return requestedUserName;
+	}
 
-  /**
-   * @param requestedUserName requestedUserName or {@code null} for none
-   */
-  public BuddyRequestsProtoSenderUserNameRequestedUserName setRequestedUserName(java.lang.String requestedUserName) {
-    this.requestedUserName = requestedUserName;
-    return this;
-  }
+	/**
+	 * @param requestedUserName requestedUserName or {@code null} for none
+	 */
+	public BuddyRequestsProtoSenderUserNameRequestedUserName setRequestedUserName(java.lang.String requestedUserName) {
+		this.requestedUserName = requestedUserName;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getSenderUserName() {
-    return senderUserName;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.String getSenderUserName() {
+		return senderUserName;
+	}
 
-  /**
-   * @param senderUserName senderUserName or {@code null} for none
-   */
-  public BuddyRequestsProtoSenderUserNameRequestedUserName setSenderUserName(java.lang.String senderUserName) {
-    this.senderUserName = senderUserName;
-    return this;
-  }
+	/**
+	 * @param senderUserName senderUserName or {@code null} for none
+	 */
+	public BuddyRequestsProtoSenderUserNameRequestedUserName setSenderUserName(java.lang.String senderUserName) {
+		this.senderUserName = senderUserName;
+		return this;
+	}
 
-  @Override
-  public BuddyRequestsProtoSenderUserNameRequestedUserName set(String fieldName, Object value) {
-    return (BuddyRequestsProtoSenderUserNameRequestedUserName) super.set(fieldName, value);
-  }
+	@Override
+	public BuddyRequestsProtoSenderUserNameRequestedUserName set(String fieldName, Object value) {
+		return (BuddyRequestsProtoSenderUserNameRequestedUserName) super.set(fieldName, value);
+	}
 
-  @Override
-  public BuddyRequestsProtoSenderUserNameRequestedUserName clone() {
-    return (BuddyRequestsProtoSenderUserNameRequestedUserName) super.clone();
-  }
+	@Override
+	public BuddyRequestsProtoSenderUserNameRequestedUserName clone() {
+		return (BuddyRequestsProtoSenderUserNameRequestedUserName) super.clone();
+	}
 
 }

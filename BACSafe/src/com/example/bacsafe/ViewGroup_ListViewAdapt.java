@@ -1,3 +1,8 @@
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.example.bacsafe;
 
 import java.text.DecimalFormat;
@@ -80,7 +85,7 @@ public class ViewGroup_ListViewAdapt extends BaseAdapter {
 
 		// Combine the First and Last name of the user if provided
 		String sNameCombined = " ";
-		
+
 		String sFirstName = "";
 		try {
 			sFirstName = buddy.getBuddyFirstName();
@@ -89,7 +94,7 @@ public class ViewGroup_ListViewAdapt extends BaseAdapter {
 		} catch (ExecutionException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		String sLastName = "";
 		try {
 			sLastName = buddy.getBuddyLastName();
@@ -122,10 +127,10 @@ public class ViewGroup_ListViewAdapt extends BaseAdapter {
 		// Set UI Fields
 		tvUsername.setText(buddy.m_sBuddyUsername);
 		tvName.setText(sNameCombined); // sNameCombined);
-		
+
 		// Retrieve the BAC
 		DecimalFormat df = new DecimalFormat(".##");
-        try {
+		try {
 			String sBuddyBAC = df.format(buddy.getBuddyBAC());
 			tvBAC.setText(sBuddyBAC); 
 		} catch (InterruptedException e) {
@@ -133,11 +138,11 @@ public class ViewGroup_ListViewAdapt extends BaseAdapter {
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
-        
-        // Retrieve the total drink count
-        try {
+
+		// Retrieve the total drink count
+		try {
 			int nBuddyTotalDrinks = buddy.getBuddyTotalDrinkCount();
-			 String sBuddyTotalDrinks = Integer.toString(nBuddyTotalDrinks);
+			String sBuddyTotalDrinks = Integer.toString(nBuddyTotalDrinks);
 			tvDrinkCount.setText(sBuddyTotalDrinks);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -152,7 +157,7 @@ public class ViewGroup_ListViewAdapt extends BaseAdapter {
 		tvDrinkCount.setTextColor(Color.WHITE);
 
 		return viewGroupBuddies; 
-		
+
 	} // getView()
-	
-}
+
+} // class ViewGroup_ListViewAdapter

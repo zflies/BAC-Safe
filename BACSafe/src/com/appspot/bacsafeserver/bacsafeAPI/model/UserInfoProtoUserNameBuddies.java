@@ -16,6 +16,11 @@
  * Modify at your own risk.
  */
 
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.appspot.bacsafeserver.bacsafeAPI.model;
 
 /**
@@ -31,56 +36,56 @@ package com.appspot.bacsafeserver.bacsafeAPI.model;
 @SuppressWarnings("javadoc")
 public final class UserInfoProtoUserNameBuddies extends com.google.api.client.json.GenericJson {
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.util.List<java.lang.String> buddies;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.util.List<java.lang.String> buddies;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String userName;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.String userName;
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.util.List<java.lang.String> getBuddies() {
-    return buddies;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.util.List<java.lang.String> getBuddies() {
+		return buddies;
+	}
 
-  /**
-   * @param buddies buddies or {@code null} for none
-   */
-  public UserInfoProtoUserNameBuddies setBuddies(java.util.List<java.lang.String> buddies) {
-    this.buddies = buddies;
-    return this;
-  }
+	/**
+	 * @param buddies buddies or {@code null} for none
+	 */
+	public UserInfoProtoUserNameBuddies setBuddies(java.util.List<java.lang.String> buddies) {
+		this.buddies = buddies;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getUserName() {
-    return userName;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.String getUserName() {
+		return userName;
+	}
 
-  /**
-   * @param userName userName or {@code null} for none
-   */
-  public UserInfoProtoUserNameBuddies setUserName(java.lang.String userName) {
-    this.userName = userName;
-    return this;
-  }
+	/**
+	 * @param userName userName or {@code null} for none
+	 */
+	public UserInfoProtoUserNameBuddies setUserName(java.lang.String userName) {
+		this.userName = userName;
+		return this;
+	}
 
-  @Override
-  public UserInfoProtoUserNameBuddies set(String fieldName, Object value) {
-    return (UserInfoProtoUserNameBuddies) super.set(fieldName, value);
-  }
+	@Override
+	public UserInfoProtoUserNameBuddies set(String fieldName, Object value) {
+		return (UserInfoProtoUserNameBuddies) super.set(fieldName, value);
+	}
 
-  @Override
-  public UserInfoProtoUserNameBuddies clone() {
-    return (UserInfoProtoUserNameBuddies) super.clone();
-  }
+	@Override
+	public UserInfoProtoUserNameBuddies clone() {
+		return (UserInfoProtoUserNameBuddies) super.clone();
+	}
 
 }

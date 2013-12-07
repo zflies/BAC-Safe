@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. All Rights Reserved -->
+
 <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"

@@ -16,6 +16,11 @@
  * Modify at your own risk.
  */
 
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.appspot.bacsafeserver.bacsafeAPI.model;
 
 /**
@@ -31,56 +36,56 @@ package com.appspot.bacsafeserver.bacsafeAPI.model;
 @SuppressWarnings("javadoc")
 public final class UserInfoProtoUserNameCurBAC extends com.google.api.client.json.GenericJson {
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.Double curBAC;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.Double curBAC;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String userName;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.String userName;
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.Double getCurBAC() {
-    return curBAC;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.Double getCurBAC() {
+		return curBAC;
+	}
 
-  /**
-   * @param curBAC curBAC or {@code null} for none
-   */
-  public UserInfoProtoUserNameCurBAC setCurBAC(java.lang.Double curBAC) {
-    this.curBAC = curBAC;
-    return this;
-  }
+	/**
+	 * @param curBAC curBAC or {@code null} for none
+	 */
+	public UserInfoProtoUserNameCurBAC setCurBAC(java.lang.Double curBAC) {
+		this.curBAC = curBAC;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getUserName() {
-    return userName;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.String getUserName() {
+		return userName;
+	}
 
-  /**
-   * @param userName userName or {@code null} for none
-   */
-  public UserInfoProtoUserNameCurBAC setUserName(java.lang.String userName) {
-    this.userName = userName;
-    return this;
-  }
+	/**
+	 * @param userName userName or {@code null} for none
+	 */
+	public UserInfoProtoUserNameCurBAC setUserName(java.lang.String userName) {
+		this.userName = userName;
+		return this;
+	}
 
-  @Override
-  public UserInfoProtoUserNameCurBAC set(String fieldName, Object value) {
-    return (UserInfoProtoUserNameCurBAC) super.set(fieldName, value);
-  }
+	@Override
+	public UserInfoProtoUserNameCurBAC set(String fieldName, Object value) {
+		return (UserInfoProtoUserNameCurBAC) super.set(fieldName, value);
+	}
 
-  @Override
-  public UserInfoProtoUserNameCurBAC clone() {
-    return (UserInfoProtoUserNameCurBAC) super.clone();
-  }
+	@Override
+	public UserInfoProtoUserNameCurBAC clone() {
+		return (UserInfoProtoUserNameCurBAC) super.clone();
+	}
 
 }

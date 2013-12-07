@@ -16,6 +16,11 @@
  * Modify at your own risk.
  */
 
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.appspot.bacsafeserver.bacsafeAPI;
 
 /**
@@ -81,41 +86,41 @@ package com.appspot.bacsafeserver.bacsafeAPI;
  */
 public class BacsafeAPIRequestInitializer extends com.google.api.client.googleapis.services.json.CommonGoogleJsonClientRequestInitializer {
 
-  public BacsafeAPIRequestInitializer() {
-    super();
-  }
+	public BacsafeAPIRequestInitializer() {
+		super();
+	}
 
-  /**
-   * @param key API key or {@code null} to leave it unchanged
-   */
-  public BacsafeAPIRequestInitializer(String key) {
-    super(key);
-  }
+	/**
+	 * @param key API key or {@code null} to leave it unchanged
+	 */
+	public BacsafeAPIRequestInitializer(String key) {
+		super(key);
+	}
 
-  /**
-   * @param key API key or {@code null} to leave it unchanged
-   * @param userIp user IP or {@code null} to leave it unchanged
-   */
-  public BacsafeAPIRequestInitializer(String key, String userIp) {
-    super(key, userIp);
-  }
+	/**
+	 * @param key API key or {@code null} to leave it unchanged
+	 * @param userIp user IP or {@code null} to leave it unchanged
+	 */
+	public BacsafeAPIRequestInitializer(String key, String userIp) {
+		super(key, userIp);
+	}
 
-  @Override
-  public final void initializeJsonRequest(com.google.api.client.googleapis.services.json.AbstractGoogleJsonClientRequest<?> request) throws java.io.IOException {
-    super.initializeJsonRequest(request);
-    initializeBacsafeAPIRequest((BacsafeAPIRequest<?>) request);
-  }
+	@Override
+	public final void initializeJsonRequest(com.google.api.client.googleapis.services.json.AbstractGoogleJsonClientRequest<?> request) throws java.io.IOException {
+		super.initializeJsonRequest(request);
+		initializeBacsafeAPIRequest((BacsafeAPIRequest<?>) request);
+	}
 
-  /**
-   * Initializes BacsafeAPI request.
-   *
-   * <p>
-   * Default implementation does nothing. Called from
-   * {@link #initializeJsonRequest(com.google.api.client.googleapis.services.json.AbstractGoogleJsonClientRequest)}.
-   * </p>
-   *
-   * @throws java.io.IOException I/O exception
-   */
-  protected void initializeBacsafeAPIRequest(BacsafeAPIRequest<?> request) throws java.io.IOException {
-  }
+	/**
+	 * Initializes BacsafeAPI request.
+	 *
+	 * <p>
+	 * Default implementation does nothing. Called from
+	 * {@link #initializeJsonRequest(com.google.api.client.googleapis.services.json.AbstractGoogleJsonClientRequest)}.
+	 * </p>
+	 *
+	 * @throws java.io.IOException I/O exception
+	 */
+	protected void initializeBacsafeAPIRequest(BacsafeAPIRequest<?> request) throws java.io.IOException {
+	}
 }

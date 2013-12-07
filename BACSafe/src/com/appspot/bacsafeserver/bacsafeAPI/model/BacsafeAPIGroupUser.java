@@ -16,6 +16,11 @@
  * Modify at your own risk.
  */
 
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.appspot.bacsafeserver.bacsafeAPI.model;
 
 /**
@@ -31,56 +36,56 @@ package com.appspot.bacsafeserver.bacsafeAPI.model;
 @SuppressWarnings("javadoc")
 public final class BacsafeAPIGroupUser extends com.google.api.client.json.GenericJson {
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String groupName;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.String groupName;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String userName;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.String userName;
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getGroupName() {
-    return groupName;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.String getGroupName() {
+		return groupName;
+	}
 
-  /**
-   * @param groupName groupName or {@code null} for none
-   */
-  public BacsafeAPIGroupUser setGroupName(java.lang.String groupName) {
-    this.groupName = groupName;
-    return this;
-  }
+	/**
+	 * @param groupName groupName or {@code null} for none
+	 */
+	public BacsafeAPIGroupUser setGroupName(java.lang.String groupName) {
+		this.groupName = groupName;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getUserName() {
-    return userName;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.String getUserName() {
+		return userName;
+	}
 
-  /**
-   * @param userName userName or {@code null} for none
-   */
-  public BacsafeAPIGroupUser setUserName(java.lang.String userName) {
-    this.userName = userName;
-    return this;
-  }
+	/**
+	 * @param userName userName or {@code null} for none
+	 */
+	public BacsafeAPIGroupUser setUserName(java.lang.String userName) {
+		this.userName = userName;
+		return this;
+	}
 
-  @Override
-  public BacsafeAPIGroupUser set(String fieldName, Object value) {
-    return (BacsafeAPIGroupUser) super.set(fieldName, value);
-  }
+	@Override
+	public BacsafeAPIGroupUser set(String fieldName, Object value) {
+		return (BacsafeAPIGroupUser) super.set(fieldName, value);
+	}
 
-  @Override
-  public BacsafeAPIGroupUser clone() {
-    return (BacsafeAPIGroupUser) super.clone();
-  }
+	@Override
+	public BacsafeAPIGroupUser clone() {
+		return (BacsafeAPIGroupUser) super.clone();
+	}
 
 }

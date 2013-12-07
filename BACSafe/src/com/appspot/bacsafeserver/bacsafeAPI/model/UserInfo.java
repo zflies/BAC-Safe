@@ -16,6 +16,11 @@
  * Modify at your own risk.
  */
 
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.appspot.bacsafeserver.bacsafeAPI.model;
 
 /**
@@ -31,182 +36,182 @@ package com.appspot.bacsafeserver.bacsafeAPI.model;
 @SuppressWarnings("javadoc")
 public final class UserInfo extends com.google.api.client.json.GenericJson {
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.util.List<java.lang.String> buddies;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.util.List<java.lang.String> buddies;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.Double curBAC;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.Double curBAC;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key @com.google.api.client.json.JsonString
-  private java.lang.Long drinkCount;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key @com.google.api.client.json.JsonString
+	private java.lang.Long drinkCount;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String firstName;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.String firstName;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.util.List<java.lang.String> groups;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.util.List<java.lang.String> groups;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key @com.google.api.client.json.JsonString
-  private java.lang.Long id;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key @com.google.api.client.json.JsonString
+	private java.lang.Long id;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String lastName;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.String lastName;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String userName;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.String userName;
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.util.List<java.lang.String> getBuddies() {
-    return buddies;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.util.List<java.lang.String> getBuddies() {
+		return buddies;
+	}
 
-  /**
-   * @param buddies buddies or {@code null} for none
-   */
-  public UserInfo setBuddies(java.util.List<java.lang.String> buddies) {
-    this.buddies = buddies;
-    return this;
-  }
+	/**
+	 * @param buddies buddies or {@code null} for none
+	 */
+	public UserInfo setBuddies(java.util.List<java.lang.String> buddies) {
+		this.buddies = buddies;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.Double getCurBAC() {
-    return curBAC;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.Double getCurBAC() {
+		return curBAC;
+	}
 
-  /**
-   * @param curBAC curBAC or {@code null} for none
-   */
-  public UserInfo setCurBAC(java.lang.Double curBAC) {
-    this.curBAC = curBAC;
-    return this;
-  }
+	/**
+	 * @param curBAC curBAC or {@code null} for none
+	 */
+	public UserInfo setCurBAC(java.lang.Double curBAC) {
+		this.curBAC = curBAC;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.Long getDrinkCount() {
-    return drinkCount;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.Long getDrinkCount() {
+		return drinkCount;
+	}
 
-  /**
-   * @param drinkCount drinkCount or {@code null} for none
-   */
-  public UserInfo setDrinkCount(java.lang.Long drinkCount) {
-    this.drinkCount = drinkCount;
-    return this;
-  }
+	/**
+	 * @param drinkCount drinkCount or {@code null} for none
+	 */
+	public UserInfo setDrinkCount(java.lang.Long drinkCount) {
+		this.drinkCount = drinkCount;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getFirstName() {
-    return firstName;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.String getFirstName() {
+		return firstName;
+	}
 
-  /**
-   * @param firstName firstName or {@code null} for none
-   */
-  public UserInfo setFirstName(java.lang.String firstName) {
-    this.firstName = firstName;
-    return this;
-  }
+	/**
+	 * @param firstName firstName or {@code null} for none
+	 */
+	public UserInfo setFirstName(java.lang.String firstName) {
+		this.firstName = firstName;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.util.List<java.lang.String> getGroups() {
-    return groups;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.util.List<java.lang.String> getGroups() {
+		return groups;
+	}
 
-  /**
-   * @param groups groups or {@code null} for none
-   */
-  public UserInfo setGroups(java.util.List<java.lang.String> groups) {
-    this.groups = groups;
-    return this;
-  }
+	/**
+	 * @param groups groups or {@code null} for none
+	 */
+	public UserInfo setGroups(java.util.List<java.lang.String> groups) {
+		this.groups = groups;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.Long getId() {
-    return id;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.Long getId() {
+		return id;
+	}
 
-  /**
-   * @param id id or {@code null} for none
-   */
-  public UserInfo setId(java.lang.Long id) {
-    this.id = id;
-    return this;
-  }
+	/**
+	 * @param id id or {@code null} for none
+	 */
+	public UserInfo setId(java.lang.Long id) {
+		this.id = id;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getLastName() {
-    return lastName;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.String getLastName() {
+		return lastName;
+	}
 
-  /**
-   * @param lastName lastName or {@code null} for none
-   */
-  public UserInfo setLastName(java.lang.String lastName) {
-    this.lastName = lastName;
-    return this;
-  }
+	/**
+	 * @param lastName lastName or {@code null} for none
+	 */
+	public UserInfo setLastName(java.lang.String lastName) {
+		this.lastName = lastName;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getUserName() {
-    return userName;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.String getUserName() {
+		return userName;
+	}
 
-  /**
-   * @param userName userName or {@code null} for none
-   */
-  public UserInfo setUserName(java.lang.String userName) {
-    this.userName = userName;
-    return this;
-  }
+	/**
+	 * @param userName userName or {@code null} for none
+	 */
+	public UserInfo setUserName(java.lang.String userName) {
+		this.userName = userName;
+		return this;
+	}
 
-  @Override
-  public UserInfo set(String fieldName, Object value) {
-    return (UserInfo) super.set(fieldName, value);
-  }
+	@Override
+	public UserInfo set(String fieldName, Object value) {
+		return (UserInfo) super.set(fieldName, value);
+	}
 
-  @Override
-  public UserInfo clone() {
-    return (UserInfo) super.clone();
-  }
+	@Override
+	public UserInfo clone() {
+		return (UserInfo) super.clone();
+	}
 
 }

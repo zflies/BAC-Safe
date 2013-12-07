@@ -1,24 +1,14 @@
 package com.example.bacsafe.Test;
 
 import static org.junit.Assert.*;
-
-import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Vector;
-import java.util.concurrent.ExecutionException;
-
 import org.junit.Test;
 
-import android.os.AsyncTask;
-import android.widget.TextView;
-
-
-import com.example.bacsafe.*;
-
-public class Test0 {
+/**
+ * UnitTesting provides the JUnit Tests for BAC Safe.
+ * Debugged and Tested by Team BAC Safe
+ * @author Team BAC Safe
+ */
+public class UnitTesting {
 
 	//main tests
 	//BAC

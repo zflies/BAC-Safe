@@ -16,6 +16,11 @@
  * Modify at your own risk.
  */
 
+//-------------------------------------------------------------------------------------------------------------------------------
+//	Copyright 2013 by BAC Safe Creators: Zach Flies, Alec White, Josh Collins, Shannon Bisges, and David Menager. 
+//  All Rights Reserved.
+//-------------------------------------------------------------------------------------------------------------------------------
+
 package com.appspot.bacsafeserver.bacsafeAPI.model;
 
 /**
@@ -31,98 +36,98 @@ package com.appspot.bacsafeserver.bacsafeAPI.model;
 @SuppressWarnings("javadoc")
 public final class Groups extends com.google.api.client.json.GenericJson {
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.util.List<java.lang.String> dd;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.util.List<java.lang.String> dd;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.util.List<java.lang.String> drinkers;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.util.List<java.lang.String> drinkers;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String groupName;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key
+	private java.lang.String groupName;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key @com.google.api.client.json.JsonString
-  private java.lang.Long id;
+	/**
+	 * The value may be {@code null}.
+	 */
+	@com.google.api.client.util.Key @com.google.api.client.json.JsonString
+	private java.lang.Long id;
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.util.List<java.lang.String> getDd() {
-    return dd;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.util.List<java.lang.String> getDd() {
+		return dd;
+	}
 
-  /**
-   * @param dd dd or {@code null} for none
-   */
-  public Groups setDd(java.util.List<java.lang.String> dd) {
-    this.dd = dd;
-    return this;
-  }
+	/**
+	 * @param dd dd or {@code null} for none
+	 */
+	public Groups setDd(java.util.List<java.lang.String> dd) {
+		this.dd = dd;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.util.List<java.lang.String> getDrinkers() {
-    return drinkers;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.util.List<java.lang.String> getDrinkers() {
+		return drinkers;
+	}
 
-  /**
-   * @param drinkers drinkers or {@code null} for none
-   */
-  public Groups setDrinkers(java.util.List<java.lang.String> drinkers) {
-    this.drinkers = drinkers;
-    return this;
-  }
+	/**
+	 * @param drinkers drinkers or {@code null} for none
+	 */
+	public Groups setDrinkers(java.util.List<java.lang.String> drinkers) {
+		this.drinkers = drinkers;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getGroupName() {
-    return groupName;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.String getGroupName() {
+		return groupName;
+	}
 
-  /**
-   * @param groupName groupName or {@code null} for none
-   */
-  public Groups setGroupName(java.lang.String groupName) {
-    this.groupName = groupName;
-    return this;
-  }
+	/**
+	 * @param groupName groupName or {@code null} for none
+	 */
+	public Groups setGroupName(java.lang.String groupName) {
+		this.groupName = groupName;
+		return this;
+	}
 
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.Long getId() {
-    return id;
-  }
+	/**
+	 * @return value or {@code null} for none
+	 */
+	public java.lang.Long getId() {
+		return id;
+	}
 
-  /**
-   * @param id id or {@code null} for none
-   */
-  public Groups setId(java.lang.Long id) {
-    this.id = id;
-    return this;
-  }
+	/**
+	 * @param id id or {@code null} for none
+	 */
+	public Groups setId(java.lang.Long id) {
+		this.id = id;
+		return this;
+	}
 
-  @Override
-  public Groups set(String fieldName, Object value) {
-    return (Groups) super.set(fieldName, value);
-  }
+	@Override
+	public Groups set(String fieldName, Object value) {
+		return (Groups) super.set(fieldName, value);
+	}
 
-  @Override
-  public Groups clone() {
-    return (Groups) super.clone();
-  }
+	@Override
+	public Groups clone() {
+		return (Groups) super.clone();
+	}
 
 }
